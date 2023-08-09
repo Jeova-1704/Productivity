@@ -18,7 +18,7 @@ janela = Tk()
 janela.title("Nome da aplicação")
 janela.geometry('1366x768')
 janela.config(background=CORBRANCA)
-# janela.resizable(width=FALSE, height=FALSE)
+janela.resizable(width=FALSE, height=FALSE)
     
 # Continuação do codigo: ================================================================================================================================================
 
