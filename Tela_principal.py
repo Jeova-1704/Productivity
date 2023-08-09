@@ -4,20 +4,13 @@
 
 from tkinter import *
 import tkinter as tk
-
-
 # variveis globais: =====================================================================================================================================================
-
 CORBRANCA = "#F2F2F0"
 CORZINZACLARO = "#A5A6A4"
 CORZINZAESCURO = "#737373"
 CORLARANJACLARO = "#BF8450"
 CORLARANJAESCURO = "#BF4C0A"
-
-
-    
 # Continuação do codigo: ================================================================================================================================================
-
 
 # Ciclo da janela para ela ir atualizando: ==============================================================================================================================
 def criar_janela():
@@ -44,7 +37,6 @@ def criar_janela():
 
     frame_tabela = Frame(janela, width=1366, height=80, bg=CORLARANJACLARO, relief=SOLID)
     frame_tabela.grid(row=5, column=0, padx=0, pady=60, sticky=NSEW, columnspan=5)
-
 
     # Iniciar o loop de eventos da interface gráfica
     janela.mainloop()
