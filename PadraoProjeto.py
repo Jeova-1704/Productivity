@@ -30,35 +30,6 @@ janela.resizable(width=FALSE, height=FALSE)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Ciclo da janela para ela ir atualizando: ==============================================================================================================================
 
 janela.mainloop()
