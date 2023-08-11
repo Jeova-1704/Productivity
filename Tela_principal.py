@@ -1,9 +1,10 @@
 # Código para ser seguido nos projetos 
 
 # Importação das bibliotecas: ==========================================================================================================================================
-
+from PIL import ImageTk, Image
 from tkinter import *
 import tkinter as tk
+
 # variveis globais: =====================================================================================================================================================
 CORBRANCA = "#F2F2F0"
 CORZINZACLARO = "#A5A6A4"
@@ -17,26 +18,63 @@ def criar_janela():
     # Criar uma instância da classe Tk
     janela = tk.Tk()
     janela.title("Janela Principal")
-    janela.geometry('1366x768')
+    janela.geometry('1280x700')
     janela.config(background=CORBRANCA)
     janela.resizable(width=FALSE, height=FALSE)
 
     # Criar três frames
-    
-    frame_top = Frame(janela, width=1366, height=100, bg=CORBRANCA, relief=SOLID)
-    frame_top.grid(row=0, column=0, padx=0, pady=30)
 
-    frame_logo = Frame(frame_top,width=140,height=140,bg=CORZINZACLARO,relief=SOLID)
-    frame_logo.grid(row=0,column=0,padx=40,pady=0)
+    frame_top = Frame(janela, width=1280, height=125, bg=CORBRANCA, relief=SOLID)
+    frame_top.pack(padx=0, pady=0)
 
-    frame_detalhes = Frame(frame_top,width=1180,height=150,bg=CORZINZAESCURO,relief=SOLID)
-    frame_detalhes.grid(row=0,column=1,padx=0,pady=0)
+    frame_detalhes = Frame(frame_top,width=1280,height=174,bg=CORZINZAESCURO,relief=SOLID)
+    frame_detalhes.pack(padx=0,pady=0)
 
-    frame_botoes = Frame(janela, width=1000, height=300, bg=CORLARANJAESCURO, relief=RAISED)
-    frame_botoes.grid(row=3, column=0, padx=0, pady=50,sticky="w")
+    Texto_Productivity = "Productivity"
+    label = tk.Label(frame_top, text=Texto_Productivity,fg=CORBRANCA,  bg=CORZINZAESCURO,font=('monospace', 40))
+    label.place(x=34,y=50)
 
-    frame_tabela = Frame(janela, width=1366, height=80, bg=CORLARANJACLARO, relief=SOLID)
-    frame_tabela.grid(row=5, column=0, padx=0, pady=60, sticky=NSEW, columnspan=5)
+    Botao_Home = "Home"
+    label = Button(frame_top, text=Botao_Home,fg=CORBRANCA,  bg=CORZINZAESCURO,font=('monospace', 32),relief=FLAT)
+    label.place(x=625,y=50)
+
+    Botao_Codigo = "Código"
+    label = Button(frame_top, text=Botao_Codigo,fg=CORBRANCA,  bg=CORZINZAESCURO,font=('monospace', 32),relief=FLAT)
+    label.place(x=846,y=50)
+
+    Botao_Team = "Team"
+    label = Button(frame_top, text=Botao_Team,fg=CORBRANCA,  bg=CORZINZAESCURO,font=('monospace', 32),relief=FLAT)
+    label.place(x=1068,y=50)
+
+    frame_detalhes_borda = Frame(frame_top,width=1280,height=4,bg=CORZINZACLARO,relief=SOLID)
+    frame_detalhes_borda.pack(padx=0,pady=0)
+
+ # iniciando frame do meio -----------------------------------------
+
+    frame_meio = Frame(janela, width=1280, height=240, bg=CORBRANCA, relief=SOLID)
+    frame_meio.pack(padx=0, pady=0,side='right')
+
+    img_logo = PhotoImage(file='images/logo_productivity.png')
+    label = Label(frame_meio,image=img_logo)
+    label.pack(padx=90,pady=0,side='left')
+
+    app_add = Image.open('images/Ellipse 1.png')
+    app_add = app_add.resize((25, 25))
+    app_add = ImageTk.PhotoImage(app_add)
+    botao_add = Button(frame_meio, image=app_add, relief=GROOVE, text="Adicionar", width=100,
+                       compound=LEFT,
+                       overrelief=RIDGE, font='Ivy 7 bold',
+                       bg=CORZINZAESCURO, fg=CORBRANCA)
+    botao_add.grid(row=1, column=0, padx=10, pady=5, sticky=NSEW)
+
+    frame_centro = Frame(frame_meio,width=900,height=240,bg=CORZINZAESCURO,relief=SOLID)
+    frame_centro.pack(padx=0,pady=0,side='right')
+
+    frame_centro_Borda = Frame(frame_meio,width=4,height=240,bg=CORZINZACLARO,relief=SOLID)
+    frame_centro_Borda.pack(padx=0,pady=0)
+
+
+
 
     # Iniciar o loop de eventos da interface gráfica
     janela.mainloop()
