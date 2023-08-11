@@ -18,7 +18,7 @@ fonte_conteudo = ('monospace', 16)
 
 janela = Tk()
 janela.title("Nome da aplicação")
-janela.geometry('1280x700')
+janela.geometry('1440x800')
 janela.config(background=COR_BRANCA)
 janela.resizable(width=FALSE, height=FALSE)
     
