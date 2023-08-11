@@ -16,7 +16,7 @@ CORLARANJAESCURO = "#BF4C0A"
 
 janela = Tk()
 janela.title("Nome da aplicação")
-janela.geometry('1366x768')
+janela.geometry('1280x700')
 janela.config(background=CORBRANCA)
 janela.resizable(width=FALSE, height=FALSE)
     
