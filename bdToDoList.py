@@ -17,8 +17,8 @@ class ToDOStatus:
         self.cursor.execute('''CREATE TABLE IF NOT EXISTS todolistStatus(
                             idTask INTEGER PRIMARY KEY AUTOINCREMENT,
                             tarefa TEXT NOT NULL,
-                           status TEXT NOT NULL,
-                           descricao TEXT NOT NULL,
+                            status TEXT NOT NULL,
+                            descricao TEXT NOT NULL,
                             nivel_Importancia INTEGER NOT NULL)''')
         
     # registrar os valores no banco de dados com uma lista passada como paramntro contando os valores (tarefa, status, descricao, nivel_Inportancia)
