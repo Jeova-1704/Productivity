@@ -1,17 +1,13 @@
-# Código para ser seguido nos projetos 
-
-# Importação das bibliotecas: ==========================================================================================================================================
 
 from core.FuncoesTelaPrincipal import *
 
-# variveis globais: =====================================================================================================================================================
+
 CORBRANCA = "#F2F2F0"
 CORCINZACLARO = "#A5A6A4"
 CORCINZAESCURO = "#737373"
 CORLARANJACLARO = "#BF8450"
 CORLARANJAESCURO = "#BF4C0A"
 
-# Criar uma instância da classe Tk
 janela = tk.Tk()
 janela.title("Janela Principal")
 janela.geometry('1280x700')
@@ -19,14 +15,10 @@ janela.config(background=CORBRANCA)
 janela.resizable(width=FALSE, height=FALSE)
 
 
-# Continuação do codigo: ================================================================================================================================================
 def voltar_home():
-    nova_janela = Tk()
-    nova_janela.title("Nova Janela")
-    janela.destroy()
+    #janela.destroy()
+    tk.Toplevel(janela)
 
-
-# Frame da parte superior da janela ----------------------------
 
 def criar_Frame_Top():
     frame_top = Frame(janela, width=1280, height=125, bg=CORBRANCA, relief=SOLID)
@@ -56,7 +48,6 @@ def criar_Frame_Top():
 
 criar_Frame_Top()
 
-# iniciando frame do meio ====================================================================
 
 frame_meio = Frame(janela, width=1280, height=220, bg=CORBRANCA, relief=SOLID)
 frame_meio.pack(padx=0, pady=0, side='right')
@@ -87,8 +78,6 @@ img_Pomodoro = PhotoImage(file='assets/Ellipse 4.png')
 label_Pomodoro = Button(frame_meio,image=img_Pomodoro,relief=FLAT,bg=CORCINZAESCURO)
 label_Pomodoro.place(x=1040,y=23)
 
-
-# Iniciar o loop de eventos da interface gráfica ==============================================
 
 
 janela.mainloop()
