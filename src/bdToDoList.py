@@ -8,7 +8,7 @@ from tkinter import messagebox
 class ToDOStatus:
     # Incializando a classe do banco de dados com, criando um conector e crinando a tabela
     def __init__(self):
-        self.conn = sqlite3.connect('todolistStatus.db')
+        self.conn = sqlite3.connect('../src/todolistStatus.db')
         self.cursor = self.conn.cursor()
         self.criarTabela()
 
@@ -60,7 +60,3 @@ class ToDOStatus:
         self.conn.commit()
         # Mostrando mensagem de sucesso
         messagebox.showinfo('SUCESSO!', f"Tarefa com o idTask {idTask} foi deletado com sucesso.")
-
-
-# Instanciando a classe:=================================================================================================================================================
-todostatus = ToDOStatus()
