@@ -1,2 +1,7 @@
 teste.py
-/src/todolistStatus.db
+dao/todolistStatus.db
+core/funcionalidades
+dao/bancodedados
+util/constantes
+view/assets/imagens
+view/telas
