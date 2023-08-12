@@ -2,10 +2,7 @@
 
 # Importação das bibliotecas: ==========================================================================================================================================
 
-from PIL import ImageTk, Image
-from tkinter import *
-import tkinter as tk
-from FuncoesTelaPrincipal import *
+from core.FuncoesTelaPrincipal import *
 
 # variveis globais: =====================================================================================================================================================
 CORBRANCA = "#F2F2F0"
@@ -64,7 +61,7 @@ criar_Frame_Top()
 frame_meio = Frame(janela, width=1280, height=220, bg=CORBRANCA, relief=SOLID)
 frame_meio.pack(padx=0, pady=0, side='right')
 
-img_logo = PhotoImage(file='../images/logo_productivity.png')
+img_logo = PhotoImage(file='assets/logo_productivity.png')
 label = Label(frame_meio,image=img_logo)
 label.pack(padx=90,pady=0,side='left')
 
@@ -74,19 +71,19 @@ frame_centro_Borda.place(x=380,y=0)
 frame_centro = Frame(frame_meio,width=900,height=240,bg=CORCINZAESCURO,relief=SOLID)
 frame_centro.pack(padx=0,pady=0,side='right')
 
-img_ToDoList = PhotoImage(file='../images/Ellipse 1.png')
+img_ToDoList = PhotoImage(file='assets/Ellipse 1.png')
 label_ToDoList = Button(frame_meio,image=img_ToDoList,relief=FLAT,bg=CORCINZAESCURO)
 label_ToDoList.place(x=385,y=23)
 
-img_Anotacoes = PhotoImage(file='../images/Ellipse 2.png')
+img_Anotacoes = PhotoImage(file='assets/Ellipse 2.png')
 label_Anotacoes = Button(frame_meio,image=img_Anotacoes,relief=FLAT,bg=CORCINZAESCURO)
 label_Anotacoes.place(x=602,y=23)
 
-img_Calendario = PhotoImage(file='../images/Ellipse 3.png')
+img_Calendario = PhotoImage(file='assets/Ellipse 3.png')
 label_Calendario = Button(frame_meio,image=img_Calendario,relief=FLAT,bg=CORCINZAESCURO)
 label_Calendario.place(x=821,y=23)
 
-img_Pomodoro = PhotoImage(file='../images/Ellipse 4.png')
+img_Pomodoro = PhotoImage(file='assets/Ellipse 4.png')
 label_Pomodoro = Button(frame_meio,image=img_Pomodoro,relief=FLAT,bg=CORCINZAESCURO)
 label_Pomodoro.place(x=1040,y=23)
 
