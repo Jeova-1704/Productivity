@@ -2,6 +2,6 @@ teste.py
 dao/todolistStatus.db
 core/funcionalidades
 dao/bancodedados
-util/constantes
+utils/constantes
 view/assets/imagens
 view/telas
