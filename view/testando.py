@@ -1,5 +1,6 @@
+import tkinter as tk
 from tkinter import *
-from tkinter import ttk
+import tkinter.ttk as ttk
 from PIL import ImageTk, Image
 
 from core import funcoes_todolist
@@ -7,14 +8,10 @@ from utils import PadraoProjeto
 from dao import bdToDoList
 
 
-def atualizar_janela(janela):
-    # Destrua a janela atual
-    janela.destroy()
-    criar_janela()
-
-
 def criar_janela():
-    janela = Tk()
+    global janela
+
+    janela = tk.Tk()
     janela.title("To-Do List")
     janela.geometry('1280x700')
     janela.config(background=PadraoProjeto.COR_CINZA_ESCURO)
@@ -26,7 +23,7 @@ def criar_janela():
     frame_meio = Frame(janela, width=1280, height=550, bg=PadraoProjeto.COR_BRANCA, relief=SOLID)
     frame_meio.pack()
 
-    tv = ttk.Treeview(frame_meio, columns=('id', 'tarefa', 'status', 'descricao', 'nivel'), height=20)
+    tv = ttk.Treeview(frame_meio, columns=('id', 'tarefa', 'status', 'descricao', 'nivel'), height=24)
     tv.column('id', minwidth=30, width=30, anchor='w', stretch=NO)
     tv.column('tarefa', minwidth=50, width=100, anchor='w')
     tv.column('status', minwidth=50, width=100, anchor='center')
@@ -38,12 +35,11 @@ def criar_janela():
     tv.heading('descricao', text='DESCRICAO')
     tv.heading('nivel', text='NIVEL')
     tv.place(x=670, y=20)
-    try:
-        bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus")
-        for row in bdToDoList.ToDoList_banco.cursor.fetchall():
-            tv.insert("", "end", values=row)
-    except:
-        pass
+
+    bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus")
+    for row in bdToDoList.ToDoList_banco.cursor.fetchall():
+        tv.insert("", "end", values=row)
+
     linha_vertical = Label(frame_meio, relief=GROOVE, width=0, height=255, anchor=NW, font='Ivy 1',
                            bg=PadraoProjeto.COR_LARANJA_ESCURO, fg=PadraoProjeto.COR_CINZA_ESCURO)
     linha_vertical.place(x=640, y=15)
@@ -83,13 +79,6 @@ def criar_janela():
                        bg=PadraoProjeto.COR_LARANJA_CLARO, fg=PadraoProjeto.COR_BRANCA)
     botao_add.place(x=175, y=290)
 
-    botao_atualizar_table = Button(frame_meio, image=img_update, command=lambda: atualizar_janela(janela),
-                                   relief=GROOVE,
-                                   text="Atualizar Tarefa", width=300, compound=LEFT, overrelief=RIDGE,
-                                   font=PadraoProjeto.fonte_conteudo, bg=PadraoProjeto.COR_LARANJA_CLARO,
-                                   fg=PadraoProjeto.COR_BRANCA)
-    botao_atualizar_table.place(x=820, y=450)
-
     img_delete = Image.open('assets/toDoList_delete.png')
     img_delete = img_delete.resize((35, 35))
     img_delete = ImageTk.PhotoImage(img_delete)
@@ -102,13 +91,19 @@ def criar_janela():
     img_all_delete = Image.open('assets/toDoList_danger.png')
     img_all_delete = img_all_delete.resize((35, 35))
     img_all_delete = ImageTk.PhotoImage(img_all_delete)
-    botao_all_delete = Button(frame_meio, command=bdToDoList.ToDoList_banco.deletarTodasAsTarefas, image=img_all_delete, relief=GROOVE,
+    botao_all_delete = Button(frame_meio, command=..., image=img_all_delete, relief=GROOVE,
                               text="Deletar todas as tarefas",
                               width=300, compound=LEFT, overrelief=RIDGE, font=PadraoProjeto.fonte_conteudo,
                               bg=PadraoProjeto.COR_LARANJA_CLARO, fg=PadraoProjeto.COR_BRANCA)
     botao_all_delete.place(x=175, y=450)
 
+    botao_fechar = Button(janela, text="Fechar Janela", command=fechar_janela)
+    botao_fechar.place(x=0, y=0)
+
     janela.mainloop()
 
 
+
+
+# Chame a função para criar a primeira janela
 criar_janela()

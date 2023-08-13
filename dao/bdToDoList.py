@@ -2,7 +2,7 @@
 
 import sqlite3
 from tkinter import messagebox
-
+import os
 
 # Criando classe do banco de dados:======================================================================================================================================
 
@@ -61,6 +61,22 @@ class ToDOStatus:
         self.conn.commit()
         # Mostrando mensagem de sucesso
         messagebox.showinfo('SUCESSO!', f"Tarefa com o idTask {idTask} foi deletado com sucesso.")
+
+    def deletarTodasAsTarefas(self):
+        nome_arquivo = '../dao/todolistStatus.db'
+
+        if os.path.exists(nome_arquivo):
+            try:
+                ToDoList_banco.conn.close()
+            except Exception as e:
+                pass
+            try:
+                os.remove(nome_arquivo)
+                messagebox.showinfo('SUCESSO!', f"O arquivo do banco de dados todas as suas tarefas foram excluidas.")
+            except OSError as e:
+                messagebox.showerror('ERRO!', f"Erro ao excluir suas tarefas")
+        else:
+            messagebox.showinfo('INFO', f"Você não tem nenhuma tarefa no sistema.")
 
 
 ToDoList_banco = ToDOStatus()

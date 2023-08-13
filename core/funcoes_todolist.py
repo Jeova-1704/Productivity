@@ -6,6 +6,7 @@ from utils import PadraoProjeto
 from dao import bdToDoList
 
 
+
 def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_nivel, janela):
     try:
         tarefa = str(Entrada_tarefa.get())
@@ -79,7 +80,9 @@ def addTarefa():
     botao_salvar.place(x=175, y=300)
 
 
-
+"""def deletarTarefaEspecifica(id):
+    tarefa = id.get()
+    """
 
 
 
