@@ -50,20 +50,12 @@ class ToDOStatus:
         messagebox.showinfo('SUCESSO!', f"Tarefa com o idTask {idTask} foi deletado com sucesso.")
 
     def deletarTodasAsTarefas(self):
-        nome_arquivo = '../dao/todolistStatus.db'
-
-        if os.path.exists(nome_arquivo):
-            try:
-                ToDoList_banco.conn.close()
-            except Exception as e:
-                pass
-            try:
-                os.remove(nome_arquivo)
-                messagebox.showinfo('SUCESSO!', f"O arquivo do banco de dados todas as suas tarefas foram excluidas.")
-            except OSError as e:
-                messagebox.showerror('ERRO!', f"Erro ao excluir suas tarefas")
-        else:
-            messagebox.showinfo('INFO', f"Você não tem nenhuma tarefa no sistema.")
+        try:
+            self.cursor.execute('DELETE FROM todolistStatus')
+            self.conn.commit()
+            messagebox.showinfo('SUCESSO!', 'Todas as tarefas foram excluídas do banco de dados.')
+        except Exception as e:
+            messagebox.showerror('ERRO!', 'Erro ao excluir todas as tarefas do banco de dados.')
 
 
 ToDoList_banco = ToDOStatus()

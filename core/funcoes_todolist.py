@@ -110,6 +110,7 @@ def atualizarTarefa(id):
     try:
         id_Tarefa = int(id.get())
         todo_lista = bdToDoList.ToDoList_banco.procurarTarefa(id_Tarefa)
+        print(todo_lista)
         if todo_lista is not None:
             janela_dados = Tk()
             janela_dados.geometry('500x500')
@@ -139,7 +140,7 @@ def atualizarTarefa(id):
             titulo_descricao.place(x=50, y=100)
             Entrada_descricao = Entry(frame_meio, width=22, justify=LEFT, relief=SOLID, font=PadraoProjeto.fonte_conteudo)
             Entrada_descricao.place(x=165, y=100)
-            Entrada_descricao.insert(0, todo_lista[2])
+            Entrada_descricao.insert(0, todo_lista[3])
 
             titulo_status = Label(frame_meio, text='Status:', anchor=NW, font=PadraoProjeto.fonte_conteudo,
                                   bg=PadraoProjeto.COR_BRANCA)
@@ -147,7 +148,7 @@ def atualizarTarefa(id):
             Entrada_status = ttk.Combobox(frame_meio, width=20, font=PadraoProjeto.fonte_conteudo, justify=CENTER)
             Entrada_status['values'] = status
             Entrada_status.place(x=165, y=150)
-            Entrada_status.insert(0, todo_lista[3])
+            Entrada_status.insert(0, todo_lista[2])
 
             titulo_nivel = Label(frame_meio, text='Nivel de importancia:', anchor=NW, font=PadraoProjeto.fonte_conteudo,
                                  bg=PadraoProjeto.COR_BRANCA)
