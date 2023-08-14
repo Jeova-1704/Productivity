@@ -78,14 +78,14 @@ def criar_janela():
     img_update = Image.open('assets/toDoList_update.png')
     img_update = img_update.resize((35, 35))
     img_update = ImageTk.PhotoImage(img_update)
-    botao_add = Button(frame_meio, image=img_update, command=..., relief=GROOVE, text="Atualizar Tarefa", width=300,
+    botao_add = Button(frame_meio, image=img_update, command=lambda: funcoes_todolist.atualizarTarefa(Entrada_idTask), relief=GROOVE, text="Atualizar Tarefa", width=300,
                        compound=LEFT, overrelief=RIDGE, font=PadraoProjeto.fonte_conteudo,
                        bg=PadraoProjeto.COR_LARANJA_CLARO, fg=PadraoProjeto.COR_BRANCA)
     botao_add.place(x=175, y=290)
 
     botao_atualizar_table = Button(frame_meio, image=img_update, command=lambda: atualizar_janela(janela),
                                    relief=GROOVE,
-                                   text="Atualizar Tarefa", width=300, compound=LEFT, overrelief=RIDGE,
+                                   text="Atualizar banco", width=300, compound=LEFT, overrelief=RIDGE,
                                    font=PadraoProjeto.fonte_conteudo, bg=PadraoProjeto.COR_LARANJA_CLARO,
                                    fg=PadraoProjeto.COR_BRANCA)
     botao_atualizar_table.place(x=820, y=450)
@@ -93,7 +93,7 @@ def criar_janela():
     img_delete = Image.open('assets/toDoList_delete.png')
     img_delete = img_delete.resize((35, 35))
     img_delete = ImageTk.PhotoImage(img_delete)
-    botao_delete = Button(frame_meio, command=..., image=img_delete, relief=GROOVE, text="Deletar Tarefa", width=300,
+    botao_delete = Button(frame_meio, command=lambda: funcoes_todolist.deletarTarefaEspecifica(Entrada_idTask), image=img_delete, relief=GROOVE, text="Deletar Tarefa", width=300,
                           compound=LEFT,
                           overrelief=RIDGE, font=PadraoProjeto.fonte_conteudo,
                           bg=PadraoProjeto.COR_LARANJA_CLARO, fg=PadraoProjeto.COR_BRANCA)
