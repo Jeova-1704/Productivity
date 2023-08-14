@@ -10,17 +10,17 @@ from dao import bdToDoList
 def atualizar_janela(janela):
     # Destrua a janela atual
     janela.destroy()
-    criar_janela()
+    criar_janela_todo_list()
 
 
-def criar_janela():
+def criar_janela_todo_list():
     janela = Tk()
     janela.title("To-Do List")
     janela.geometry('1280x700')
-    janela.config(background=PadraoProjeto.COR_CINZA_ESCURO)
+    janela.config(background=PadraoProjeto.COR_BRANCA)
     janela.resizable(width=FALSE, height=FALSE)
 
-    frame_topo = Frame(janela, width=1280, height=150, bg=PadraoProjeto.COR_CINZA_ESCURO, relief=SOLID)
+    frame_topo = Frame(janela, width=1280, height=125, bg=PadraoProjeto.COR_CINZA_ESCURO, relief=SOLID)
     frame_topo.pack()
 
     frame_meio = Frame(janela, width=1280, height=550, bg=PadraoProjeto.COR_BRANCA, relief=SOLID)
@@ -51,6 +51,10 @@ def criar_janela():
     linha_horizontal = Label(frame_meio, relief=GROOVE, width=350, height=0, anchor=NW, font='Ivy 1',
                              bg=PadraoProjeto.COR_LARANJA_ESCURO, fg=PadraoProjeto.COR_CINZA_ESCURO)
     linha_horizontal.place(x=152, y=190)
+
+    linha_horizontal = Label(frame_meio, relief=GROOVE, width=1280, height=0, anchor=NW, font='Ivy 1',
+                             bg=PadraoProjeto.COR_LARANJA_ESCURO, fg=PadraoProjeto.COR_CINZA_ESCURO)
+    linha_horizontal.place(x=0, y=523)
 
     img_logo = Image.open('assets/toDoList_logo.png')
     img_logo = ImageTk.PhotoImage(img_logo)
@@ -111,4 +115,4 @@ def criar_janela():
     janela.mainloop()
 
 
-criar_janela()
+criar_janela_todo_list()

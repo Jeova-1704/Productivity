@@ -7,7 +7,6 @@ from utils import PadraoProjeto
 from dao import bdToDoList
 
 
-
 def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_nivel, janela):
     try:
         tarefa = str(Entrada_tarefa.get())
@@ -114,7 +113,7 @@ def atualizarTarefa(id):
         if todo_lista is not None:
             janela_dados = Tk()
             janela_dados.geometry('500x500')
-            janela_dados.title("Cadastro de tarefas")
+            janela_dados.title("Atuaização de tarefas")
             janela_dados.resizable(height=FALSE, width=FALSE)
             janela_dados.config(background=PadraoProjeto.COR_BRANCA)
 
@@ -164,7 +163,7 @@ def atualizarTarefa(id):
 
             botao_salvar = Button(frame_meio, command=lambda: atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status,
                                                                             Entrada_nivel, id_Tarefa, janela_dados), relief=GROOVE,
-                                  text="Salvar", width=10,
+                                  text="Atualizar", width=10,
                                   compound=LEFT,
                                   overrelief=RIDGE, font=PadraoProjeto.fonte_conteudo,
                                   bg=PadraoProjeto.COR_LARANJA_CLARO, fg=PadraoProjeto.COR_BRANCA)
@@ -172,7 +171,3 @@ def atualizarTarefa(id):
 
     except:
         ...
-
-
-
-
