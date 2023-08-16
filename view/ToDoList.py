@@ -5,7 +5,7 @@ from PIL import ImageTk, Image
 from core import funcoes_todolist
 from utils import PadraoProjeto
 from dao import bdToDoList
-
+from core import  Funcoes_main
 
 def atualizar_janela(janela):
     # Destrua a janela atual
@@ -31,7 +31,7 @@ def criar_janela_todo_list():
     label.place(x=34, y=50)
 
     Botao_Home = "Home"
-    label = Button(frame_top, text=Botao_Home, fg=PadraoProjeto.COR_BRANCA, bg=PadraoProjeto.COR_CINZA_ESCURO, font=('monospace', 32), relief=FLAT,
+    label = Button(frame_top, text=Botao_Home, fg=PadraoProjeto.COR_BRANCA, bg=PadraoProjeto.COR_CINZA_ESCURO, font=('monospace', 32), relief=FLAT,command=lambda:Funcoes_main.renderizar_home(janela)
                    )
     label.place(x=625, y=50)
 

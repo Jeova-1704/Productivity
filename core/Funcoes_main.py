@@ -35,13 +35,20 @@ def renderizar_header():
     frame_detalhes_borda = Frame(frame_top,width=1280,height=4,bg=COR_CINZA_CLARO,relief=SOLID)
     frame_detalhes_borda.pack(padx=0, pady=0)
 
-def limpar_janela():
-    global janela
-    janela.destroy()
-    janela = get_modelo_janela()
+def limpar_janela(janela_para_fechar=False):
 
-def renderizar_home():
-    limpar_janela()
+    if janela_para_fechar:
+        janela_para_fechar.destroy()
+    else:
+        global janela
+        janela.destroy()
+        janela = get_modelo_janela()
+
+def renderizar_home(janela_para_fechar=False):
+    if janela_para_fechar:
+        limpar_janela(janela_para_fechar)
+    else:
+        limpar_janela()
 
     renderizar_header()
 
@@ -115,18 +122,6 @@ def renderizar_ToDoList():
     janela.destroy()
 
     ToDoList.criar_janela_todo_list()
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
