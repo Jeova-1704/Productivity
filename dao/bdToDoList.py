@@ -1,6 +1,4 @@
 import sqlite3
-from tkinter import messagebox
-import os
 
 class ToDOStatus:
     def __init__(self):
@@ -22,7 +20,6 @@ class ToDOStatus:
             ListaTarefas)
 
         self.conn.commit()
-        messagebox.showinfo("SUCESSO", 'Tarefa adicionada com sucesso!')
 
     def visualizacaoTodasTarefas(self):
         self.cursor.execute('SELECT * FROM todolistStatus')
@@ -33,7 +30,7 @@ class ToDOStatus:
         self.cursor.execute('SELECT * FROM todolistStatus WHERE idTask=?', (idTask,))
         informacao = self.cursor.fetchone()
         if informacao == None:
-            return messagebox.showinfo("ERRO!", f'Não foi possível encontrar a tarefa com o IdTask {idTask}')
+            return False
         else:
             return informacao
 
@@ -41,21 +38,17 @@ class ToDOStatus:
         query = 'UPDATE todolistStatus SET tarefa = ?, status = ?, descricao = ?, nivel_Importancia = ? WHERE idTask = ?'
         self.cursor.execute(query, listaAtualizada)
         self.conn.commit()
-        messagebox.showinfo('SUCESSO!', f"Tarefa com idTask {listaAtualizada[4]} foi atualizada com sucesso.")
+
 
     def deletarTarefa(self, idTask):
         self.cursor.execute('DELETE FROM todolistStatus WHERE idTask=?', (idTask,))
         self.conn.commit()
-        # Mostrando mensagem de sucesso
-        messagebox.showinfo('SUCESSO!', f"Tarefa com o idTask {idTask} foi deletado com sucesso.")
+
 
     def deletarTodasAsTarefas(self):
-        try:
-            self.cursor.execute('DELETE FROM todolistStatus')
-            self.conn.commit()
-            messagebox.showinfo('SUCESSO!', 'Todas as tarefas foram excluídas do banco de dados.')
-        except Exception as e:
-            messagebox.showerror('ERRO!', 'Erro ao excluir todas as tarefas do banco de dados.')
+        self.cursor.execute('DELETE FROM todolistStatus')
+        self.conn.commit()
+
 
 
 ToDoList_banco = ToDOStatus()

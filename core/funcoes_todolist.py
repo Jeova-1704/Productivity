@@ -15,6 +15,7 @@ def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_niv
         nivel = int(Entrada_nivel.get())
         lista_para_banco_dados = [tarefa, status, descricao, nivel]
         bdToDoList.ToDoList_banco.registroDeTarefas(lista_para_banco_dados)
+        messagebox.showinfo("SUCESSO", 'Tarefa adicionada com sucesso!')
         janela.destroy()
     except:
         tkinter.messagebox.showinfo("ERRO!", 'Por favor forneça todos os campos de entrada')
@@ -29,15 +30,10 @@ def atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_
         id = id_task
         lista_para_banco_dados = [tarefa, status, descricao, nivel, id]
         bdToDoList.ToDoList_banco.atualizar_tarefa(lista_para_banco_dados)
+        messagebox.showinfo('SUCESSO!', f"Tarefa com idTask {id} foi atualizada com sucesso.")
         janela.destroy()
     except:
         tkinter.messagebox.showinfo("ERRO!", 'Por favor forneça todos os campos de entrada')
-
-
-
-
-status = ['Não iniado', 'Em andamento', 'Concluido']
-nivel_importancia = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
 def addTarefa():
@@ -73,14 +69,14 @@ def addTarefa():
                           bg=PadraoProjeto.COR_BRANCA)
     titulo_status.place(x=50, y=150)
     Entrada_status = ttk.Combobox(frame_meio, width=20, font=PadraoProjeto.fonte_conteudo, justify=CENTER)
-    Entrada_status['values'] = status
+    Entrada_status['values'] = PadraoProjeto.status
     Entrada_status.place(x=165, y=150)
 
     titulo_nivel = Label(frame_meio, text='Nivel de importancia:', anchor=NW, font=PadraoProjeto.fonte_conteudo,
                          bg=PadraoProjeto.COR_BRANCA)
     titulo_nivel.place(x=50, y=200)
     Entrada_nivel = ttk.Combobox(frame_meio, width=5, font=PadraoProjeto.fonte_conteudo, justify=CENTER)
-    Entrada_nivel['values'] = nivel_importancia
+    Entrada_nivel['values'] = PadraoProjeto.nivel_importancia
     Entrada_nivel.place(x=270, y=200)
 
     linha_horizontal = Label(frame_meio, relief=GROOVE, width=400, height=0, anchor=NW, font='Ivy 1',
@@ -98,19 +94,24 @@ def deletarTarefaEspecifica(id):
     try:
         id_tarefa = int(id.get())
         bdToDoList.ToDoList_banco.deletarTarefa(id_tarefa)
-
-
+        messagebox.showinfo('SUCESSO!', f"Tarefa com o id {id_tarefa} foi deletado com sucesso.")
     except:
         messagebox.showinfo("Erro!", 'Por favor forneça um valor valido da tabela')
 
+
+def deletarTodasTasks():
+    try:
+        bdToDoList.ToDoList_banco.deletarTodasAsTarefas()
+        messagebox.showinfo('SUCESSO!', 'Todas as tarefas foram excluídas do banco de dados.')
+    except:
+        messagebox.showerror('ERRO!', 'Erro ao excluir todas as tarefas do banco de dados.')
 
 
 def atualizarTarefa(id):
     try:
         id_Tarefa = int(id.get())
         todo_lista = bdToDoList.ToDoList_banco.procurarTarefa(id_Tarefa)
-        print(todo_lista)
-        if todo_lista is not None:
+        if len(todo_lista) != 0 or todo_lista == False:
             janela_dados = Tk()
             janela_dados.geometry('500x500')
             janela_dados.title("Atuaização de tarefas")
@@ -145,7 +146,7 @@ def atualizarTarefa(id):
                                   bg=PadraoProjeto.COR_BRANCA)
             titulo_status.place(x=50, y=150)
             Entrada_status = ttk.Combobox(frame_meio, width=20, font=PadraoProjeto.fonte_conteudo, justify=CENTER)
-            Entrada_status['values'] = status
+            Entrada_status['values'] = PadraoProjeto.status
             Entrada_status.place(x=165, y=150)
             Entrada_status.insert(0, todo_lista[2])
 
@@ -153,7 +154,7 @@ def atualizarTarefa(id):
                                  bg=PadraoProjeto.COR_BRANCA)
             titulo_nivel.place(x=50, y=200)
             Entrada_nivel = ttk.Combobox(frame_meio, width=5, font=PadraoProjeto.fonte_conteudo, justify=CENTER)
-            Entrada_nivel['values'] = nivel_importancia
+            Entrada_nivel['values'] = PadraoProjeto.nivel_importancia
             Entrada_nivel.place(x=270, y=200)
             Entrada_nivel.insert(0, todo_lista[4])
 
@@ -170,4 +171,4 @@ def atualizarTarefa(id):
             botao_salvar.place(x=175, y=300)
 
     except:
-        ...
+        messagebox.showerror("ERRO!", f"Por favor forneça um ID valido para atualizar a atarefa")

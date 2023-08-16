@@ -38,12 +38,14 @@ def criar_janela_todo_list():
     tv.heading('descricao', text='DESCRICAO')
     tv.heading('nivel', text='NIVEL')
     tv.place(x=670, y=20)
+
     try:
         bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus")
         for row in bdToDoList.ToDoList_banco.cursor.fetchall():
             tv.insert("", "end", values=row)
-    except:
-        pass
+    except Exception as e:
+        tv.insert("", "end", values=("Erro ao acessar o banco de dados:", str(e)))
+
     linha_vertical = Label(frame_meio, relief=GROOVE, width=0, height=255, anchor=NW, font='Ivy 1',
                            bg=PadraoProjeto.COR_LARANJA_ESCURO, fg=PadraoProjeto.COR_CINZA_ESCURO)
     linha_vertical.place(x=640, y=15)
@@ -106,7 +108,7 @@ def criar_janela_todo_list():
     img_all_delete = Image.open('assets/toDoList_danger.png')
     img_all_delete = img_all_delete.resize((35, 35))
     img_all_delete = ImageTk.PhotoImage(img_all_delete)
-    botao_all_delete = Button(frame_meio, command=bdToDoList.ToDoList_banco.deletarTodasAsTarefas, image=img_all_delete, relief=GROOVE,
+    botao_all_delete = Button(frame_meio, command=funcoes_todolist.deletarTodasTasks, image=img_all_delete, relief=GROOVE,
                               text="Deletar todas as tarefas",
                               width=300, compound=LEFT, overrelief=RIDGE, font=PadraoProjeto.fonte_conteudo,
                               bg=PadraoProjeto.COR_LARANJA_CLARO, fg=PadraoProjeto.COR_BRANCA)
