@@ -2,71 +2,47 @@ from tkinter import *
 import tkinter as tk
 import webbrowser
 from utils.colors import *
-from utils.window import get_window
+from utils.window import get_modelo_janela
 
-janela = get_window()
+janela = get_modelo_janela()
 
+def renderizar_header():
+    global janela
+
+    frame_top = Frame(janela, width=1280, height=125, bg=COR_BRANCA, relief=SOLID)
+    frame_top.pack(padx=0, pady=0)
+
+    frame_detalhes = Frame(frame_top,width=1280,height=174,bg=COR_CINZA_ESCURO,relief=SOLID)
+    frame_detalhes.pack(padx=0,pady=0)
+
+    Texto_Productivity = "Productivity"
+    label = tk.Label(frame_top, text=Texto_Productivity,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 40))
+    label.place(x=34,y=50)
+
+    Botao_Home = "Home"
+    label = Button(frame_top, text=Botao_Home,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32),relief=FLAT, command=renderizar_home)
+    label.place(x=625,y=50)
+
+    Botao_Codigo = "DashBoard"
+    label = Button(frame_top, text=Botao_Codigo,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32), relief=FLAT)
+    label.place(x=800,y=50)
+
+    Botao_Team = "Sobre"
+    label = Button(frame_top, text=Botao_Team,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32),relief=FLAT, command=renderizar_tela_team)
+    label.place(x=1068,y=50)
+
+    frame_detalhes_borda = Frame(frame_top,width=1280,height=4,bg=COR_CINZA_CLARO,relief=SOLID)
+    frame_detalhes_borda.pack(padx=0, pady=0)
 
 def limpar_janela():
     global janela
-
     janela.destroy()
+    janela = get_modelo_janela()
 
-    janela = get_window()
+def renderizar_home():
+    limpar_janela()
 
-
-def criar_Frame_Top(janela):
-    frame_top = Frame(janela, width=1280, height=125, bg=COR_BRANCA, relief=SOLID)
-    frame_top.pack(padx=0, pady=0)
-
-    frame_detalhes = Frame(frame_top,width=1280,height=174,bg=COR_CINZA_ESCURO,relief=SOLID)
-    frame_detalhes.pack(padx=0,pady=0)
-
-    Texto_Productivity = "Productivity"
-    label = tk.Label(frame_top, text=Texto_Productivity,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 40))
-    label.place(x=34,y=50)
-
-    Botao_Home = "Home"
-    label = Button(frame_top, text=Botao_Home,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32),relief=FLAT )
-    label.place(x=625,y=50)
-
-    Botao_Codigo = "Código"
-    label = Button(frame_top, text=Botao_Codigo,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32), relief=FLAT,command= abrir_navegador)
-    label.place(x=846,y=50)
-
-    Botao_Team = "Team"
-    label = Button(frame_top, text=Botao_Team,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32),relief=FLAT, command=lambda: abrir_janela_team())
-    label.place(x=1068,y=50)
-
-    frame_detalhes_borda = Frame(frame_top,width=1280,height=4,bg=COR_CINZA_CLARO,relief=SOLID)
-    frame_detalhes_borda.pack(padx=0,pady=0)
-
-
-def criar_home():
-    frame_top = Frame(janela, width=1280, height=125, bg=COR_BRANCA, relief=SOLID)
-    frame_top.pack(padx=0, pady=0)
-
-    frame_detalhes = Frame(frame_top,width=1280,height=174,bg=COR_CINZA_ESCURO,relief=SOLID)
-    frame_detalhes.pack(padx=0,pady=0)
-
-    Texto_Productivity = "Productivity"
-    label = tk.Label(frame_top, text=Texto_Productivity,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 40))
-    label.place(x=34,y=50)
-
-    Botao_Home = "Home"
-    label = Button(frame_top, text=Botao_Home,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32),relief=FLAT )
-    label.place(x=625,y=50)
-
-    Botao_Codigo = "Código"
-    label = Button(frame_top, text=Botao_Codigo,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32), relief=FLAT,command= abrir_navegador)
-    label.place(x=846,y=50)
-
-    Botao_Team = "Team"
-    label = Button(frame_top, text=Botao_Team,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 32),relief=FLAT, command=lambda: abrir_janela_team())
-    label.place(x=1068,y=50)
-
-    frame_detalhes_borda = Frame(frame_top,width=1280,height=4,bg=COR_CINZA_CLARO,relief=SOLID)
-    frame_detalhes_borda.pack(padx=0,pady=0)
+    renderizar_header()
 
     frame_meio = Frame(janela, width=1280, height=220, bg=COR_BRANCA, relief=SOLID)
     frame_meio.pack(padx=0, pady=0, side='right')
@@ -100,45 +76,59 @@ def criar_home():
 
     janela.mainloop()
 
-
 def abrir_navegador():
     nova_url = "https://github.com/Jeova-1704/Projeto-programacao-1"
     webbrowser.open(nova_url)
 
-
 def voltar_home():
     limpar_janela()
 
-    criar_home()
+    renderizar_home()
 
-
-def abrir_janela_team():
+def renderizar_tela_team():
     limpar_janela()
 
-    frame_top = Frame(janela, width=1280, height=125, bg=COR_BRANCA, relief=SOLID)
-    frame_top.pack(padx=0, pady=0)
+    renderizar_header()
 
-    frame_detalhes = Frame(frame_top, width=1280, height=174, bg=COR_CINZA_ESCURO, relief=SOLID)
-    frame_detalhes.pack(padx=0, pady=0)
+    frame_equipe = Frame(janela,width=1280,height=100,bg=COR_BRANCA,relief=SOLID)
+    frame_equipe.pack(padx=0,pady=0)
 
-    Texto_Productivity = "Productivity"
-    label = tk.Label(frame_top, text=Texto_Productivity, fg=COR_BRANCA, bg=COR_CINZA_ESCURO, font=('monospace', 40))
-    label.place(x=34, y=50)
+    label_nomes = Label(frame_equipe,text="Calendário | Gerente de Projeto | Bloco de notas | To Do List | Pomodoro",
+                        fg=COR_CINZA_ESCURO,bg=COR_BRANCA,font=('mulish', 28))
+    label_nomes.place(x=28,y=25)
 
-    Botao_Home = "Home"
-    label = Button(frame_top, text=Botao_Home, fg=COR_BRANCA, bg=COR_CINZA_ESCURO, font=('monospace', 32), relief=FLAT,
-                   command=lambda: voltar_home())
-    label.place(x=625, y=50)
+    frame_meio_team = Frame(janela, width=1280, height=420, bg=COR_BRANCA, relief=SOLID)
+    frame_meio_team.pack(padx=0, pady=0)
 
-    Botao_Codigo = "Código"
-    label = Button(frame_top, text=Botao_Codigo, fg=COR_BRANCA, bg=COR_CINZA_ESCURO, font=('monospace', 32),
-                   relief=FLAT, command=abrir_navegador)
-    label.place(x=846, y=50)
+    img_logo = PhotoImage(file='../view/assets/Group 8.png')
+    label = Label(frame_meio_team, image=img_logo)
+    label.pack(padx=0, pady=0)
 
-    Botao_Team = "Team"
-    label = Button(frame_top, text=Botao_Team, fg=COR_BRANCA, bg=COR_CINZA_ESCURO, font=('monospace', 32), relief=FLAT,
-                   command=lambda: abrir_janela_team())
-    label.place(x=1068, y=50)
+    Botao_Codigo = "Código GitHub"
+    label = Button(janela, text=Botao_Codigo,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 16), relief=FLAT, command=abrir_navegador)
+    label.pack(padx=0,pady=10)
 
-    frame_detalhes_borda = Frame(frame_top, width=1280, height=4, bg=COR_CINZA_CLARO, relief=SOLID)
-    frame_detalhes_borda.pack(padx=0, pady=0)
+    janela.mainloop()
+
+def renderizar_pomodoro():
+    limpar_janela()
+    renderizar_header()
+
+    # código aqui
+
+    janela.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
