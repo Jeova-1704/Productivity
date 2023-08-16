@@ -5,6 +5,8 @@ from utils.colors import *
 from utils.window import get_modelo_janela
 from view import ToDoList
 
+
+
 janela = get_modelo_janela()
 
 def renderizar_header():
