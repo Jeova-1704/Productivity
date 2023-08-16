@@ -1,0 +1,5 @@
+/.idea
+core/__pycache__/
+dao/__pycache__/
+dao/eventos.db
+
