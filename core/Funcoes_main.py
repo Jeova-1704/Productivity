@@ -90,12 +90,12 @@ def renderizar_tela_team():
 
     renderizar_header()
 
-    frame_equipe = Frame(janela,width=1280,height=100,bg=COR_BRANCA,relief=SOLID)
+    frame_equipe = Frame(janela,width=1280,height=80,bg=COR_BRANCA,relief=SOLID)
     frame_equipe.pack(padx=0,pady=0)
 
-    label_nomes = Label(frame_equipe,text="Calendário | Gerente de Projeto | Bloco de notas | To Do List | Pomodoro",
-                        fg=COR_CINZA_ESCURO,bg=COR_BRANCA,font=('mulish', 28))
-    label_nomes.place(x=28,y=25)
+    label_nomes = Label(frame_equipe,text="Desenvolvedores :",
+                        fg=COR_CINZA_ESCURO,bg=COR_BRANCA,font=('mulish', 30, "bold"))
+    label_nomes.place(x=465,y=15)
 
     frame_meio_team = Frame(janela, width=1280, height=420, bg=COR_BRANCA, relief=SOLID)
     frame_meio_team.pack(padx=0, pady=0)
@@ -106,7 +106,7 @@ def renderizar_tela_team():
 
     Botao_Codigo = "Código GitHub"
     label = Button(janela, text=Botao_Codigo,fg=COR_BRANCA,  bg=COR_CINZA_ESCURO,font=('monospace', 16), relief=FLAT, command=abrir_navegador)
-    label.pack(padx=0,pady=10)
+    label.pack(padx=0,pady=20)
 
     janela.mainloop()
 
