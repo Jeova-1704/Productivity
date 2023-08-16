@@ -3,6 +3,7 @@ import tkinter as tk
 import webbrowser
 from utils.colors import *
 from utils.window import get_modelo_janela
+from view import ToDoList
 
 janela = get_modelo_janela()
 
@@ -58,7 +59,7 @@ def renderizar_home():
     frame_centro.pack(padx=0, pady=0, side='right')
 
     img_ToDoList = PhotoImage(file='../view/assets/Ellipse 1.png')
-    label_ToDoList = Button(frame_meio, image=img_ToDoList, relief=FLAT, bg=COR_CINZA_ESCURO)
+    label_ToDoList = Button(frame_meio, image=img_ToDoList, relief=FLAT, bg=COR_CINZA_ESCURO,command=renderizar_ToDoList)
     label_ToDoList.place(x=385, y=23)
 
 
@@ -110,13 +111,12 @@ def renderizar_tela_team():
 
     janela.mainloop()
 
-def renderizar_pomodoro():
-    limpar_janela()
-    renderizar_header()
+def renderizar_ToDoList():
+    janela.destroy()
 
-    # código aqui
+    ToDoList.criar_janela_todo_list()
 
-    janela.mainloop()
+
 
 
 

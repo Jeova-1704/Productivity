@@ -20,8 +20,32 @@ def criar_janela_todo_list():
     janela.config(background=PadraoProjeto.COR_BRANCA)
     janela.resizable(width=FALSE, height=FALSE)
 
-    frame_topo = Frame(janela, width=1280, height=125, bg=PadraoProjeto.COR_CINZA_ESCURO, relief=SOLID)
-    frame_topo.pack()
+    frame_top = Frame(janela, width=1280, height=125, bg=PadraoProjeto.COR_BRANCA, relief=SOLID)
+    frame_top.pack(padx=0, pady=0)
+
+    frame_detalhes = Frame(frame_top, width=1280, height=174, bg=PadraoProjeto.COR_CINZA_ESCURO, relief=SOLID)
+    frame_detalhes.pack(padx=0, pady=0)
+
+    Texto_Productivity = "Productivity"
+    label = Label(frame_top, text=Texto_Productivity, fg=PadraoProjeto.COR_BRANCA, bg=PadraoProjeto.COR_CINZA_ESCURO, font=('monospace', 40))
+    label.place(x=34, y=50)
+
+    Botao_Home = "Home"
+    label = Button(frame_top, text=Botao_Home, fg=PadraoProjeto.COR_BRANCA, bg=PadraoProjeto.COR_CINZA_ESCURO, font=('monospace', 32), relief=FLAT,
+                   )
+    label.place(x=625, y=50)
+
+    Botao_Codigo = "DashBoard"
+    label = Button(frame_top, text=Botao_Codigo, fg=PadraoProjeto.COR_BRANCA, bg=PadraoProjeto.COR_CINZA_ESCURO, font=('monospace', 32),
+                   relief=FLAT)
+    label.place(x=800, y=50)
+
+    Botao_Team = "Sobre"
+    label = Button(frame_top, text=Botao_Team, fg=PadraoProjeto.COR_BRANCA, bg=PadraoProjeto.COR_CINZA_ESCURO, font=('monospace', 32), relief=FLAT)
+    label.place(x=1068, y=50)
+
+    frame_detalhes_borda = Frame(frame_top, width=1280, height=4, bg=PadraoProjeto.COR_CINZA_CLARO, relief=SOLID)
+    frame_detalhes_borda.pack(padx=0, pady=0)
 
     frame_meio = Frame(janela, width=1280, height=550, bg=PadraoProjeto.COR_BRANCA, relief=SOLID)
     frame_meio.pack()
@@ -117,4 +141,4 @@ def criar_janela_todo_list():
     janela.mainloop()
 
 
-criar_janela_todo_list()
+
