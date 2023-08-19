@@ -42,7 +42,7 @@ def criar_janela_todo_list():
     label.place(x=800, y=50)
 
     Botao_Team = "Sobre"
-    label = Button(frame_top, text=Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO, font=('monospace', 32), relief=FLAT)
+    label = Button(frame_top, text=Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO, font=('monospace', 32),command=Funcoes_main.renderizar_team(janela), relief=FLAT)
     label.place(x=1068, y=50)
 
     frame_detalhes_borda = Frame(frame_top, width=1280, height=4, bg=colors.COR_CINZA_CLARO, relief=SOLID)
