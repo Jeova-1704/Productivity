@@ -1,5 +1,4 @@
 import sqlite3
-from tkinter import messagebox
 import os
 
 
@@ -20,7 +19,6 @@ class BancoDeEventos:
     def insere_na_tabela(self, eventos):
         self.c.execute("INSERT INTO eventos(dias, evento) VALUES(?, ?)", eventos)
         self.conn.commit()
-        messagebox.showinfo('Sucesso', 'Registro com sucesso')
 
     def ver_todos_eventos(self):
         self.c.execute("SELECT id, dias, evento FROM eventos")
@@ -30,7 +28,6 @@ class BancoDeEventos:
     def delete_evento(self, id):
         self.c.execute("DELETE FROM eventos WHERE id=?", (id,))
         self.conn.commit()
-        messagebox.showinfo('Sucesso', f'Evento com ID {id} foi deletado')
 
 
 sistema_de_registro = BancoDeEventos()
