@@ -1,4 +1,4 @@
-from core.Funcoes_main import renderizar_home
+from core import Funcoes_main
 
 if __name__ == '__main__':
-    renderizar_home()
+    Funcoes_main.renderizer_main()

@@ -7,6 +7,7 @@ from utils import colors, fonts
 from dao import bdToDoList
 from core import Funcoes_main
 from utils.ToolTip import Tooltip
+
 def atualizar_janela(janela):
     # Destrua a janela atual
     janela.destroy()
