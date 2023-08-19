@@ -1,6 +1,6 @@
 from tkinter import *
 from utils import colors
-from core import funcoes_calendario, Funcoes_main
+from core import funcoes_calendario, funcoes_main
 
 class Interface:
     def __init__(self):
@@ -23,7 +23,7 @@ class Interface:
 
         Botao_Home = "Home"
         label = Button(frame_top, text=Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                       font=('monospace', 32), relief=FLAT, command=lambda: Funcoes_main.renderizar_home(self.janela))
+                       font=('monospace', 32), relief=FLAT, command=lambda: funcoes_main.renderizar_home(self.janela))
         label.place(x=625, y=50)
 
         Botao_Codigo = "DashBoard"
@@ -51,7 +51,7 @@ class Interface:
         label.pack(padx=0, pady=0)
         Botao_Codigo = "Código GitHub"
         label = Button(self.janela, text=Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO, font=('monospace', 16), relief=FLAT,
-               command=Funcoes_main.abrir_navegador)
+               command=funcoes_main.abrir_navegador)
         label.pack(padx=0, pady=20)
         self.janela.mainloop()
 

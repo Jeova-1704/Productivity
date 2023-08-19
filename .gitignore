@@ -1,4 +1,3 @@
-teste.py
 dao/todolistStatus.db
 dao/bancodedados
 dao/eventos.db
@@ -6,4 +5,4 @@ dao/__pycache__/
 utils/__pycache__/
 view/__pycache__/
 .idea/
-core/__pycache__/
+

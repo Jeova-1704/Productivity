@@ -85,12 +85,11 @@ def renderizar_home(janela):
 
 def renderizar_todoList(janela_main):
     janela_main.destroy()
-    ToDoList.criar_janela_todo_list()
+    ToDoList.InterfaceToDoList()
 
 def renderizar_calendario(janela_main):
     janela_main.destroy()
     Calendario.Interface()
-
 
 def renderizar_team(janela_main):
     janela_main.destroy()

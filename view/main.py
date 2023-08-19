@@ -1,4 +1,4 @@
-from core import Funcoes_main
+from core import funcoes_main
 
 if __name__ == '__main__':
-    Funcoes_main.renderizer_main()
+    funcoes_main.renderizer_main()

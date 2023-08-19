@@ -5,12 +5,13 @@ from tkinter import messagebox
 
 from utils import fonts, colors
 from dao import bdToDoList
+from view import ToDoList
 
 status = ['Não iniado', 'Em andamento', 'Concluido']
 nivel_importancia = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
-def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_nivel, janela):
+def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_nivel, janela, janela_todo):
     try:
         tarefa = str(Entrada_tarefa.get())
         descricao = str(Entrada_descricao.get())
@@ -22,9 +23,10 @@ def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_niv
         janela.destroy()
     except:
         tkinter.messagebox.showinfo("ERRO!", 'Por favor forneça todos os campos de entrada')
+    atualizar_janela(janela_todo)
 
 
-def atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_nivel, id_task, janela):
+def atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_nivel, id_task, janela, janela_todo):
     try:
         tarefa = str(Entrada_tarefa.get())
         descricao = str(Entrada_descricao.get())
@@ -37,9 +39,10 @@ def atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_
         janela.destroy()
     except:
         tkinter.messagebox.showinfo("ERRO!", 'Por favor forneça todos os campos de entrada')
+    atualizar_janela(janela_todo)
 
 
-def addTarefa():
+def addTarefa(janela_todo):
     status = ['Não iniado', 'Em andamento', 'Concluido']
     nivel_importancia = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
@@ -90,7 +93,7 @@ def addTarefa():
     linha_horizontal.place(x=50, y=250)
 
     botao_salvar = Button(frame_meio, command=lambda: salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status,
-                                                                    Entrada_nivel, janela_dados), relief=GROOVE,
+                                                                    Entrada_nivel, janela_dados, janela_todo), relief=GROOVE,
                           text="Salvar", width=10,
                           compound=LEFT,
                           overrelief=RIDGE, font=fonts.fonte_conteudo,
@@ -98,24 +101,26 @@ def addTarefa():
     botao_salvar.place(x=175, y=300)
 
 
-def deletarTarefaEspecifica(id):
+def deletarTarefaEspecifica(id, janela_todo):
     try:
         id_tarefa = int(id.get())
         bdToDoList.ToDoList_banco.deletarTarefa(id_tarefa)
         messagebox.showinfo('SUCESSO!', f"Tarefa com o id {id_tarefa} foi deletado com sucesso.")
     except:
         messagebox.showinfo("Erro!", 'Por favor forneça um valor valido da tabela')
+    atualizar_janela(janela_todo)
 
 
-def deletarTodasTasks():
+def deletarTodasTasks(janela_todo):
     try:
         bdToDoList.ToDoList_banco.deletarTodasAsTarefas()
         messagebox.showinfo('SUCESSO!', 'Todas as tarefas foram excluídas do banco de dados.')
     except:
         messagebox.showerror('ERRO!', 'Erro ao excluir todas as tarefas do banco de dados.')
+    atualizar_janela(janela_todo)
 
 
-def atualizarTarefa(id):
+def atualizarTarefa(id, janela_todo):
     try:
         id_Tarefa = int(id.get())
         todo_lista = bdToDoList.ToDoList_banco.procurarTarefa(id_Tarefa)
@@ -172,7 +177,7 @@ def atualizarTarefa(id):
 
             botao_salvar = Button(frame_meio,
                                   command=lambda: atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status,
-                                                                   Entrada_nivel, id_Tarefa, janela_dados),
+                                                                   Entrada_nivel, id_Tarefa, janela_dados, janela_todo),
                                   relief=GROOVE,
                                   text="Atualizar", width=10,
                                   compound=LEFT,
@@ -182,3 +187,8 @@ def atualizarTarefa(id):
 
     except:
         messagebox.showerror("ERRO!", f"Por favor forneça um ID valido para atualizar a atarefa")
+
+
+def atualizar_janela(janela):
+    janela.destroy()
+    ToDoList.InterfaceToDoList()
