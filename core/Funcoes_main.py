@@ -1,5 +1,6 @@
 from tkinter import *
-from utils import colors, fonts
+
+from utils import colors
 from view import ToDoList
 
 
@@ -70,8 +71,6 @@ def renderizer_main():
     label_Pomodoro.place(x=1040, y=23)
 
     janela.mainloop()
-
-
 
 
 def renderizar_home(janela):
