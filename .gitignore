@@ -5,3 +5,4 @@ dao/bancodedados
 utils/constantes
 view/assets/imagens
 view/telas
+dao/eventos.db
