@@ -1,7 +1,7 @@
 from tkinter import *
 
 from utils import colors
-from view import ToDoList, interfaceCalendario
+from view import ToDoList, Calendario
 
 
 def renderizer_main():
@@ -63,7 +63,7 @@ def renderizer_main():
     label_Anotacoes.place(x=602, y=23)
 
     img_Calendario = PhotoImage(file='assets/Ellipse 3.png')
-    label_Calendario = Button(frame_meio, image=img_Calendario, relief=FLAT, bg=colors.COR_CINZA_ESCURO, command=lambda: renderizar_calendario(janela) )
+    label_Calendario = Button(frame_meio, image=img_Calendario, relief=FLAT, bg=colors.COR_CINZA_ESCURO, command=lambda: renderizar_calendario(janela))
     label_Calendario.place(x=821, y=23)
 
     img_Pomodoro = PhotoImage(file='assets/Ellipse 4.png')
@@ -84,4 +84,4 @@ def renderizar_todoList(janela_main):
 
 def renderizar_calendario(janela_main):
     janela_main.destroy()
-    interfaceCalendario.Interface()
+    Calendario.Interface()
