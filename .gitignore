@@ -1,8 +1,9 @@
 teste.py
 dao/todolistStatus.db
-core/funcionalidades
 dao/bancodedados
-utils/constantes
-view/assets/imagens
-view/telas
 dao/eventos.db
+dao/__pycache__/
+utils/__pycache__/
+view/__pycache__/
+.idea/
+core/__pycache__/
