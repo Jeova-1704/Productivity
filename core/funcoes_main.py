@@ -11,6 +11,7 @@ def abrir_navegador():
 
 def renderizer_main():
     janela = Tk()
+    janela.iconbitmap('../view/assets/logo.ico')
     janela.title("Janela Principal")
     janela.geometry('1280x700')
     janela.config(background=colors.COR_BRANCA)

@@ -48,6 +48,7 @@ def addTarefa(janela_todo):
 
     janela_dados = Tk()
     janela_dados.geometry('500x500')
+    janela_dados.iconbitmap('../view/assets/todoList.ico')
     janela_dados.title("Cadastro de tarefas")
     janela_dados.resizable(height=FALSE, width=FALSE)
     janela_dados.config(background=colors.COR_BRANCA)
@@ -126,6 +127,7 @@ def atualizarTarefa(id, janela_todo):
         todo_lista = bdToDoList.ToDoList_banco.procurarTarefa(id_Tarefa)
         if len(todo_lista) != 0 or todo_lista == False:
             janela_dados = Tk()
+            janela_dados.iconbitmap('../view/assets/todoList.ico')
             janela_dados.geometry('500x500')
             janela_dados.title("Atuaização de tarefas")
             janela_dados.resizable(height=FALSE, width=FALSE)
@@ -187,7 +189,6 @@ def atualizarTarefa(id, janela_todo):
 
     except:
         messagebox.showerror("ERRO!", f"Por favor forneça um ID valido para atualizar a atarefa")
-
 
 def atualizar_janela(janela):
     janela.destroy()

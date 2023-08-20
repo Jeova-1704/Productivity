@@ -16,6 +16,7 @@ class InterfaceToDoList:
     def __init__(self):
 
         self.janela = Tk()
+        self.janela.iconbitmap('assets/todoList.ico')
         self.janela.title("To-Do List")
         self.janela.geometry('1280x700')
         self.janela.config(background=colors.COR_BRANCA)
