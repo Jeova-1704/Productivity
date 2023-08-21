@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from PIL import ImageTk, Image
 
 from core import funcoes_todolist
@@ -7,9 +7,6 @@ from utils import colors, fonts
 from dao import bdToDoList
 from core import funcoes_main
 from utils.ToolTip import Tooltip
-
-
-
 
 
 class InterfaceToDoList:
@@ -98,16 +95,11 @@ class InterfaceToDoList:
         texto_todolist = Label(frame_meio, text="To-Do List", font=fonts.fonte_titulo)
         texto_todolist.place(x=255, y=25)
 
-        texto_entrada_idTask = Label(frame_meio, text='ID da tarefa:', anchor=NW, font=fonts.fonte_conteudo,
-                                     bg=colors.COR_BRANCA)
-        texto_entrada_idTask.place(x=200, y=225)
-        Entrada_idTask = Entry(frame_meio, width=7, justify='center', relief=SOLID, font=fonts.fonte_conteudo)
-        Entrada_idTask.place(x=340, y=225)
-
         img_add = Image.open('assets/toDoList_add.png')
         img_add = img_add.resize((35, 35))
         img_add = ImageTk.PhotoImage(img_add)
-        botao_add = Button(frame_meio, image=img_add, command=lambda: funcoes_todolist.addTarefa(self.janela), relief=GROOVE,
+        botao_add = Button(frame_meio, image=img_add, command=lambda: funcoes_todolist.addTarefa(self.janela),
+                           relief=GROOVE,
                            text="Adicionar Tarefa", width=300,
                            compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
                            bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
@@ -117,13 +109,14 @@ class InterfaceToDoList:
         img_update = img_update.resize((35, 35))
         img_update = ImageTk.PhotoImage(img_update)
         botao_update = Button(frame_meio, image=img_update,
-                           command=lambda: funcoes_todolist.atualizarTarefa(Entrada_idTask, self.janela),
-                           relief=GROOVE, text="Atualizar Tarefa", width=300,
-                           compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
-                           bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        botao_update.place(x=175, y=290)
+                              command=lambda: funcoes_todolist.atualizar_pesquisar_arvore(self.janela, tv),
+                              relief=GROOVE, text="Atualizar Tarefa", width=300,
+                              compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
+                              bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
+        botao_update.place(x=175, y=230)
 
-        botao_atualizar_table = Button(frame_meio, image=img_update, command=lambda: funcoes_todolist.atualizar_janela(self.janela),
+        botao_atualizar_table = Button(frame_meio, image=img_update,
+                                       command=lambda: funcoes_todolist.atualizar_janela(self.janela),
                                        relief=GROOVE, width=40, compound=LEFT, overrelief=RIDGE,
                                        font=fonts.fonte_conteudo, bg=colors.COR_LARANJA_CLARO,
                                        fg=colors.COR_BRANCA)
@@ -133,22 +126,23 @@ class InterfaceToDoList:
         img_delete = Image.open('assets/toDoList_delete.png')
         img_delete = img_delete.resize((35, 35))
         img_delete = ImageTk.PhotoImage(img_delete)
-        botao_delete = Button(frame_meio, command=lambda: funcoes_todolist.deletarTarefaEspecifica(Entrada_idTask, self.janela),
+        botao_delete = Button(frame_meio, command=lambda: funcoes_todolist.deletar_pesquisar_arvore(self.janela, tv),
                               image=img_delete, relief=GROOVE, text="Deletar Tarefa", width=300,
                               compound=LEFT,
                               overrelief=RIDGE, font=fonts.fonte_conteudo,
                               bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        botao_delete.place(x=175, y=370)
+        botao_delete.place(x=175, y=310)
 
         img_all_delete = Image.open('assets/toDoList_danger.png')
         img_all_delete = img_all_delete.resize((35, 35))
         img_all_delete = ImageTk.PhotoImage(img_all_delete)
-        botao_all_delete = Button(frame_meio, command=lambda: funcoes_todolist.deletarTodasTasks(self.janela), image=img_all_delete,
+        botao_all_delete = Button(frame_meio, command=lambda: funcoes_todolist.deletarTodasTasks(self.janela),
+                                  image=img_all_delete,
                                   relief=GROOVE,
                                   text="Deletar todas as tarefas",
                                   width=300, compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
                                   bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        botao_all_delete.place(x=175, y=450)
+        botao_all_delete.place(x=175, y=390)
 
         self.janela.mainloop()
 
