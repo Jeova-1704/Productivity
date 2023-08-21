@@ -46,7 +46,7 @@ def addTarefa(janela_todo):
     status = ['Não iniado', 'Em andamento', 'Concluido']
     nivel_importancia = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-    janela_dados = Tk()
+    janela_dados = Toplevel()
     janela_dados.geometry('500x500')
     janela_dados.iconbitmap('../view/assets/todoList.ico')
     janela_dados.title("Cadastro de tarefas")
