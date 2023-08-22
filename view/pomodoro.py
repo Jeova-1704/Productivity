@@ -3,49 +3,55 @@
 # Importação das bibliotecas e outras necessidades: ==========================================================================================================================================
 
 from tkinter import *
-
-# variveis globais: =====================================================================================================================================================
-
-COR_BRANCA = "#F2F2F0"
-COR_CINZA_CLARO = "#A5A6A4"
-COR_CINZA_ESCURO = "#737373"
-COR_LARANJA_CLARO = "#BF8450"
-COR_LARANJA_ESCURO = "#BF4C0A"
-fonte_titulo = ('mulish', 22, 'bold')
-fonte_conteudo = ('monospace', 16)
+from utils import colors, fonts
 
 # Inicalização da janela: ===============================================================================================================================================
 
 janela = Tk()
 janela.title("POMODRO")
 janela.geometry('1280x700')
-janela.config(background=COR_BRANCA)
-janela.resizable()
+janela.config(background=colors.COR_BRANCA)
+janela.resizable(width=False, height=False)
 janela.iconbitmap("assets/favicon.ico")
+
+
 
 # Continuação do codigo: ================================================================================================================================================
 # 1 segmento de tela:
-navbar = Frame(janela, width=1280, height=174, bg=COR_CINZA_ESCURO)
+navbar = Frame(janela, width=1280, height=174, bg=colors.COR_CINZA_ESCURO)
 navbar.pack()
+Botao_Home = "Home"
+label = Button( navbar, text=Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                font=fonts.fonte_h2,
+                relief=FLAT, command=...
+                )
+label.place( x=625, y=50 )
+
+Botao_Codigo = "DashBoard"
+label = Button( navbar, text=Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                font=fonts.fonte_h2,
+                relief=FLAT )
+label.place( x=800, y=50 )
+
+Botao_Team = "Sobre"
+label = Button( navbar, text=Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                font=fonts.fonte_h2,
+                command=..., relief=FLAT )
+label.place( x=1068, y=50 )
+
 
 # 2 segmento de tela:
-inf_tempo = Canvas(janela, width=389, height=389)
-inf_tempo.place(x=251, y=233.91)
-inf_tempo.create_oval(1, 1, 389, 389, fill=COR_LARANJA_CLARO, outline='')
 
-frase_foco = Label(inf_tempo, text="# Bora focar!", fg=COR_BRANCA, font="Space Mono 20")
-frase_foco.pack()
+frame_tempo = Frame(janela,  width=1280, height=532, bg=colors.COR_BRANCA)
+frame_tempo.pack()
+img_tempo = PhotoImage(file="assets/pomodoro_tempo.png")
+label_tempo = Label(frame_tempo,image=img_tempo)
+label_tempo.place(x=251, y=77.09)
 
-label0 = Label(inf_tempo, text=src.temporizador(), fg=COR_BRANCA, font="Space Mono 20")
-# icon
-imagem_pomodoro = PhotoImage(file="assets/Ellipse 4.png")
-# Criar uma imagem sobreposta ao círculo
-x_icon = 10  # Coordenada x da imagem
-y_icon = 10  # Coordenada y da imagem
-inf_tempo.create_image(x_icon, y_icon, image=imagem_pomodoro, anchor=NW)
+img_icon = PhotoImage(file="assets/Ellipse 4.png")
+button_icon = Button(frame_tempo, image=img_icon, relief=FLAT)
+button_icon.place(x=265.73, y=70)
 
-button_icon = Button(inf_tempo, image=imagem_pomodoro, command=lambda: src.click_icon())
-button_icon.pack()
 
 # botao
 
@@ -58,22 +64,10 @@ button_icon.pack()'''
 
 # 3 segmento de tela:
 
-tabela_pausa = Frame(janela, width=480, height=331, bg=COR_LARANJA_CLARO)
-tabela_pausa.place(x=800, y=293.89)
+img_intervalo = PhotoImage(file="assets/pomodoro_intervalos.png")
+label_intervalo = Label(frame_tempo,image=img_intervalo)
+label_intervalo.place(x=800, y=112)
 
-frase_pausa = Label(tabela_pausa, text="Partiu dar uma pausa!", bg=COR_LARANJA_CLARO, fg=COR_BRANCA, font="Space Mono 20")
-frase_pausa.pack()
-
-label1 = Label(tabela_pausa, text="Intervalos", fg=COR_BRANCA, font="Space Mono 35")
-label1.pack()
-'''importar a imagem do circulo branco para botar no fundo de uma váriavel t que contabilizará o total de intervalos'''
-
-label2 = Label(tabela_pausa, text="Pausa curta", fg=COR_BRANCA, font="Space Mono 30", bd=4, relief="sunken")
-label2.pack()
-label3 = Label(tabela_pausa, text="Pausa média", fg=COR_BRANCA, font="Space Mono 30", bd=4, relief="sunken")
-label3.pack()
-label4 = Label(tabela_pausa, text="Pausa longa", fg=COR_BRANCA, font="Space Mono 30", bd=4, relief="sunken")
-label4.pack()
 # Ciclo da janela para ela ir atualizando: ==============================================================================================================================
 
 janela.mainloop()
