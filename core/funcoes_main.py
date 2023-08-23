@@ -3,7 +3,7 @@ from tkinter import *
 
 from utils import colors
 from view import ToDoList, Calendario, Team
-from core.funcoes_bloco import Anotacoes
+from core import funcoes_bloco
 
 
 def abrir_navegador():
@@ -99,4 +99,4 @@ def renderizar_team(janela_main):
 
 def renderizar_anotacoes(janela_main):
     janela_main.destroy()
-    Anotacoes.janela_principal(janela_main)
+    funcoes_bloco.Anotacoes()

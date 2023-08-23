@@ -3,6 +3,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import simpledialog
 from utils import colors, fonts
+from core import funcoes_main
 arquivo_atual_janela = ""
 texto_na_pagina = []
 numero_paginas_abertas = 0
@@ -10,40 +11,64 @@ numero_paginas_abertas = 0
 
 class Anotacoes:
 
-    def janela_principal(self):
-
-        self.janela = Tk()
+    def __init__(self):
         global numero_paginas_abertas
+        self.janela = Tk()
+        self.janela.title("Calendário")
+        self.janela.geometry("1280x700")
+        self.janela.config(background='#F2F2F0')
+        self.janela.resizable(width=FALSE, height=FALSE)
+
         numero_paginas_abertas += 1
-        self.janela.title("Bloco de Notas")
 
-        texto = Text(self.janela, wrap="word", height=40, width=100, font=fonts.fonte_conteudo)
-        texto.pack()
+        frame_top = Frame(self.janela, width=1280, height=125, bg=colors.COR_BRANCA, relief=SOLID)
+        frame_top.pack(padx=0, pady=0)
 
-        # dimensoes
-        largura_total_janela = self.janela.winfo_screenwidth()
-        altura_total_janela = self.janela.winfo_screenheight()
-        largura_janela = 1280
-        altura_janela = 700
-        posicao_eixo_x = largura_total_janela/2 - largura_janela/2
-        posicao_eixo_y = altura_total_janela/2 - altura_janela/2
-        self.janela.geometry("%dx%d+%d+%d" % (largura_janela, altura_janela, posicao_eixo_x, posicao_eixo_y))
-        self.janela.resizable(FALSE, FALSE)
-        # Menu
+        frame_detalhes = Frame(frame_top, width=1280, height=174, bg=colors.COR_CINZA_ESCURO, relief=SOLID)
+        frame_detalhes.pack(padx=0, pady=0)
+
+        Texto_Productivity = "Productivity"
+        label = Label(frame_top, text=Texto_Productivity, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                      font=('monospace', 40))
+        label.place(x=34, y=50)
+
+        Botao_Home = "Home"
+        label = Button(frame_top, text=Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                       font=('monospace', 32), relief=FLAT, command=lambda: funcoes_main.renderizar_home(self.janela)
+                       )
+        label.place(x=625, y=50)
+
+        Botao_Codigo = "DashBoard"
+        label = Button(frame_top, text=Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                       font=('monospace', 32),
+                       relief=FLAT)
+        label.place(x=800, y=50)
+
+        Botao_Team = "Sobre"
+        label = Button(frame_top, text=Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                       font=('monospace', 32), relief=FLAT, command=lambda: funcoes_main.renderizar_team(self.janela))
+        label.place(x=1068, y=50)
+
+        frame_detalhes_borda = Frame(frame_top, width=1280, height=4, bg=colors.COR_CINZA_CLARO, relief=SOLID)
+        frame_detalhes_borda.pack(padx=0, pady=0)
+
+        self.texto = Text(self.janela,wrap="word",height=25,width=200,font=fonts.fonte_conteudo)
+        self.texto.pack()
+
         menu_janela = Menu(self.janela)
         file_menu_janela_bloco_notas = Menu(menu_janela, tearoff=0)
         menu_janela.add_cascade(label="Arquivo", menu=file_menu_janela_bloco_notas)
-        file_menu_janela_bloco_notas.add_command(label="Nova página", command=self.janela_principal)
-        file_menu_janela_bloco_notas.add_command(label="Abrir...", command=lambda: self.abrir_arquivo_janela(texto))
-        file_menu_janela_bloco_notas.add_command(label="Salvar", command=lambda: self.salvar_arquivo_janela(texto))
-        file_menu_janela_bloco_notas.add_command(label="Salvar como...", command=lambda: self.salvar_como_arquivo_janela(texto))
+        file_menu_janela_bloco_notas.add_command(label="Nova página", command=Anotacoes)
+        file_menu_janela_bloco_notas.add_command(label="Abrir...", command=lambda: self.abrir_arquivo_janela(self.texto))
+        file_menu_janela_bloco_notas.add_command(label="Salvar", command=lambda: self.salvar_arquivo_janela(self.texto))
+        file_menu_janela_bloco_notas.add_command(label="Salvar como...", command=lambda: self.salvar_como_arquivo_janela(self.texto))
         file_menu_janela_bloco_notas.add_separator()
-        file_menu_janela_bloco_notas.add_command(label="Sair", command=lambda: self.fechar_janela(texto, self.janela))
-        menu_janela.add_command(label="Procurar", command=lambda: self.pesquisar_palavra(texto))
-        menu_janela.add_command(label="Desmarcar texto", command=lambda: self.desmarcar_palavra(texto))
+        file_menu_janela_bloco_notas.add_command(label="Sair", command=lambda: self.fechar_janela(self.texto, self.janela))
+        menu_janela.add_command(label="Procurar", command=lambda: self.pesquisar_palavra(self.texto))
+        menu_janela.add_command(label="Desmarcar texto", command=lambda: self.desmarcar_palavra(self.texto))
         menu_janela.add_command(label="Contador", command=self.contador)
         self.janela.config(menu=menu_janela)
-        self.janela.protocol("WM_DELETE_WINDOW", lambda: self.fechar_janela(texto, self.janela))
+        self.janela.protocol("WM_DELETE_WINDOW", lambda: self.fechar_janela(self.texto, self.janela))
         self.janela.mainloop()
 
 
