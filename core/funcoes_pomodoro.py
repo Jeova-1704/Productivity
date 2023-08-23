@@ -1,4 +1,6 @@
 from tkinter import *
+from turtledemo.nim import randomrow
+
 from utils import colors, fonts
 from PIL import ImageTk, Image
 
@@ -40,14 +42,22 @@ def abrir_janela():
     janela_config = Toplevel()
     janela_config.title("SETTINGS")
     janela_config.geometry('284x379')
-    janela_config.config(background=colors.COR_BRANCA)
     janela_config.resizable(width=False, height=False)
     janela_config.iconbitmap("assets/favicon.ico")
+    janela_config.resizable(width=False, height=False)
 
-    img_config = Image.open('view/assets/pomodoro_config.png')
-    img_config = ImageTk.PhotoImage(img_config)
-    imagem_config = Label(janela_config, image=img_config, compound=LEFT, anchor=NW)
-    imagem_config.place(x=0, y=0)
+    img = PhotoImage(file="../view/assets/pomodoro_config.png")
+    bg_label = Label(janela_config, image=img)
+    bg_label.place(relwidth=1, relheight=1)
+    bg_label.image = img
+
+
+
+
+
+
+
+
 
 
 
