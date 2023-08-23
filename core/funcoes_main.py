@@ -4,6 +4,7 @@ from tkinter import *
 from utils import colors
 from view import ToDoList, Calendario, Team
 from core import funcoes_bloco
+from view import Main_bloco_notas
 
 
 def abrir_navegador():
@@ -99,4 +100,48 @@ def renderizar_team(janela_main):
 
 def renderizar_anotacoes(janela_main):
     janela_main.destroy()
-    funcoes_bloco.Anotacoes()
+    Main_bloco_notas.Anotacoes()
+
+
+def renderizar_team_anotacoes(janela_main):
+    janela_main.destroy()
+    Team.Interface()
+
+
+def renderizar_home_anotacoes(janela):
+    janela.destroy()
+    renderizer_main()
+
+
+
+
+def fechar_janela_home(texto, janela):
+    conteudo_janela = texto.get("1.0", "end-1c")
+    if conteudo_janela != "":
+        mensagem = funcoes_bloco.messagebox.askyesno("pergunta", "Deseja salvar suas alterações?")
+        if mensagem:
+            funcoes_bloco.salvar_arquivo_janela(texto)
+            janela.destroy()
+            renderizer_main()
+        else:
+            janela.destroy()
+            renderizer_main()
+    else:
+        janela.destroy()
+        renderizer_main()
+
+
+def fechar_janela_team(texto, janela):
+    conteudo_janela = texto.get("1.0", "end-1c")
+    if conteudo_janela != "":
+        mensagem = funcoes_bloco.messagebox.askyesno("pergunta", "Deseja salvar suas alterações?")
+        if mensagem:
+            funcoes_bloco.salvar_arquivo_janela(texto)
+            janela.destroy()
+            Team.Interface()
+        else:
+            janela.destroy()
+            Team.Interface()
+    else:
+        janela.destroy()
+        Team.Interface()
