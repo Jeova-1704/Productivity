@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk, messagebox
+from tkinter import ttk
 from PIL import ImageTk, Image
 
 from core import funcoes_todolist
@@ -10,6 +10,8 @@ from utils.ToolTip import Tooltip
 
 
 class InterfaceToDoList:
+    Botao_Codigo: str
+
     def __init__(self):
 
         self.janela = Tk()
@@ -19,130 +21,133 @@ class InterfaceToDoList:
         self.janela.config(background=colors.COR_BRANCA)
         self.janela.resizable(width=FALSE, height=FALSE)
 
-        frame_top = Frame(self.janela, width=1280, height=125, bg=colors.COR_BRANCA, relief=SOLID)
-        frame_top.pack(padx=0, pady=0)
+        self.frame_top = Frame(self.janela, width=1280, height=125, bg=colors.COR_BRANCA, relief=SOLID)
+        self.frame_top.pack(padx=0, pady=0)
 
-        frame_detalhes = Frame(frame_top, width=1280, height=174, bg=colors.COR_CINZA_ESCURO, relief=SOLID)
-        frame_detalhes.pack(padx=0, pady=0)
+        self.frame_detalhes = Frame(self.frame_top, width=1280, height=174, bg=colors.COR_CINZA_ESCURO, relief=SOLID)
+        self.frame_detalhes.pack(padx=0, pady=0)
 
-        Texto_Productivity = "Productivity"
-        label = Label(frame_top, text=Texto_Productivity, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                      font=('monospace', 40))
-        label.place(x=34, y=50)
+        self.Texto_Productivity = "Productivity"
+        self.label = Label(self.frame_top, text=self.Texto_Productivity, fg=colors.COR_BRANCA,
+                           bg=colors.COR_CINZA_ESCURO,
+                           font=fonts.fonte_conteudo_logo)
+        self.label.place(x=34, y=50)
 
-        Botao_Home = "Home"
-        label = Button(frame_top, text=Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                       font=('monospace', 32),
-                       relief=FLAT, command=lambda: funcoes_main.renderizar_home(self.janela)
-                       )
-        label.place(x=625, y=50)
+        self.Botao_Home = "Home"
+        self.label = Button(self.frame_top, text=self.Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                            font=fonts.fonte_conteudo_navBAr,
+                            relief=FLAT, command=lambda: funcoes_main.renderizar_home(self.janela)
+                            )
+        self.label.place(x=625, y=50)
 
-        Botao_Codigo = "DashBoard"
-        label = Button(frame_top, text=Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                       font=('monospace', 32),
-                       relief=FLAT)
-        label.place(x=800, y=50)
+        self.Botao_Codigo = "DashBoard"
+        self.label = Button(self.frame_top, text=self.Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                            font=fonts.fonte_conteudo_navBAr,
+                            relief=FLAT)
+        self.label.place(x=800, y=50)
 
-        Botao_Team = "Sobre"
-        label = Button(frame_top, text=Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                       font=('monospace', 32),
-                       command=lambda: funcoes_main.renderizar_team(self.janela), relief=FLAT)
-        label.place(x=1068, y=50)
+        self.Botao_Team = "Sobre"
+        self.label = Button(self.frame_top, text=self.Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                            font=fonts.fonte_conteudo_navBAr,
+                            command=lambda: funcoes_main.renderizar_team(self.janela), relief=FLAT)
+        self.label.place(x=1068, y=50)
 
-        frame_detalhes_borda = Frame(frame_top, width=1280, height=4, bg=colors.COR_CINZA_CLARO, relief=SOLID)
-        frame_detalhes_borda.pack(padx=0, pady=0)
+        self.frame_detalhes_borda = Frame(self.frame_top, width=1280, height=4, bg=colors.COR_CINZA_CLARO, relief=SOLID)
+        self.frame_detalhes_borda.pack(padx=0, pady=0)
 
-        frame_meio = Frame(self.janela, width=1280, height=550, bg=colors.COR_BRANCA, relief=SOLID)
-        frame_meio.pack()
+        self.frame_meio = Frame(self.janela, width=1280, height=550, bg=colors.COR_BRANCA, relief=SOLID)
+        self.frame_meio.pack()
 
-        tv = ttk.Treeview(frame_meio, columns=('id', 'tarefa', 'status', 'descricao', 'nivel'), height=20)
-        tv.column('id', minwidth=30, width=30, anchor='w', stretch=NO)
-        tv.column('tarefa', minwidth=50, width=100, anchor='w')
-        tv.column('status', minwidth=50, width=100, anchor='center')
-        tv.column('descricao', minwidth=80, width=100, anchor='w')
-        tv.column('nivel', minwidth=30, width=50, anchor='center')
-        tv.heading('id', text='ID', anchor='w')
-        tv.heading('tarefa', text='TAREFA')
-        tv.heading('status', text='STATUS')
-        tv.heading('descricao', text='DESCRICAO')
-        tv.heading('nivel', text='NIVEL')
-        tv.place(x=670, y=20)
+        self.tv = ttk.Treeview(self.frame_meio, columns=('id', 'tarefa', 'status', 'descricao', 'nivel'), height=20)
+        self.tv.column('id', minwidth=30, width=30, anchor='w', stretch=NO)
+        self.tv.column('tarefa', minwidth=50, width=100, anchor='w')
+        self.tv.column('status', minwidth=50, width=100, anchor='center')
+        self.tv.column('descricao', minwidth=80, width=100, anchor='w')
+        self.tv.column('nivel', minwidth=30, width=50, anchor='center')
+        self.tv.heading('id', text='ID', anchor='w')
+        self.tv.heading('tarefa', text='TAREFA')
+        self.tv.heading('status', text='STATUS')
+        self.tv.heading('descricao', text='DESCRICAO')
+        self.tv.heading('nivel', text='NIVEL')
+        self.tv.place(x=670, y=20)
 
         try:
             bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus")
             for row in bdToDoList.ToDoList_banco.cursor.fetchall():
-                tv.insert("", "end", values=row)
+                self.tv.insert("", "end", values=row)
         except Exception as e:
-            tv.insert("", "end", values=("Erro ao acessar o banco de dados:", str(e)))
+            self.tv.insert("", "end", values=("Erro ao acessar o banco de dados:", str(e)))
 
-        linha_vertical = Label(frame_meio, relief=GROOVE, width=0, height=255, anchor=NW, font='Ivy 1',
+        linha_vertical = Label(self.frame_meio, relief=GROOVE, width=0, height=255, anchor=NW, font='Ivy 1',
                                bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
         linha_vertical.place(x=640, y=15)
 
-        linha_horizontal = Label(frame_meio, relief=GROOVE, width=350, height=0, anchor=NW, font='Ivy 1',
+        linha_horizontal = Label(self.frame_meio, relief=GROOVE, width=350, height=0, anchor=NW, font='Ivy 1',
                                  bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
         linha_horizontal.place(x=152, y=190)
 
-        linha_horizontal = Label(frame_meio, relief=GROOVE, width=1280, height=0, anchor=NW, font='Ivy 1',
+        linha_horizontal = Label(self.frame_meio, relief=GROOVE, width=1280, height=0, anchor=NW, font='Ivy 1',
                                  bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
         linha_horizontal.place(x=0, y=523)
 
-        img_logo = Image.open('assets/toDoList_logo.png')
-        img_logo = ImageTk.PhotoImage(img_logo)
-        imagem_logo = Label(frame_meio, image=img_logo, compound=LEFT, anchor=NW)
-        imagem_logo.place(x=165, y=10)
+        self.img_logo = Image.open('assets/toDoList_logo.png')
+        self.img_logo = ImageTk.PhotoImage(self.img_logo)
+        self.imagem_logo = Label(self.frame_meio, image=self.img_logo, compound=LEFT, anchor=NW)
+        self.imagem_logo.place(x=165, y=10)
 
-        texto_todolist = Label(frame_meio, text="To-Do List", font=fonts.fonte_titulo)
-        texto_todolist.place(x=255, y=25)
+        self.texto_todolist = Label(self.frame_meio, text="To-Do List", font=fonts.fonte_titulo)
+        self.texto_todolist.place(x=255, y=25)
 
-        img_add = Image.open('assets/toDoList_add.png')
-        img_add = img_add.resize((35, 35))
-        img_add = ImageTk.PhotoImage(img_add)
-        botao_add = Button(frame_meio, image=img_add, command=lambda: funcoes_todolist.addTarefa(self.janela),
-                           relief=GROOVE,
-                           text="Adicionar Tarefa", width=300,
-                           compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
-                           bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        botao_add.place(x=175, y=120)
+        self.img_add = Image.open('assets/toDoList_add.png')
+        self.img_add = self.img_add.resize((35, 35))
+        self.img_add = ImageTk.PhotoImage(self.img_add)
+        self.botao_add = Button(self.frame_meio, image=self.img_add,
+                                command=lambda: funcoes_todolist.addTarefa(self.janela),
+                                relief=GROOVE,
+                                text="Adicionar Tarefa", width=300,
+                                compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
+                                bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
+        self.botao_add.place(x=175, y=120)
 
-        img_update = Image.open('assets/toDoList_update.png')
-        img_update = img_update.resize((35, 35))
-        img_update = ImageTk.PhotoImage(img_update)
-        botao_update = Button(frame_meio, image=img_update,
-                              command=lambda: funcoes_todolist.atualizar_pesquisar_arvore(self.janela, tv),
-                              relief=GROOVE, text="Atualizar Tarefa", width=300,
-                              compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
-                              bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        botao_update.place(x=175, y=230)
+        self.img_update = Image.open('assets/toDoList_update.png')
+        self.img_update = self.img_update.resize((35, 35))
+        self.img_update = ImageTk.PhotoImage(self.img_update)
+        self.botao_update = Button(self.frame_meio, image=self.img_update,
+                                   command=lambda: funcoes_todolist.atualizar_pesquisar_arvore(self.janela, self.tv),
+                                   relief=GROOVE, text="Atualizar Tarefa", width=300,
+                                   compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
+                                   bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
+        self.botao_update.place(x=175, y=230)
 
-        botao_atualizar_table = Button(frame_meio, image=img_update,
-                                       command=lambda: funcoes_todolist.atualizar_janela(self.janela),
-                                       relief=GROOVE, width=40, compound=LEFT, overrelief=RIDGE,
-                                       font=fonts.fonte_conteudo, bg=colors.COR_LARANJA_CLARO,
-                                       fg=colors.COR_BRANCA)
-        botao_atualizar_table.place(x=1205, y=450)
-        tooltip = Tooltip(botao_atualizar_table, "Atualizar tabela")
+        self.botao_atualizar_table = Button(self.frame_meio, image=self.img_update,
+                                            command=lambda: funcoes_todolist.atualizar_janela(self.janela),
+                                            relief=GROOVE, width=40, compound=LEFT, overrelief=RIDGE,
+                                            font=fonts.fonte_conteudo, bg=colors.COR_LARANJA_CLARO,
+                                            fg=colors.COR_BRANCA)
+        self.botao_atualizar_table.place(x=1205, y=450)
+        self.tooltip = Tooltip(self.botao_atualizar_table, "Atualizar tabela")
 
-        img_delete = Image.open('assets/toDoList_delete.png')
-        img_delete = img_delete.resize((35, 35))
-        img_delete = ImageTk.PhotoImage(img_delete)
-        botao_delete = Button(frame_meio, command=lambda: funcoes_todolist.deletar_pesquisar_arvore(self.janela, tv),
-                              image=img_delete, relief=GROOVE, text="Deletar Tarefa", width=300,
-                              compound=LEFT,
-                              overrelief=RIDGE, font=fonts.fonte_conteudo,
-                              bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        botao_delete.place(x=175, y=310)
+        self.img_delete = Image.open('assets/toDoList_delete.png')
+        self.img_delete = self.img_delete.resize((35, 35))
+        self.img_delete = ImageTk.PhotoImage(self.img_delete)
+        self.botao_delete = Button(self.frame_meio,
+                                   command=lambda: funcoes_todolist.deletar_pesquisar_arvore(self.janela, self.tv),
+                                   image=self.img_delete, relief=GROOVE, text="Deletar Tarefa", width=300,
+                                   compound=LEFT,
+                                   overrelief=RIDGE, font=fonts.fonte_conteudo,
+                                   bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
+        self.botao_delete.place(x=175, y=310)
 
-        img_all_delete = Image.open('assets/toDoList_danger.png')
-        img_all_delete = img_all_delete.resize((35, 35))
-        img_all_delete = ImageTk.PhotoImage(img_all_delete)
-        botao_all_delete = Button(frame_meio, command=lambda: funcoes_todolist.deletarTodasTasks(self.janela),
-                                  image=img_all_delete,
-                                  relief=GROOVE,
-                                  text="Deletar todas as tarefas",
-                                  width=300, compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
-                                  bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        botao_all_delete.place(x=175, y=390)
+        self.img_all_delete = Image.open('assets/toDoList_danger.png')
+        self.img_all_delete = self.img_all_delete.resize((35, 35))
+        self.img_all_delete = ImageTk.PhotoImage(self.img_all_delete)
+        self.botao_all_delete = Button(self.frame_meio, command=lambda: funcoes_todolist.deletarTodasTasks(self.janela),
+                                       image=self.img_all_delete,
+                                       relief=GROOVE,
+                                       text="Deletar todas as tarefas",
+                                       width=300, compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
+                                       bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
+        self.botao_all_delete.place(x=175, y=390)
 
         self.janela.mainloop()
 
