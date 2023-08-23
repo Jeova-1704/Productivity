@@ -3,6 +3,7 @@ from tkinter import *
 
 from utils import colors
 from view import ToDoList, Calendario, Team
+from core.funcoes_bloco import Anotacoes
 
 
 def abrir_navegador():
@@ -65,7 +66,7 @@ def renderizer_main():
     label_ToDoList.place(x=385, y=23)
 
     img_Anotacoes = PhotoImage(file='assets/Ellipse 2.png')
-    label_Anotacoes = Button(frame_meio, image=img_Anotacoes, relief=FLAT, bg=colors.COR_CINZA_ESCURO)
+    label_Anotacoes = Button(frame_meio, image=img_Anotacoes, relief=FLAT, bg=colors.COR_CINZA_ESCURO,command=lambda: renderizar_anotacoes(janela))
     label_Anotacoes.place(x=602, y=23)
 
     img_Calendario = PhotoImage(file='assets/Ellipse 3.png')
@@ -95,3 +96,7 @@ def renderizar_calendario(janela_main):
 def renderizar_team(janela_main):
     janela_main.destroy()
     Team.Interface()
+
+def renderizar_anotacoes(janela_main):
+    janela_main.destroy()
+    Anotacoes.janela_principal(janela_main)
