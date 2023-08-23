@@ -59,7 +59,8 @@ class InterfaceToDoList:
         self.frame_meio = Frame(self.janela, width=1280, height=550, bg=colors.COR_BRANCA, relief=SOLID)
         self.frame_meio.pack()
 
-        self.tv = ttk.Treeview(self.frame_meio, columns=('id', 'tarefa', 'status', 'descricao', 'nivel'), height=20)
+        self.tv = ttk.Treeview(self.frame_meio, columns=('id', 'tarefa', 'status', 'descricao', 'nivel'), height=20,
+                               selectmode="extended")
         self.tv.column('id', minwidth=30, width=30, anchor='w', stretch=NO)
         self.tv.column('tarefa', minwidth=50, width=100, anchor='w')
         self.tv.column('status', minwidth=50, width=100, anchor='center')

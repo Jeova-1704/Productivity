@@ -104,20 +104,25 @@ def addTarefa(janela_todo):
 
 
 def deletar_pesquisar_arvore(tv):
-    try:
-        item_selecionado = tv.selection()[0]
-        id_tarefa = tv.item(item_selecionado, 'values')[0]
-        tv.delete(item_selecionado)
-        deletarTarefaEspecifica(id_tarefa)
-    except IndexError:
-        messagebox.showinfo("Erro", "Selecione um elemento para poder deletar")
+    itens_selecionados = tv.selection()
+    if not itens_selecionados:
+        messagebox.showerror("Atenção", 'Selecionar ao menos uma tarefa para poder deletar!')
+        return
+
+    confirmacao = messagebox.askyesno("Confirmação", "Tem certeza que deseja deletar as tarefas selecionadas?")
+
+    if confirmacao:
+        for item_selecionado in itens_selecionados:
+            id_tarefa = tv.item(item_selecionado, 'values')[0]
+            tv.delete(item_selecionado)
+            deletarTarefaEspecifica(id_tarefa)
+        messagebox.showinfo("Sucesso!", "Todas as tarefas selecionadas foram deletadas com sucesso!")
 
 
 def deletarTarefaEspecifica(id_tarefa):
     try:
         id_tarefa = int(id_tarefa)
         bdToDoList.ToDoList_banco.deletarTarefa(id_tarefa)
-        messagebox.showinfo('SUCESSO!', f"Tarefa com o id {id_tarefa} foi deletada com sucesso.")
     except:
         messagebox.showerror("Erro!",
                              'Erro ao deletar a tarefa, por favor tente novamente, se o problema persistir atualizar '
@@ -135,17 +140,21 @@ def deletarTodasTasks(janela_todo):
 
 
 def atualizar_pesquisar_arvore(janela, tv):
-    try:
-        item_selecionado = tv.selection()[0]
-        id_tarefa = tv.item(item_selecionado, 'values')[0]
-        atualizarTarefa(id_tarefa, janela)
-    except IndexError:
-        messagebox.showerror("Erro", "Selecione um elemento para poder atualizar")
+    itens_selecionados = tv.selection()
+    if len(itens_selecionados) == 1:
+        try:
+            item_selecionado = tv.selection()[0]
+            id_tarefa = tv.item(item_selecionado, 'values')[0]
+            atualizarTarefa(id_tarefa, janela)
+        except IndexError:
+            messagebox.showerror("Erro", "Selecione um elemento para poder atualizar")
+    else:
+        messagebox.showerror("Erro!", "Por favor selecione apenas um item para poder atualizar.")
 
 
-def atualizarTarefa(id, janela_todo):
+def atualizarTarefa(id_tarefa, janela_todo):
     try:
-        todo_lista = bdToDoList.ToDoList_banco.procurarTarefa(id)
+        todo_lista = bdToDoList.ToDoList_banco.procurarTarefa(id_tarefa)
         if len(todo_lista) != 0 or todo_lista == False:
             janela_dados = Tk()
             janela_dados.iconbitmap('../view/assets/todoList.ico')
@@ -200,14 +209,13 @@ def atualizarTarefa(id, janela_todo):
 
             botao_salvar = Button(frame_meio,
                                   command=lambda: atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status,
-                                                                   Entrada_nivel, id, janela_dados, janela_todo),
+                                                                   Entrada_nivel, id_tarefa, janela_dados, janela_todo),
                                   relief=GROOVE,
                                   text="Atualizar", width=10,
                                   compound=LEFT,
                                   overrelief=RIDGE, font=fonts.fonte_conteudo,
                                   bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
             botao_salvar.place(x=175, y=300)
-            
     except:
         messagebox.showerror("ERRO!", f"Por favor forneça um ID valido para atualizar a atarefa")
 
