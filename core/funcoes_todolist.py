@@ -212,3 +212,29 @@ def atualizarTarefa(id, janela_todo):
 def atualizar_janela(janela):
     janela.destroy()
     ToDoList.InterfaceToDoList()
+
+def aplicar_filtro(tv, filtro_box):
+    status_para_filtro = filtro_box.get()
+
+    # Deleta todos os itens filhos da Treeview
+    for item in tv.get_children():
+        tv.delete(item)
+
+    try:
+        if status_para_filtro == "Todos":
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus")
+        elif status_para_filtro == "Concluido":
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Concluido",))
+        elif status_para_filtro == "Em andamento":
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Em andamento",))
+        elif status_para_filtro == "Não iniado":
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Não iniado",))
+        else:
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", (status_para_filtro,))
+
+        for row in bdToDoList.ToDoList_banco.cursor.fetchall():
+            tv.insert("", "end", values=row)
+
+    except Exception as e:
+        tv.insert("", "end", values=("Erro ao acessar o banco de dados:", str(e)))
+

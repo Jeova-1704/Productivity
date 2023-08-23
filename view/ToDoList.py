@@ -11,6 +11,7 @@ from utils.ToolTip import Tooltip
 
 class InterfaceToDoList:
     Botao_Codigo: str
+    status = ['Todos', 'Concluido', 'Em andamento', 'Não iniado']
 
     def __init__(self):
 
@@ -82,10 +83,6 @@ class InterfaceToDoList:
                                bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
         linha_vertical.place(x=640, y=15)
 
-        linha_horizontal = Label(self.frame_meio, relief=GROOVE, width=350, height=0, anchor=NW, font='Ivy 1',
-                                 bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
-        linha_horizontal.place(x=152, y=190)
-
         linha_horizontal = Label(self.frame_meio, relief=GROOVE, width=1280, height=0, anchor=NW, font='Ivy 1',
                                  bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
         linha_horizontal.place(x=0, y=523)
@@ -117,7 +114,7 @@ class InterfaceToDoList:
                                    relief=GROOVE, text="Atualizar Tarefa", width=300,
                                    compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
                                    bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        self.botao_update.place(x=175, y=230)
+        self.botao_update.place(x=175, y=200)
 
         self.botao_atualizar_table = Button(self.frame_meio, image=self.img_update,
                                             command=lambda: funcoes_todolist.atualizar_janela(self.janela),
@@ -136,7 +133,7 @@ class InterfaceToDoList:
                                    compound=LEFT,
                                    overrelief=RIDGE, font=fonts.fonte_conteudo,
                                    bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        self.botao_delete.place(x=175, y=310)
+        self.botao_delete.place(x=175, y=280)
 
         self.img_all_delete = Image.open('assets/toDoList_danger.png')
         self.img_all_delete = self.img_all_delete.resize((35, 35))
@@ -147,7 +144,23 @@ class InterfaceToDoList:
                                        text="Deletar todas as tarefas",
                                        width=300, compound=LEFT, overrelief=RIDGE, font=fonts.fonte_conteudo,
                                        bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
-        self.botao_all_delete.place(x=175, y=390)
+        self.botao_all_delete.place(x=175, y=360)
+
+        self.status_filter_combobox = ttk.Combobox(self.frame_meio, width=12, justify=CENTER, font=fonts.fonte_conteudo)
+        self.status_filter_combobox['values'] = self.status
+        self.status_filter_combobox.place(x=320, y=425)
+
+        self.img_filter = Image.open('assets/toDoList_filtro.png')
+        self.img_filter = self.img_filter.resize((35, 35))
+        self.img_filter = ImageTk.PhotoImage(self.img_filter)
+        self.filtrar_tabela = Button(self.frame_meio, command=lambda: funcoes_todolist.aplicar_filtro(self.tv, self.status_filter_combobox),
+                                     image=self.img_filter,
+                                     relief=GROOVE, anchor='w',
+                                     text="Filtrar por:", compound="left",
+                                     font=fonts.fonte_conteudo,
+                                     bg=colors.COR_LARANJA_CLARO,
+                                     fg=colors.COR_BRANCA)
+        self.filtrar_tabela.place(x=174, y=425)
 
         self.janela.mainloop()
 
