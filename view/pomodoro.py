@@ -4,6 +4,7 @@
 
 from tkinter import *
 from utils import colors, fonts
+from core import funcoes_pomodoro
 
 # Inicalização da janela: ===============================================================================================================================================
 
@@ -48,8 +49,9 @@ img_tempo = PhotoImage(file="assets/pomodoro_tempo.png")
 label_tempo = Label(frame_tempo,image=img_tempo)
 label_tempo.place(x=251, y=77.09)
 
+
 img_icon = PhotoImage(file="assets/Ellipse 4.png")
-button_icon = Button(frame_tempo, image=img_icon, relief=FLAT)
+button_icon = Button(frame_tempo, image=img_icon, relief=FLAT, command=lambda: funcoes_pomodoro.abrir_janela())
 button_icon.place(x=265.73, y=70)
 
 
