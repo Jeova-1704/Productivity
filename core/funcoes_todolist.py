@@ -15,9 +15,9 @@ def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_niv
     try:
         tarefa = str(Entrada_tarefa.get())
         descricao = str(Entrada_descricao.get())
-        status = str(Entrada_status.get())
+        status_task = str(Entrada_status.get())
         nivel = int(Entrada_nivel.get())
-        lista_para_banco_dados = [tarefa, status, descricao, nivel]
+        lista_para_banco_dados = [tarefa, status_task, descricao, nivel]
         bdToDoList.ToDoList_banco.registroDeTarefas(lista_para_banco_dados)
         messagebox.showinfo("SUCESSO", 'Tarefa adicionada com sucesso!')
         janela.destroy()
@@ -30,12 +30,12 @@ def atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_
     try:
         tarefa = str(Entrada_tarefa.get())
         descricao = str(Entrada_descricao.get())
-        status = str(Entrada_status.get())
+        status_task = str(Entrada_status.get())
         nivel = int(Entrada_nivel.get())
         id = id_task
-        lista_para_banco_dados = [tarefa, status, descricao, nivel, id]
+        lista_para_banco_dados = [tarefa, status_task, descricao, nivel, id]
         bdToDoList.ToDoList_banco.atualizar_tarefa(lista_para_banco_dados)
-        messagebox.showinfo('SUCESSO!', f"Tarefa com idTask {id} foi atualizada com sucesso.")
+        messagebox.showinfo('SUCESSO!', f"A tarefa '{tarefa}' foi atualizada com sucesso.")
         janela.destroy()
     except:
         tkinter.messagebox.showinfo("ERRO!", 'Por favor forneça todos os campos de entrada')
@@ -43,8 +43,8 @@ def atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_
 
 
 def addTarefa(janela_todo):
-    status = ['Não iniado', 'Em andamento', 'Concluido']
-    nivel_importancia = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    status_task = ['Não iniado', 'Em andamento', 'Concluido']
+    nivel_importancia_task = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     janela_dados = Toplevel()
     janela_dados.geometry('500x500')
@@ -79,14 +79,14 @@ def addTarefa(janela_todo):
                           bg=colors.COR_BRANCA)
     titulo_status.place(x=50, y=150)
     Entrada_status = ttk.Combobox(frame_meio, width=20, font=fonts.fonte_conteudo, justify=CENTER)
-    Entrada_status['values'] = status
+    Entrada_status['values'] = status_task
     Entrada_status.place(x=165, y=150)
 
     titulo_nivel = Label(frame_meio, text='Nivel de importancia:', anchor=NW, font=fonts.fonte_conteudo,
                          bg=colors.COR_BRANCA)
     titulo_nivel.place(x=50, y=200)
     Entrada_nivel = ttk.Combobox(frame_meio, width=5, font=fonts.fonte_conteudo, justify=CENTER)
-    Entrada_nivel['values'] = nivel_importancia
+    Entrada_nivel['values'] = nivel_importancia_task
     Entrada_nivel.place(x=270, y=200)
 
     linha_horizontal = Label(frame_meio, relief=GROOVE, width=400, height=0, anchor=NW, font='Ivy 1',
@@ -103,7 +103,7 @@ def addTarefa(janela_todo):
     botao_salvar.place(x=175, y=300)
 
 
-def deletar_pesquisar_arvore(janela, tv):
+def deletar_pesquisar_arvore(tv):
     try:
         item_selecionado = tv.selection()[0]
         id_tarefa = tv.item(item_selecionado, 'values')[0]
@@ -119,15 +119,18 @@ def deletarTarefaEspecifica(id_tarefa):
         bdToDoList.ToDoList_banco.deletarTarefa(id_tarefa)
         messagebox.showinfo('SUCESSO!', f"Tarefa com o id {id_tarefa} foi deletada com sucesso.")
     except:
-        messagebox.showerror("Erro!", 'Erro ao deletar a tarefa do banco de dados')
+        messagebox.showerror("Erro!",
+                             'Erro ao deletar a tarefa, por favor tente novamente, se o problema persistir atualizar '
+                             'a tabela.')
 
 
 def deletarTodasTasks(janela_todo):
     try:
         bdToDoList.ToDoList_banco.deletarTodasAsTarefas()
-        messagebox.showinfo('SUCESSO!', 'Todas as tarefas foram excluídas do banco de dados.')
+        messagebox.showinfo('SUCESSO!', 'Todas as tarefas foram excluídas com sucesso.')
     except:
-        messagebox.showerror('ERRO!', 'Erro ao excluir todas as tarefas do banco de dados.')
+        messagebox.showerror('ERRO!', 'Erro ao excluir todas as tarefas, por favor tente novamente e se o problema '
+                                      'persistir tente atualizar a tabela e tente novamente.')
     atualizar_janela(janela_todo)
 
 
@@ -204,7 +207,7 @@ def atualizarTarefa(id, janela_todo):
                                   overrelief=RIDGE, font=fonts.fonte_conteudo,
                                   bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
             botao_salvar.place(x=175, y=300)
-
+            
     except:
         messagebox.showerror("ERRO!", f"Por favor forneça um ID valido para atualizar a atarefa")
 
@@ -212,6 +215,7 @@ def atualizarTarefa(id, janela_todo):
 def atualizar_janela(janela):
     janela.destroy()
     ToDoList.InterfaceToDoList()
+
 
 def aplicar_filtro(tv, filtro_box):
     status_para_filtro = filtro_box.get()
@@ -230,11 +234,11 @@ def aplicar_filtro(tv, filtro_box):
         elif status_para_filtro == "Não iniado":
             bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Não iniado",))
         else:
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", (status_para_filtro,))
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?",
+                                                     (status_para_filtro,))
 
         for row in bdToDoList.ToDoList_banco.cursor.fetchall():
             tv.insert("", "end", values=row)
 
     except Exception as e:
         tv.insert("", "end", values=("Erro ao acessar o banco de dados:", str(e)))
-

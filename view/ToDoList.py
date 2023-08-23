@@ -128,7 +128,7 @@ class InterfaceToDoList:
         self.img_delete = self.img_delete.resize((35, 35))
         self.img_delete = ImageTk.PhotoImage(self.img_delete)
         self.botao_delete = Button(self.frame_meio,
-                                   command=lambda: funcoes_todolist.deletar_pesquisar_arvore(self.janela, self.tv),
+                                   command=lambda: funcoes_todolist.deletar_pesquisar_arvore(self.tv),
                                    image=self.img_delete, relief=GROOVE, text="Deletar Tarefa", width=300,
                                    compound=LEFT,
                                    overrelief=RIDGE, font=fonts.fonte_conteudo,
