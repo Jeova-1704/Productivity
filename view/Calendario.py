@@ -6,7 +6,7 @@ from utils import colors
 class Interface:
     def __init__(self):
         self.janela = Tk()
-        self.janela.iconbitmap('assets/calendario.png')
+        self.janela.iconbitmap('assets/calendario.ico')
         self.janela.title("Calendário")
         self.janela.geometry("1280x700")
         self.janela.config(background='#F2F2F0')
