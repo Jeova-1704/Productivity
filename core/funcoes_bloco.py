@@ -1,11 +1,8 @@
-from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import simpledialog
-from utils import colors, fonts
-from view import ToDoList, Calendario, Team
-from core import funcoes_main
 from view import Main_bloco_notas
+
 arquivo_atual_janela = ""
 texto_na_pagina = []
 numero_paginas_abertas = 1
@@ -20,6 +17,7 @@ def abrir_arquivo_janela(texto):
             conteudo = file_janela.read()
             texto.delete("1.0", "end")
             texto.insert("1.0", conteudo)
+
 
 def salvar_arquivo_janela(texto):
     global arquivo_atual_janela
@@ -36,12 +34,6 @@ def salvar_arquivo_janela(texto):
             with open(arquivo, "w") as salvar:
                 salvar.write(conteudo_janela)
                 arquivo_atual_janela = arquivo
-
-
-
-
-
-
 
 
 def salvar_como_arquivo_janela(texto):
@@ -68,7 +60,7 @@ def fechar_janela(texto, janela):
 
 def contador():
     if numero_paginas_abertas == 1:
-         messagebox.showinfo("Contador", f"Até o momento você criou {numero_paginas_abertas} nova anotação.")
+        messagebox.showinfo("Contador", f"Até o momento você criou {numero_paginas_abertas} nova anotação.")
     else:
         messagebox.showinfo("Contador", f"Até o momento você criou {numero_paginas_abertas} novas anotações.")
 
@@ -80,9 +72,9 @@ def pesquisar_palavra(texto):
         texto.tag_remove("destaque", "1.0", "end")
         posicao = texto_palavra.find(palavra_pesquisada)
         if palavra_pesquisada not in texto_palavra:
-             messagebox.showwarning("Aviso", f"A palavra: {palavra_pesquisada} não foi encontrada")
+            messagebox.showwarning("Aviso", f"A palavra: {palavra_pesquisada} não foi encontrada")
         else:
-             messagebox.showwarning("Aviso", f"Todas as plavras com: *{palavra_pesquisada}* foram destacadas")
+            messagebox.showwarning("Aviso", f"Todas as plavras com: *{palavra_pesquisada}* foram destacadas")
 
         while posicao != -1:
             inicio = f"1.0+{posicao}c"
@@ -100,20 +92,20 @@ def desmarcar_palavra(texto):
         texto_palavra.find(palavra_desmarcada)
         messagebox.showwarning("Aviso", "Todas as palavras foram desmarcadas")
 
+
 def fechar_janela_destruir(texto):
     conteudo_janela = texto.get("1.0", "end-1c")
     if conteudo_janela != "":
-         mensagem = messagebox.askyesno("pergunta", "Deseja salvar suas alterações?")
-         if mensagem:
+        mensagem = messagebox.askyesno("pergunta", "Deseja salvar suas alterações?")
+        if mensagem:
             salvar_arquivo_janela(texto)
 
-def destruir(janela,texto):
+
+def destruir(janela, texto):
     global numero_paginas_abertas
-    numero_paginas_abertas +=1
+    numero_paginas_abertas += 1
     fechar_janela_destruir(texto)
     global arquivo_atual_janela
     arquivo_atual_janela = ""
     janela.destroy()
     Main_bloco_notas.Anotacoes()
-
-
