@@ -54,6 +54,11 @@ img_icon = PhotoImage(file="assets/Ellipse 4.png")
 button_icon = Button(frame_tempo, image=img_icon, relief=FLAT, command=funcoes_pomodoro.abrir_janela)
 button_icon.place(x=265.73, y=70)
 
+
+label_temporizador = Label(frame_tempo, text="xx : xx", font=fonts.fonte_temporizador_p, fg=colors.COR_BRANCA, bg=colors.COR_LARANJA_CLARO)
+label_temporizador.place(x=318, y=200)
+
+
 img_start = PhotoImage(file="assets/botao_start_pomodoro.png")
 button_start = Button(frame_tempo, image=img_start, relief="flat",command=...)
 button_start.place(x=365, y=350)
@@ -73,8 +78,9 @@ img_intervalo = PhotoImage(file="assets/pomodoro_intervalos.png")
 label_intervalo = Label(frame_tempo,image=img_intervalo)
 label_intervalo.place(x=800, y=112)
 
-qntd_intervalos = Label(label_intervalo, text="t")
-qntd_intervalos.place(x=360, y=50)
+qntd_intervalos = Label(label_intervalo, text=str(funcoes_pomodoro.v_intervalos), font=fonts.fonte_h2_p,
+                        fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat")
+qntd_intervalos.place(x=355, y=33)
 
 # Ciclo da janela para ela ir atualizando: ==============================================================================================================================
 print(funcoes_pomodoro.v_pomodoro)

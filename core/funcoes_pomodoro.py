@@ -7,12 +7,12 @@ from PIL import ImageTk, Image
 import time
 import os
 
-v_pomodoro = None
-v_intervalos = None
-t_pomodoro = None
-t_pausaC = None
-t_pausaM = None
-t_pausaL = None
+v_pomodoro = 4
+v_intervalos = 4
+t_pomodoro = 25
+t_pausaC = 5
+t_pausaM = 10
+t_pausaL = 15
 
 
 """foco = 25
@@ -20,12 +20,11 @@ pausa = 5"""
 
 
 def conversao(t):
-    pass
     # de min para segundos:
-    """return t * 60"""
+    return t * 60
 
 
-def pomodoro(foco, pausa):
+def pomodoro(, pausa):
     pass
     """f = conversao(foco)
     p = conversao(pausa)
