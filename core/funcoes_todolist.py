@@ -7,9 +7,8 @@ from utils import fonts, colors
 from dao import bdToDoList
 from view import ToDoList
 
-status = ['Não iniado', 'Em andamento', 'Concluido']
-nivel_importancia = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
+status_task = ['Não iniciado', 'Em andamento', 'Concluido']
+nivel_importancia_task = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_nivel, janela, janela_todo):
     try:
@@ -43,9 +42,6 @@ def atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_
 
 
 def addTarefa(janela_todo):
-    status_task = ['Não iniado', 'Em andamento', 'Concluido']
-    nivel_importancia_task = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
     janela_dados = Toplevel()
     janela_dados.geometry('500x500')
     janela_dados.iconbitmap('../view/assets/todoList.ico')
@@ -191,7 +187,7 @@ def atualizarTarefa(id_tarefa, janela_todo):
                                   bg=colors.COR_BRANCA)
             titulo_status.place(x=50, y=150)
             Entrada_status = ttk.Combobox(frame_meio, width=20, font=fonts.fonte_conteudo, justify=CENTER)
-            Entrada_status['values'] = status
+            Entrada_status['values'] = status_task
             Entrada_status.place(x=165, y=150)
             Entrada_status.insert(0, todo_lista[2])
 
@@ -199,7 +195,7 @@ def atualizarTarefa(id_tarefa, janela_todo):
                                  bg=colors.COR_BRANCA)
             titulo_nivel.place(x=50, y=200)
             Entrada_nivel = ttk.Combobox(frame_meio, width=5, font=fonts.fonte_conteudo, justify=CENTER)
-            Entrada_nivel['values'] = nivel_importancia
+            Entrada_nivel['values'] = nivel_importancia_task
             Entrada_nivel.place(x=270, y=200)
             Entrada_nivel.insert(0, todo_lista[4])
 

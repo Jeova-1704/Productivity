@@ -1,17 +1,22 @@
 from tkinter import *
-
+from tkinter.ttk import Treeview
+from dao import bdToDoList
 from utils import colors, fonts
 from core import funcoes_main
 
+
 class InterfaceDashboard:
     def __init__(self):
-
         self.janela = Tk()
         self.janela.iconbitmap('assets/dashboard.ico')
         self.janela.title("DashBoard")
         self.janela.geometry('1280x700')
         self.janela.config(background=colors.COR_BRANCA)
         self.janela.resizable(width=FALSE, height=FALSE)
+
+        self.db = bdToDoList.ToDoList_banco
+        self.create_task_tables()
+        self.populate_tables()
 
         self.frame_top = Frame(self.janela, width=1280, height=125, bg=colors.COR_BRANCA, relief=SOLID)
         self.frame_top.pack(padx=0, pady=0)
@@ -33,7 +38,8 @@ class InterfaceDashboard:
         self.label.place(x=625, y=50)
 
         self.Botao_Codigo = "DashBoard"
-        self.label = Button(self.frame_detalhes, text=self.Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+        self.label = Button(self.frame_detalhes, text=self.Botao_Codigo, fg=colors.COR_BRANCA,
+                            bg=colors.COR_CINZA_ESCURO,
                             font=fonts.fonte_conteudo_navBAr,
                             relief=FLAT)
         self.label.place(x=800, y=50)
@@ -44,10 +50,53 @@ class InterfaceDashboard:
                             command=lambda: funcoes_main.renderizar_team(self.janela), relief=FLAT)
         self.label.place(x=1068, y=50)
 
+        self.texto_anotacoes = Label(self.janela, text="Tarefas", font=fonts.fonte_conteudo, width=10,
+                                     bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.texto_anotacoes.place(x=580, y=180)
 
+        self.texto_anotacoes = Label(self.janela, text="Não iniciado", font=fonts.fonte_conteudo, width=10,
+                                     bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.texto_anotacoes.place(x=400, y=230)
 
+        self.texto_anotacoes = Label(self.janela, text="Andamento", font=fonts.fonte_conteudo, width=10,
+                                     bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.texto_anotacoes.place(x=580, y=230)
+
+        self.texto_anotacoes = Label(self.janela, text="Concluido", font=fonts.fonte_conteudo, width=10,
+                                     bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.texto_anotacoes.place(x=770, y=230)
 
         self.janela.mainloop()
+
+    def create_task_tables(self):
+        self.table_nao_iniciado = Treeview(self.janela, columns=('Tarefa',), show='headings')
+        self.table_nao_iniciado.heading('Tarefa', text='Tarefa')
+        self.table_nao_iniciado.place(x=375, y=265, width=180, height=400)
+
+        self.table_andamento = Treeview(self.janela, columns=('Tarefa',), show='headings')
+        self.table_andamento.heading('Tarefa', text='Tarefa')
+        self.table_andamento.place(x=557, y=265, width=180, height=400)
+
+        self.table_concluido = Treeview(self.janela, columns=('Tarefa',), show='headings')
+        self.table_concluido.heading('Tarefa', text='Tarefa')
+        self.table_concluido.place(x=738, y=265, width=180, height=400)
+
+    def populate_tables(self):
+        try:
+            all_tasks = self.db.visualizacaoTodasTarefas()
+            for task in all_tasks:
+                self.add_task_to_table(task)
+        except Exception as e:
+            print("Erro ao acessar o banco de dados:", str(e))
+
+    def add_task_to_table(self, task):
+        status = task[2]
+        if status == "Não iniciado":
+            self.table_nao_iniciado.insert('', 'end', values=(task[1],))
+        elif status == "Em andamento":
+            self.table_andamento.insert('', 'end', values=(task[1],))
+        elif status == "Concluido":
+            self.table_concluido.insert('', 'end', values=(task[1],))
 
 
 if __name__ == '__main__':

@@ -42,9 +42,10 @@ class InterfaceToDoList:
         self.label.place(x=625, y=50)
 
         self.Botao_Codigo = "DashBoard"
-        self.label = Button(self.frame_detalhes, text=self.Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                            font=fonts.fonte_conteudo_navBAr, command=lambda: funcoes_main.renderizar_dashboard(self.janela),
-                            relief=FLAT)
+        self.label = Button(self.frame_detalhes, text=self.Botao_Codigo, fg=colors.COR_BRANCA,
+                            bg=colors.COR_CINZA_ESCURO,
+                            font=fonts.fonte_conteudo_navBAr,
+                            command=lambda: funcoes_main.renderizar_dashboard(self.janela), relief=FLAT)
         self.label.place(x=800, y=50)
 
         self.Botao_Team = "Sobre"
@@ -154,7 +155,9 @@ class InterfaceToDoList:
         self.img_filter = Image.open('assets/toDoList_filtro.png')
         self.img_filter = self.img_filter.resize((35, 35))
         self.img_filter = ImageTk.PhotoImage(self.img_filter)
-        self.filtrar_tabela = Button(self.frame_meio, command=lambda: funcoes_todolist.aplicar_filtro(self.tv, self.status_filter_combobox),
+        self.filtrar_tabela = Button(self.frame_meio,
+                                     command=lambda: funcoes_todolist.aplicar_filtro(self.tv,
+                                                                                     self.status_filter_combobox),
                                      image=self.img_filter,
                                      relief=GROOVE, anchor='w',
                                      text="Filtrar por:", compound="left",
