@@ -51,17 +51,16 @@ def abrir_janela():
     bg_label.place(relwidth=1, relheight=1)
     bg_label.image = img
 
+    def qntd(janela_config):
 
+        r_pomodoro = Entry(janela_config, width= 34, height= 20)
+        r_pomodoro.place(x= 62, y= 252)
 
+        r_intervalos = Entry(janela_config, width= 34, height = 20)
+        r_pomodoro.place(x= 62, y= 219)
 
-
-
-
-
-
-
-
-
+    #chamando as funções
+    qntd(janela_config)
 
     # Define o sinalizador para indicar que a janela está aberta
     janela_aberta = True
