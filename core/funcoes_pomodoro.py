@@ -20,11 +20,12 @@ pausa = 5"""
 
 
 def conversao(t):
-    # de min para segundos:
-    return t * 60
+    pass
+   """ # de min para segundos:
+    return t * 60"""
 
 
-def pomodoro(, pausa):
+def pomodoro(foco, pausa):
     pass
     """f = conversao(foco)
     p = conversao(pausa)
