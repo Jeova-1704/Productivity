@@ -29,26 +29,26 @@ class InterfaceToDoList:
         self.frame_detalhes.pack(padx=0, pady=0)
 
         self.Texto_Productivity = "Productivity"
-        self.label = Label(self.frame_top, text=self.Texto_Productivity, fg=colors.COR_BRANCA,
+        self.label = Label(self.frame_detalhes, text=self.Texto_Productivity, fg=colors.COR_BRANCA,
                            bg=colors.COR_CINZA_ESCURO,
                            font=fonts.fonte_conteudo_logo)
         self.label.place(x=34, y=50)
 
         self.Botao_Home = "Home"
-        self.label = Button(self.frame_top, text=self.Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+        self.label = Button(self.frame_detalhes, text=self.Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
                             font=fonts.fonte_conteudo_navBAr,
                             relief=FLAT, command=lambda: funcoes_main.renderizar_home(self.janela)
                             )
         self.label.place(x=625, y=50)
 
         self.Botao_Codigo = "DashBoard"
-        self.label = Button(self.frame_top, text=self.Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                            font=fonts.fonte_conteudo_navBAr,
+        self.label = Button(self.frame_detalhes, text=self.Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+                            font=fonts.fonte_conteudo_navBAr, command=lambda: funcoes_main.renderizar_dashboard(self.janela),
                             relief=FLAT)
         self.label.place(x=800, y=50)
 
         self.Botao_Team = "Sobre"
-        self.label = Button(self.frame_top, text=self.Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
+        self.label = Button(self.frame_detalhes, text=self.Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
                             font=fonts.fonte_conteudo_navBAr,
                             command=lambda: funcoes_main.renderizar_team(self.janela), relief=FLAT)
         self.label.place(x=1068, y=50)

@@ -1,6 +1,7 @@
 import webbrowser
 from tkinter import *
 
+import view.dashboard
 from utils import colors
 from view import ToDoList, Calendario, Team
 from core import funcoes_bloco
@@ -10,6 +11,7 @@ from view import Main_bloco_notas
 def abrir_navegador():
     nova_url = "https://github.com/Jeova-1704/Projeto-programacao-1"
     webbrowser.open(nova_url)
+
 
 def renderizer_main():
     janela = Tk()
@@ -42,7 +44,7 @@ def renderizer_main():
 
     Botao_Team = "Sobre"
     label = Button(frame_top, text=Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                   font=('monospace', 32), command=lambda:renderizar_team(janela),relief=FLAT)
+                   font=('monospace', 32), command=lambda: renderizar_team(janela), relief=FLAT)
     label.place(x=1068, y=50)
 
     frame_detalhes_borda = Frame(frame_top, width=1280, height=4, bg=colors.COR_CINZA_CLARO, relief=SOLID)
@@ -67,11 +69,13 @@ def renderizer_main():
     label_ToDoList.place(x=385, y=23)
 
     img_Anotacoes = PhotoImage(file='assets/Ellipse 2.png')
-    label_Anotacoes = Button(frame_meio, image=img_Anotacoes, relief=FLAT, bg=colors.COR_CINZA_ESCURO,command=lambda: renderizar_anotacoes(janela))
+    label_Anotacoes = Button(frame_meio, image=img_Anotacoes, relief=FLAT, bg=colors.COR_CINZA_ESCURO,
+                             command=lambda: renderizar_anotacoes(janela))
     label_Anotacoes.place(x=602, y=23)
 
     img_Calendario = PhotoImage(file='assets/Ellipse 3.png')
-    label_Calendario = Button(frame_meio, image=img_Calendario, relief=FLAT, bg=colors.COR_CINZA_ESCURO, command=lambda: renderizar_calendario(janela))
+    label_Calendario = Button(frame_meio, image=img_Calendario, relief=FLAT, bg=colors.COR_CINZA_ESCURO,
+                              command=lambda: renderizar_calendario(janela))
     label_Calendario.place(x=821, y=23)
 
     img_Pomodoro = PhotoImage(file='assets/Ellipse 4.png')
@@ -90,17 +94,25 @@ def renderizar_todoList(janela_main):
     janela_main.destroy()
     ToDoList.InterfaceToDoList()
 
+
 def renderizar_calendario(janela_main):
     janela_main.destroy()
     Calendario.Interface()
+
 
 def renderizar_team(janela_main):
     janela_main.destroy()
     Team.Interface()
 
+
 def renderizar_anotacoes(janela_main):
     janela_main.destroy()
     Main_bloco_notas.Anotacoes()
+
+
+def renderizar_dashboard(janela_autal):
+    janela_autal.destroy()
+    view.dashboard.InterfaceDashboard()
 
 
 def renderizar_team_anotacoes(janela_main):
@@ -111,8 +123,6 @@ def renderizar_team_anotacoes(janela_main):
 def renderizar_home_anotacoes(janela):
     janela.destroy()
     renderizer_main()
-
-
 
 
 def fechar_janela_home(texto, janela):
