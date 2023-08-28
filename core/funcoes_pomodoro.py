@@ -7,6 +7,14 @@ from PIL import ImageTk, Image
 import time
 import os
 
+v_pomodoro = None
+v_intervalos = None
+t_pomodoro = None
+t_pausaC = None
+t_pausaM = None
+t_pausaL = None
+
+
 """foco = 25
 pausa = 5"""
 

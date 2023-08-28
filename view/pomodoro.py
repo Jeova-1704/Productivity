@@ -51,7 +51,7 @@ label_tempo.place(x=251, y=77.09)
 
 
 img_icon = PhotoImage(file="assets/Ellipse 4.png")
-button_icon = Button(frame_tempo, image=img_icon, relief=FLAT, command=lambda: funcoes_pomodoro.abrir_janela())
+button_icon = Button(frame_tempo, image=img_icon, relief=FLAT, command=funcoes_pomodoro.abrir_janela)
 button_icon.place(x=265.73, y=70)
 
 img_start = PhotoImage(file="assets/botao_start_pomodoro.png")
@@ -77,5 +77,5 @@ qntd_intervalos = Label(label_intervalo, text="t")
 qntd_intervalos.place(x=360, y=50)
 
 # Ciclo da janela para ela ir atualizando: ==============================================================================================================================
-
+print(funcoes_pomodoro.v_pomodoro)
 janela.mainloop()

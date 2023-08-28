@@ -1,5 +1,6 @@
 fonte_titulo = ('mulish', 22, 'bold')
-fonte_conteudo = ('monospace', 16)
+fonte_conteudo = ('mulish', 16)
+fonte_botao = ('mulish', 10)
 fonte_h1_p= ('mulish', 35, 'bold')
 fonte_h2 = ('mulish', 32, 'bold')
 fonte_h2_p = ('mulish', 30, 'bold')
