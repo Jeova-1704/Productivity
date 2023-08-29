@@ -109,6 +109,10 @@ def renderizar_anotacoes(janela_main):
     janela_main.destroy()
     Main_bloco_notas.Anotacoes()
 
+def renderizar_pomodoro(janela_main):
+    janela_main.destroy()
+    #abrir classe
+
 
 def renderizar_dashboard(janela_autal):
     janela_autal.destroy()
