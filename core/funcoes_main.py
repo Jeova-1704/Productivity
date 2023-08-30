@@ -13,11 +13,23 @@ def abrir_navegador():
     webbrowser.open(nova_url)
 
 
+def center_window(janela, width, height):
+    screen_width = janela.winfo_screenwidth()
+    screen_height = janela.winfo_screenheight()
+
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    janela.geometry(f"{width}x{height}+{x}+{y}")
+
+
 def renderizer_main():
+    width = 1280
+    height = 700
     janela = Tk()
     janela.iconbitmap('../view/assets/logo.ico')
     janela.title("Janela Principal")
-    janela.geometry('1280x700')
+    center_window(janela, width, height)
     janela.config(background=colors.COR_BRANCA)
     janela.resizable(width=FALSE, height=FALSE)
 

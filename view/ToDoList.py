@@ -9,16 +9,28 @@ from core import funcoes_main
 from utils.ToolTip import Tooltip
 
 
+def center_window(janela, width, height):
+    screen_width = janela.winfo_screenwidth()
+    screen_height = janela.winfo_screenheight()
+
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    janela.geometry(f"{width}x{height}+{x}+{y}")
+
+
 class InterfaceToDoList:
     Botao_Codigo: str
     status = ['Todos', 'Concluido', 'Em andamento', 'Não iniado']
+    width = 1280
+    height = 700
 
     def __init__(self):
 
         self.janela = Tk()
         self.janela.iconbitmap('assets/todoList.ico')
         self.janela.title("To-Do List")
-        self.janela.geometry('1280x700')
+        center_window(self.janela, self.width, self.height)
         self.janela.config(background=colors.COR_BRANCA)
         self.janela.resizable(width=FALSE, height=FALSE)
 
