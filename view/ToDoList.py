@@ -22,8 +22,7 @@ def center_window(janela, width, height):
 class InterfaceToDoList:
     Botao_Codigo: str
     status = ['Todos', 'Concluido', 'Em andamento', 'Não iniado']
-    width = 1280
-    height = 700
+
 
     def __init__(self):
 
