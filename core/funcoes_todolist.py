@@ -10,6 +10,7 @@ from view import ToDoList
 status_task = ['Não iniciado', 'Em andamento', 'Concluido']
 nivel_importancia_task = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+
 def salvar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_nivel, janela, janela_todo):
     try:
         tarefa = str(Entrada_tarefa.get())
