@@ -32,7 +32,7 @@ class Funcoes:
             self.sistema_de_registro.insere_na_tabela(event)
             self.mostrar_eventos_para_data(selected_date)
 
-    def ao_selecionar_data(self, event):3
+    def ao_selecionar_data(self, event):
         data_selecionada = self.cal.get_date()
         self.mostrar_eventos_para_data(data_selecionada)
 
