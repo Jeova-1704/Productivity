@@ -21,22 +21,25 @@ class Funcoes:
     def selecionar_data(self):
         selected_date = self.cal.get_date()
 
-        event = simpledialog.askstring("Adicionar Evento", f"Digite o evento para {selected_date}:",
-                                       parent=self.frame_calendario)
+        event_input = simpledialog.askstring("Adicionar Evento", f"Digite o evento para {selected_date}:",
+                                             parent=self.frame_calendario)
 
-        if event:
-            eventos = (selected_date, event)
-            self.sistema_de_registro.insere_na_tabela(eventos)
+        if event_input is not None:
+            time_input = simpledialog.askstring("Adicionar Evento", "Qual o horário do seu evento?:",
+                                                parent=self.frame_calendario)
+
+            event = (selected_date, event_input, time_input)
+            self.sistema_de_registro.insere_na_tabela(event)
             self.mostrar_eventos_para_data(selected_date)
 
-    def ao_selecionar_data(self, event):
+    def ao_selecionar_data(self, event):3
         data_selecionada = self.cal.get_date()
         self.mostrar_eventos_para_data(data_selecionada)
 
     def mostrar_eventos_para_data(self, data):
 
         self.image = PhotoImage(file="assets/toDoList_delete.png")
-        self.image_resized = self.image.subsample(3,3)
+        self.image_resized = self.image.subsample(3, 3)
 
         self.event_label.config(text="Eventos para " + data)
 
@@ -44,24 +47,23 @@ class Funcoes:
             widget.destroy()
 
         dados = self.sistema_de_registro.ver_todos_eventos()
-        for evento_id, evento_data, evento_descricao in dados:
+        for evento_id, evento_data, evento_descricao, evento_horario in dados:
             if evento_data == data:
                 evento_frame = Frame(self.frame_tabela)
                 evento_label = Label(evento_frame, text=evento_descricao, font=("monospace", 16))
-                remover_button = Button(evento_frame, text="Remover", bg="#BF4C0A", image=self.image_resized, relief=GROOVE,
+                hora_label = Label(evento_frame, text=evento_horario, font=("monospace", 14))
+                remover_button = Button(evento_frame, text="Remover", bg="#BF4C0A", image=self.image_resized,
+                                        relief=GROOVE,
                                         command=lambda ev=evento_descricao: self.remover_evento(data, ev, evento_id))
                 evento_label.pack(side="left")
+                hora_label.pack(side="left")
                 remover_button.pack(side="right")
                 evento_frame.pack(fill="x", padx=10, pady=5)
                 self.widgets_eventos[evento_id] = evento_frame
 
-    def remover_eventos_salvos(self):
-        self.sistema_de_registro.delete_all_eventos()
-        self.event_label.config(text="")
-
     def remover_evento(self, data, evento, evento_id):
         dados_eventos = self.sistema_de_registro.ver_todos_eventos()
-        for e_id, evento_data, evento_descricao in dados_eventos:
+        for e_id, evento_data, evento_descricao, evento_horario in dados_eventos:
             if evento_data == data and evento_descricao == evento:
 
                 mensagem = f"O evento '{evento}' foi deletado com sucesso!"

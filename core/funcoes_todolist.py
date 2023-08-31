@@ -79,7 +79,7 @@ def addTarefa(janela_todo):
     Entrada_status['values'] = status_task
     Entrada_status.place(x=165, y=150)
 
-    titulo_nivel = Label(frame_meio, text='Nivel de importancia:', anchor=NW, font=fonts.fonte_conteudo,
+    titulo_nivel = Label(frame_meio, text='Nível de importância:', anchor=NW, font=fonts.fonte_conteudo,
                          bg=colors.COR_BRANCA)
     titulo_nivel.place(x=50, y=200)
     Entrada_nivel = ttk.Combobox(frame_meio, width=5, font=fonts.fonte_conteudo, justify=CENTER)

@@ -13,15 +13,16 @@ class BancoDeEventos:
         self.c.execute('''CREATE TABLE IF NOT EXISTS eventos(
                    id INTEGER PRIMARY KEY,
                    dias TEXT NOT NULL,
-                   evento TEXT NOT NULL)
+                   evento TEXT NOT NULL,
+                   horario TEXT NOT NULL)
                    ''')
 
     def insere_na_tabela(self, eventos):
-        self.c.execute("INSERT INTO eventos(dias, evento) VALUES(?, ?)", eventos)
+        self.c.execute("INSERT INTO eventos(dias, evento, horario) VALUES(?, ?, ?)", eventos)
         self.conn.commit()
 
     def ver_todos_eventos(self):
-        self.c.execute("SELECT id, dias, evento FROM eventos")
+        self.c.execute("SELECT id, dias, evento, horario FROM eventos")
         dados = self.c.fetchall()
         return dados
 

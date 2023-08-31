@@ -17,6 +17,7 @@ def center_window(janela, width, height):
 class Interface:
     width = 1280
     height = 700
+
     def __init__(self):
         self.janela = Tk()
         self.janela.iconbitmap('assets/calendario.ico')
