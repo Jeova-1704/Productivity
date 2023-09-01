@@ -9,8 +9,8 @@ import time
 from playsound import playsound
 
 numero_ciclos = 0
-v_ciclos = IntVar()
-v_ciclos.set(4)
+
+v_ciclos = 4
 t_pomodoro = 25
 t_pausa = 5
 t_pausaC = 5
