@@ -98,7 +98,6 @@ class InterfacePomodoro():
                                      fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat")
         self.qntd_intervalos.place(x=355, y=33)
 
-
         msg = StringVar()
         msg.set("X")
         self.pC_botao = Button(self.janela, textvariable=msg, font=fonts.fonte_conteudo, fg=colors.COR_BRANCA,
@@ -116,8 +115,5 @@ class InterfacePomodoro():
                                relief="raised", command=...)
         self.pL_botao.place(x=1160, y=519)
 
-
         self.janela.mainloop()
 
-
-pomodo = InterfacePomodoro()
