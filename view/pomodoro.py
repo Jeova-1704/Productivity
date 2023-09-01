@@ -85,7 +85,7 @@ img_intervalo = PhotoImage(file="assets/pomodoro_intervalos.png")
 label_intervalo = Label(frame_tempo, image=img_intervalo)
 label_intervalo.place(x=800, y=112)
 
-qntd_intervalos = Label(label_intervalo, text=str(funcoes_pomodoro.v_intervalos), font=fonts.fonte_h2_p,
+qntd_intervalos = Label(label_intervalo, textvariable=funcoes_pomodoro.v_ciclos, font=fonts.fonte_h2_p,
                         fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat")
 qntd_intervalos.place(x=355, y=33)
 
@@ -118,5 +118,5 @@ def text_button():
         msg = "X"
 """
 # Ciclo da janela para ela ir atualizando: ==============================================================================================================================
-print(funcoes_pomodoro.v_pomodoro)
+
 janela.mainloop()

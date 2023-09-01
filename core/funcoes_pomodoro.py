@@ -1,15 +1,18 @@
 from tkinter import *
+from tkinter import messagebox
 from turtledemo.nim import randomrow
 
 from utils import colors, fonts
 from PIL import ImageTk, Image
 
 import time
-import os
+from playsound import playsound
 
-v_pomodoro = 4
-v_intervalos = 4
+numero_ciclos = 0
+v_ciclos = IntVar()
+v_ciclos.set(4)
 t_pomodoro = 25
+t_pausa = 5
 t_pausaC = 5
 t_pausaM = 10
 t_pausaL = 15
@@ -26,17 +29,14 @@ janela_aberta = False
 janela_config = None
 
 
-def salvar_inputs(qntd_pomodoros, qtnd_intervalos, duracao_pomodoro, duracao_pausaC, duracao_pausaM, duracao_pausaL,
-                  janela):
-    global v_pomodoro, v_intervalos, t_pomodoro, t_pausaC, t_pausaM, t_pausaL
+def salvar_inputs(qntd_ciclos, duracao_pomodoro, duracao_pausaC, duracao_pausaM, duracao_pausaL):
+    global v_ciclos, t_pomodoro, t_pausaC, t_pausaM, t_pausaL
 
-    v_pomodoro = int( qntd_pomodoros.get() )
-    v_intervalos = int( qtnd_intervalos.get() )
+    v_ciclos.set(int( qntd_ciclos.get() ) )
     t_pomodoro = int( duracao_pomodoro.get() )
     t_pausaC = int( duracao_pausaC.get() )
     t_pausaM = int( duracao_pausaM.get() )
     t_pausaL = int( duracao_pausaL.get() )
-    print( v_pomodoro )
 
 
 def abrir_janela():
@@ -61,14 +61,9 @@ def abrir_janela():
 
     # os inputs da janela config --------------------------------------------------------------------------------------------
 
-    qntd_pomodoros_var = StringVar()
-    qntd_pomodoros = Entry( janela_config, textvariable=qntd_pomodoros_var, width=5, justify="center", relief="sunken" )
-    qntd_pomodoros.place( x=62, y=142 )
-
-    qntd_intervalos_var = StringVar()
-    qntd_intervalos = Entry( janela_config, textvariable=qntd_intervalos_var, width=5, justify="center",
-                             relief="sunken" )
-    qntd_intervalos.place( x=62, y=175 )
+    qntd_ciclos_var = StringVar()
+    qntd_ciclos = Entry( janela_config, textvariable=qntd_ciclos_var, width=5, justify="center", relief="sunken" )
+    qntd_ciclos.place( x=62, y=152 )
 
     duracao_pomodoro_var = StringVar()
     duracao_pomodoro = Entry( janela_config, textvariable=duracao_pomodoro_var, width=5, justify="center",
@@ -91,7 +86,7 @@ def abrir_janela():
     botao_salvar = Button( janela_config, text=" SALVAR ", relief="flat", bg=colors.COR_LARANJA_CLARO,
                            font=fonts.fonte_botao,
                            fg=colors.COR_BRANCA,
-                           command=lambda: salvar_inputs( qntd_pomodoros, qntd_intervalos, duracao_pomodoro,
+                           command=lambda: salvar_inputs( qntd_ciclos, duracao_pomodoro,
                                                           duracao_pausaC, duracao_pausaM, duracao_pausaL,
                                                           janela_config ) )
     botao_salvar.place( x=109, y=420 )
@@ -111,26 +106,33 @@ def fechar_janela():
 
 ################################################################################################
 
-def botao_pausa_click(p):
-    if p == "pc_click":
-        p = conversao( t_pausaC )
-    elif p == "pm_click":
-        p = conversao( t_pausaM )
-    elif p == "pl_click":
-        p = conversao( t_pausaL )
+def work_break(timer):
+    minutes, seconds = divmod( timer, 60 )
+    min.set( f"{minutes:02d}" )
+    sec.set( f"{seconds:02d}" )
+    update()
+    time.sleep( 1 )
 
 
-    temporizador( p, label= "PAUSA" )
-    os.system( "cls" )  # clear do windows
+def work():
+    timer = conversao( t_pomodoro )
+    while timer >= 0:
+        work_break( timer )
+        if timer == 0:
+            # terminou o foco, toca musica e troca o temporizador para pausa
+            playsound( "sound.ogg" )
+            messagebox.showinfo( "Muito bem!", "Partiu dar uma pausa? \n Clique no botão de intervalo!" )
+        timer -= 1
 
 
-def pomodoro(t_pomodoro):
-    f = conversao( t_pomodoro )
-    temporizador( f, "FOCO" )
-    os.system( "cls" )  # clear do windows
-
-
-def temporizador(tempo, label):
-    pass
-
+'''def break_():
+    timer = conversao( t_pausa )
+    while timer >= 0:
+        work_break( timer )
+        if timer == 0:
+            # terminou a pausa, toca musica e troca o temporizador para foco
+            playsound( "sound.ogg" )
+            messagebox.showinfo( "Simbora!", "Bora voltar pro foco? \n Clique no botão de foco!" )
+        timer -= 1
+'''
 # pomodoro(foco, pausa)

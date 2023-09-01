@@ -236,8 +236,8 @@ def aplicar_filtro(tv, filtro_box):
             bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Concluido",))
         elif status_para_filtro == "Em andamento":
             bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Em andamento",))
-        elif status_para_filtro == "Não iniado":
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Não iniado",))
+        elif status_para_filtro == "Não iniciado":
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Não iniciado",))
         else:
             bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?",
                                                      (status_para_filtro,))
