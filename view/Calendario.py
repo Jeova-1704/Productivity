@@ -1,7 +1,11 @@
 from tkinter import *
+
+from PIL import ImageTk, Image
 from tkcalendar import Calendar
 from core import funcoes_calendario, funcoes_main
 from utils import colors
+from utils.ToolTip import Tooltip
+
 
 
 def center_window(janela, width, height):
@@ -96,6 +100,24 @@ class Interface:
             height=2
         )
         self.botao_agendar.pack(padx=30, pady=15)
+
+        def atualizar_janela(janela):
+            janela.destroy()
+            Interface()
+
+        self.img_update = Image.open('assets/toDoList_update.png')
+        self.img_update = self.img_update.resize((35, 35))
+        self.img_update = ImageTk.PhotoImage(self.img_update)
+
+        self.botao_atualizar_table = Button(self.frame_calendario, image=self.img_update,
+                                            command=lambda: atualizar_janela(self.janela),
+                                            relief=GROOVE, width=40, compound=LEFT, overrelief=RIDGE,
+                                            font='monospace', bg=colors.COR_LARANJA_ESCURO,
+                                            fg=colors.COR_BRANCA)
+
+        self.botao_atualizar_table.place(x=700, y=460)
+
+        self.tooltip = Tooltip(self.botao_atualizar_table, "Atualizar calendário")
 
         self.janela.mainloop()
 

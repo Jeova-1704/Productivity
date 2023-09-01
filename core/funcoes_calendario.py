@@ -2,6 +2,7 @@ from tkinter import simpledialog
 from tkinter import *
 from dao.bdCalendario import BancoDeEventos
 from tkinter import messagebox
+from datetime import datetime
 
 
 class Funcoes:
@@ -61,6 +62,14 @@ class Funcoes:
                 evento_frame.pack(fill="x", padx=10, pady=5)
                 self.widgets_eventos[evento_id] = evento_frame
 
+                evento_date = datetime.strptime(evento_data, "%d/%m/%Y").date()
+
+                color_tag = f"color_{evento_date.strftime('%Y_%m_%d')}"
+                self.cal.tag_config(color_tag, background="red")
+                self.cal.calevent_create(evento_date, "", tags=[color_tag])
+
+                self.widgets_eventos[evento_id] = (evento_frame, color_tag)
+
     def remover_evento(self, data, evento, evento_id):
         dados_eventos = self.sistema_de_registro.ver_todos_eventos()
         for e_id, evento_data, evento_descricao, evento_horario in dados_eventos:
@@ -72,11 +81,15 @@ class Funcoes:
                 self.sistema_de_registro.delete_evento(e_id)
 
                 if e_id in self.widgets_eventos:
-                    self.widgets_eventos[e_id].destroy()
+                    evento_frame, color_tag = self.widgets_eventos[e_id]
+                    evento_frame.destroy()
+                    self.cal.tag_config(color_tag, background="")
+                    self.cal.tag_delete(color_tag)
                     del self.widgets_eventos[e_id]
                 self.mostrar_eventos_para_data(data)
 
                 break
+
 
 
 if __name__ == "__main__":
