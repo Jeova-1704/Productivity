@@ -9,16 +9,14 @@ import time
 from playsound import playsound
 
 numero_ciclos = 0
-v_ciclos = 4
+v_ciclos = IntVar()
+v_ciclos.set(4)
 t_pomodoro = 25
 t_pausa = 5
 t_pausaC = 5
 t_pausaM = 10
 t_pausaL = 15
 
-def create_string_var():
-    global v_ciclos
-    v_ciclos = StringVar()
 
 def conversao(t):
     # de min para segundos:
@@ -31,16 +29,14 @@ janela_aberta = False
 janela_config = None
 
 
-def salvar_inputs(qntd_ciclos, duracao_pomodoro, duracao_pausaC, duracao_pausaM, duracao_pausaL,
-                  janela):
+def salvar_inputs(qntd_ciclos, duracao_pomodoro, duracao_pausaC, duracao_pausaM, duracao_pausaL):
     global v_ciclos, t_pomodoro, t_pausaC, t_pausaM, t_pausaL
 
-    v_ciclos.set(str(qntd_ciclos.get()))
+    v_ciclos.set(int( qntd_ciclos.get() ) )
     t_pomodoro = int( duracao_pomodoro.get() )
     t_pausaC = int( duracao_pausaC.get() )
     t_pausaM = int( duracao_pausaM.get() )
     t_pausaL = int( duracao_pausaL.get() )
-    print( v_ciclos )
 
 
 def abrir_janela():
@@ -68,7 +64,6 @@ def abrir_janela():
     qntd_ciclos_var = StringVar()
     qntd_ciclos = Entry( janela_config, textvariable=qntd_ciclos_var, width=5, justify="center", relief="sunken" )
     qntd_ciclos.place( x=62, y=152 )
-
 
     duracao_pomodoro_var = StringVar()
     duracao_pomodoro = Entry( janela_config, textvariable=duracao_pomodoro_var, width=5, justify="center",
@@ -112,31 +107,32 @@ def fechar_janela():
 ################################################################################################
 
 def work_break(timer):
-    minutes, seconds = divmod(timer, 60)
-    min.set(f"{minutes:02d}")
-    sec.set(f"{seconds:02d}")
+    minutes, seconds = divmod( timer, 60 )
+    min.set( f"{minutes:02d}" )
+    sec.set( f"{seconds:02d}" )
     update()
-    time.sleep(1)
+    time.sleep( 1 )
+
 
 def work():
-    timer = conversao(t_pomodoro)
+    timer = conversao( t_pomodoro )
     while timer >= 0:
-        work_break(timer)
+        work_break( timer )
         if timer == 0:
-            #terminou o foco, toca musica e troca o temporizador para pausa
-            playsound("sound.ogg")
-            messagebox.showinfo("Muito bem!", "Partiu dar uma pausa? \n Clique no botão de intervalo!")
-        timer -= 1
-
-def break_():
-    timer = conversao(t_pausa)
-    while timer >= 0:
-        work_break(timer)
-        if timer == 0:
-            #terminou a pausa, toca musica e troca o temporizador para foco
-            playsound("sound.ogg")
-            messagebox.showinfo("Simbora!", "Bora voltar pro foco? \n Clique no botão de foco!")
+            # terminou o foco, toca musica e troca o temporizador para pausa
+            playsound( "sound.ogg" )
+            messagebox.showinfo( "Muito bem!", "Partiu dar uma pausa? \n Clique no botão de intervalo!" )
         timer -= 1
 
 
+'''def break_():
+    timer = conversao( t_pausa )
+    while timer >= 0:
+        work_break( timer )
+        if timer == 0:
+            # terminou a pausa, toca musica e troca o temporizador para foco
+            playsound( "sound.ogg" )
+            messagebox.showinfo( "Simbora!", "Bora voltar pro foco? \n Clique no botão de foco!" )
+        timer -= 1
+'''
 # pomodoro(foco, pausa)
