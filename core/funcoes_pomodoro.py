@@ -11,6 +11,7 @@ import time
 from playsound import playsound
 from view import pomodoro
 
+
 def conversao(t):
     # de min para segundos:
     return t * 60
@@ -25,11 +26,11 @@ janela_config = None
 def salvar_inputs(qntd_ciclos, duracao_pomodoro, duracao_pausaC, duracao_pausaM, duracao_pausaL):
     global v_ciclos, t_pomodoro, t_pausaC, t_pausaM, t_pausaL
 
-    v_ciclos.set(int(qntd_ciclos.get()))
-    t_pomodoro = int(duracao_pomodoro.get())
-    t_pausaC = int(duracao_pausaC.get())
-    t_pausaM = int(duracao_pausaM.get())
-    t_pausaL = int(duracao_pausaL.get())
+    v_ciclos.set( int( qntd_ciclos.get() ) )
+    t_pomodoro = int( duracao_pomodoro.get() )
+    t_pausaC = int( duracao_pausaC.get() )
+    t_pausaM = int( duracao_pausaM.get() )
+    t_pausaL = int( duracao_pausaL.get() )
 
 
 def abrir_janela():
@@ -80,7 +81,7 @@ def abrir_janela():
                            font=fonts.fonte_botao,
                            fg=colors.COR_BRANCA,
                            command=lambda: salvar_inputs( qntd_ciclos, duracao_pomodoro,
-                                                          duracao_pausaC, duracao_pausaM, duracao_pausaL) )
+                                                          duracao_pausaC, duracao_pausaM, duracao_pausaL ) )
     botao_salvar.place( x=109, y=420 )
 
     # Define o sinalizador para indicar que a janela está aberta
@@ -98,33 +99,35 @@ def fechar_janela():
 
 ################################################################################################
 
-def temporizador_intervalo(t_pausa , minutos, segundos):
-    minutos, segundos = divmod(t_pausa, 60 )
-    minutos.set(f"{minutos:02d}")
-    segundos.set(f"{segundos:02d}")
+def temporizador_intervalo(t_pausa, minutos, segundos):
+    minutos, segundos = divmod( t_pausa, 60 )
+
+    minutos = f"{minutos:02d}"
+    segundos = f"{segundos:02d}"
     update()
-    time.sleep(1)
-    tempo = "f"
-    return str(minutos) + ":" + str(segundos)
+    time.sleep( 1 )
+    tempo = time.time()
+    return tempo
+
 
 def temporizador_foco(t_foco, minutos, segundos):
-    timer = conversao(t_foco)
+    timer = conversao( t_foco )
     t_pausa = 0
+    temporizador_intervalo( t_pausa, minutos, segundos )
     while timer >= 0:
-        temporizador_intervalo(t_pausa, minutos, segundos)
         if timer == 0:
             # terminou o foco, toca musica e troca o temporizador para pausa
             playsound( "sound.ogg" )
             messagebox.showinfo( "Muito bem!", "Partiu dar uma pausa? \n Clique no botão de intervalo!" )
         timer -= 1
-        if int(minutos) < 10 and int(segundos) < 10:
-            return "0" + str(minutos) + " : " + "0" + str(segundos)
-        elif int(minutos) < 10 and not int(segundos) < 10:
-            return "0" + str(minutos) + " : " + str(segundos)
-        elif not int(minutos) < 10 and int(segundos) < 10:
-            return str(minutos) + " : " + "0" + str(segundos)
+        if int( minutos ) < 10 and int( segundos ) < 10:
+            return "0" + str( minutos ) + " : " + "0" + str( segundos )
+        elif int( minutos ) < 10 and not int( segundos ) < 10:
+            return "0" + str( minutos ) + " : " + str( segundos )
+        elif not int( minutos ) < 10 and int( segundos ) < 10:
+            return str( minutos ) + " : " + "0" + str( segundos )
         else:
-            return str(minutos) + " : " + str(segundos)
+            return str( minutos ) + " : " + str( segundos )
 
 
 '''def break_():

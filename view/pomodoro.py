@@ -102,7 +102,7 @@ class InterfacePomodoro():
         self.label_temporizador.place( x=280, y=170 )
 
         self.img_start = PhotoImage( file="assets/botao_start_pomodoro.png" )
-        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat", command=lambda: funcoes_pomodoro.temporizador_foco(self.t_pomodoro,self.minutos_int,self.segundos_int))
+        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat", command=lambda: funcoes_pomodoro.temporizador_foco(self._t_pomodoro,self.minutos_int,self.segundos_int))
         self.button_start.place( x=350, y=330 )
 
         # 3 segmento de tela:
