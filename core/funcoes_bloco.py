@@ -5,7 +5,7 @@ from view import Main_bloco_notas
 
 arquivo_atual_janela = ""
 texto_na_pagina = []
-numero_paginas_abertas = 1
+numero_paginas_salvas = 0
 
 
 def abrir_arquivo_janela(texto):
@@ -21,11 +21,14 @@ def abrir_arquivo_janela(texto):
 
 def salvar_arquivo_janela(texto):
     global arquivo_atual_janela
+    global numero_paginas_salvas
 
     if arquivo_atual_janela:
         conteudo_janela = texto.get("1.0", "end-1c")
         with open(arquivo_atual_janela, "w") as salvar:
             salvar.write(conteudo_janela)
+
+
     else:
         conteudo_janela = texto.get("1.0", "end-1c")
         arquivo = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=
@@ -34,15 +37,18 @@ def salvar_arquivo_janela(texto):
             with open(arquivo, "w") as salvar:
                 salvar.write(conteudo_janela)
                 arquivo_atual_janela = arquivo
+        numero_paginas_salvas += 1
 
 
 def salvar_como_arquivo_janela(texto):
+    global arquivo_atual_janela
     conteudo_janela = texto.get("1.0", "end-1c")
     arquivo = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=
     (("Arquivos de Texto", "*.txt"),))
     if arquivo:
         with open(arquivo, "w") as salvar:
             salvar.write(conteudo_janela)
+            arquivo_atual_janela = arquivo
 
 
 def fechar_janela(texto, janela):
@@ -59,10 +65,13 @@ def fechar_janela(texto, janela):
 
 
 def contador():
-    if numero_paginas_abertas == 1:
-        messagebox.showinfo("Contador", f"Até o momento você criou {numero_paginas_abertas} nova anotação.")
+    if numero_paginas_salvas == 1:
+        messagebox.showinfo("Contador", f"Até o momento você salvou {numero_paginas_salvas} nova anotação.")
+    elif numero_paginas_salvas == 0:
+        messagebox.showinfo("Contador", f"Até o momento você não possui anotações salvas")
+
     else:
-        messagebox.showinfo("Contador", f"Até o momento você criou {numero_paginas_abertas} novas anotações.")
+        messagebox.showinfo("Contador", f"Até o momento você salvou{numero_paginas_salvas} novas anotações.")
 
 
 def pesquisar_palavra(texto):
@@ -85,7 +94,7 @@ def pesquisar_palavra(texto):
 
 
 def desmarcar_palavra(texto):
-    palavra_desmarcada = "96867763464#4$589490Edsgdg@gas"
+    palavra_desmarcada = "96867763464#4$589&¨%$#490Edsgdg@gas"
     if palavra_desmarcada:
         texto_palavra = texto.get("1.0", "end")
         texto.tag_remove("destaque", "1.0", "end")
@@ -102,10 +111,12 @@ def fechar_janela_destruir(texto):
 
 
 def destruir(janela, texto):
-    global numero_paginas_abertas
-    numero_paginas_abertas += 1
     fechar_janela_destruir(texto)
     global arquivo_atual_janela
     arquivo_atual_janela = ""
     janela.destroy()
     Main_bloco_notas.Anotacoes()
+
+def arquivo():
+    global arquivo_atual_janela
+    arquivo_atual_janela= ""
