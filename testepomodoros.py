@@ -98,20 +98,20 @@ def fechar_janela():
 
 ################################################################################################
 
-def temporizador_intervalo(t_pausa , minutos, segundos):
+"""def temporizador_intervalo(t_pausa , minutos, segundos):
     minutos, segundos = divmod(t_pausa, 60 )
     minutos.set(f"{minutos:02d}")
     segundos.set(f"{segundos:02d}")
     update()
     time.sleep(1)
     tempo = "f"
-    return str(minutos) + ":" + str(segundos)
+    return str(minutos) + ":" + str(segundos)"""
 
 def temporizador_foco(t_foco, minutos, segundos):
     timer = conversao(t_foco)
     t_pausa = 0
     while timer >= 0:
-        "temporizador_intervalo(t_pausa, minutos, segundos)"
+        """temporizador_intervalo(t_pausa, minutos, segundos)"""
         if timer == 0:
             # terminou o foco, toca musica e troca o temporizador para pausa
             playsound( "sound.ogg" )
@@ -125,15 +125,6 @@ def temporizador_foco(t_foco, minutos, segundos):
             return str(minutos) + " : " + "0" + str(segundos)
         else:
             return str(minutos) + " : " + str(segundos)
-
-
-def iniciarPomodoro(label,tempo_pomodoro):
-
-    label.config(text="teste")
-    minutos = tempo_pomodoro
-    segundos = 30
-
-
 
 
 '''def break_():

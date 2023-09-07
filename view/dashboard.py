@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter.ttk import Treeview
-from dao import bdToDoList
+from dao import bdToDoList, bdCalendario
 from utils import colors, fonts
 from core import funcoes_main
 
@@ -30,6 +30,8 @@ class InterfaceDashboard:
         self.db = bdToDoList.ToDoList_banco
         self.create_task_tables()
         self.populate_tables()
+
+        self.db = bdCalendario.BancoDeEventos()
 
         self.frame_top = Frame(self.janela, width=1280, height=125, bg=colors.COR_BRANCA, relief=SOLID)
         self.frame_top.pack(padx=0, pady=0)
@@ -79,6 +81,20 @@ class InterfaceDashboard:
                                      bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
         self.texto_anotacoes.place(x=770, y=230)
 
+        self.calendario = Label(self.janela, text="Calendário", font=fonts.fonte_conteudo, width=10,
+                                bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.calendario.place(x=140, y=180)
+
+        self.treeview_datas_eventos = Treeview(self.janela, columns=('Data',), show='headings')
+        self.treeview_datas_eventos.heading('Data', text='Data')
+        self.treeview_datas_eventos.column('Data', width=150, anchor='w')
+        self.treeview_datas_eventos.place(x=100, y=265, width=150, height=400)
+
+        self.treeview_eventos = Treeview(self.janela, columns=('Evento',), show='headings')
+        self.treeview_eventos.heading('Evento', text='Evento', anchor='w')
+        self.treeview_eventos.place(x=200, y=265, width=100, height=400)
+
+        self.populate_datas_eventos()
         self.janela.mainloop()
 
     def create_task_tables(self):
@@ -110,6 +126,28 @@ class InterfaceDashboard:
             self.table_andamento.insert('', 'end', values=(task[1],))
         elif status == "Concluido":
             self.table_concluido.insert('', 'end', values=(task[1],))
+
+    def get_eventos_do_banco(self):
+        try:
+            eventos = self.db.ver_todos_eventos()
+            return eventos
+        except Exception as e:
+            print("Erro ao acessar o banco de dados:", str(e))
+            return []
+
+    def populate_datas_eventos(self):
+        try:
+            eventos = self.get_eventos_do_banco()
+
+            for evento in eventos:
+                data = evento[1]
+                descricao = evento[2]
+
+                self.treeview_datas_eventos.insert('', 'end', values=(data,))
+                self.treeview_eventos.insert('', 'end', values=(descricao,))
+
+        except Exception as e:
+            print("Erro ao acessar o banco de dados:", str(e))
 
 
 if __name__ == '__main__':
