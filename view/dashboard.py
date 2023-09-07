@@ -3,6 +3,7 @@ from tkinter.ttk import Treeview
 from dao import bdToDoList, bdCalendario
 from utils import colors, fonts
 from core import funcoes_main
+from core import funcoes_bloco
 
 
 def center_window(janela, width, height):
@@ -84,6 +85,18 @@ class InterfaceDashboard:
         self.calendario = Label(self.janela, text="Calendário", font=fonts.fonte_conteudo, width=10,
                                 bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
         self.calendario.place(x=140, y=180)
+
+        self.bloco_de_notas = Label(self.janela, text="Bloco de Notas", font=fonts.fonte_conteudo, width=15,
+                                bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.salvos = Label(self.janela, text="Anotações salvas:", font="Arial 14", width=15,
+                                    bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.bloco_de_notas.place(x=1000, y=180)
+        self.salvos.place(x=1010, y=230)
+
+        qtd_bloco_notas = funcoes_bloco.retornar_qtd_notas()
+        self.quantidadde = Label(self.janela, text=qtd_bloco_notas, bg=colors.COR_CINZA_CLARO, fg = colors.COR_LARANJA_ESCURO, font=fonts.fonte_titulo)
+        self.quantidadde.place(x=1080, y=280)
+
 
         self.treeview_datas_eventos = Treeview(self.janela, columns=('Data',), show='headings')
         self.treeview_datas_eventos.heading('Data', text='Data')

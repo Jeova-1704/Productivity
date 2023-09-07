@@ -8,6 +8,10 @@ texto_na_pagina = []
 numero_paginas_salvas = 0
 
 
+def retornar_qtd_notas():
+    return numero_paginas_salvas
+
+
 def abrir_arquivo_janela(texto):
     global arquivo_atual_janela
     arquivo_janela = filedialog.askopenfilename(filetypes=(("Arquivos de Texto", "*.txt"), ("Arquivos Python", "*.py")))

@@ -177,3 +177,20 @@ def fechar_janela_team(texto, janela):
     else:
         janela.destroy()
         Team.Interface()
+
+def fechar_janela_dashboard(texto, janela, janela_autal):
+    conteudo_janela = texto.get("1.0", "end-1c")
+    if conteudo_janela != "":
+        mensagem = funcoes_bloco.messagebox.askyesno("pergunta", "Deseja salvar suas alterações?")
+        if mensagem:
+            funcoes_bloco.salvar_arquivo_janela(texto)
+            funcoes_bloco.arquivo()
+            janela.destroy()
+            renderizar_dashboard(janela_autal)
+        else:
+            funcoes_bloco.arquivo()
+            janela.destroy()
+            renderizar_dashboard(janela_autal)
+    else:
+        janela.destroy()
+        renderizar_dashboard(janela_autal)
