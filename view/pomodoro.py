@@ -72,20 +72,20 @@ class InterfacePomodoro():
 
         self.Botao_Home = "Home"
         self.label = Button( self.navbar, text=self.Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                             font=fonts.fonte_h2,
+                             font=fonts.fonte_conteudo_navBAr,
                              relief=FLAT, command=lambda: funcoes_main.renderizar_home( self.janela )
                              )
         self.label.place( x=625, y=50 )
 
         self.Botao_Codigo = "DashBoard"
         self.label = Button( self.navbar, text=self.Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                             font=fonts.fonte_h2,
+                             font=fonts.fonte_conteudo_navBAr,
                              relief=FLAT )
         self.label.place( x=800, y=50 )
 
         self.Botao_Team = "Sobre"
         self.label = Button( self.navbar, text=self.Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                             font=fonts.fonte_h2,
+                             font=fonts.fonte_conteudo_navBAr,
                              command=..., relief=FLAT )
         self.label.place( x=1068, y=50 )
 
