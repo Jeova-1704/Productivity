@@ -6,6 +6,7 @@ from utils import colors
 from view import ToDoList, Calendario, Team
 from core import funcoes_bloco
 from view import Main_bloco_notas
+from view import pomodoro
 
 
 def abrir_navegador():
@@ -13,11 +14,23 @@ def abrir_navegador():
     webbrowser.open(nova_url)
 
 
+def center_window(janela, width, height):
+    screen_width = janela.winfo_screenwidth()
+    screen_height = janela.winfo_screenheight()
+
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    janela.geometry(f"{width}x{height}+{x}+{y}")
+
+
 def renderizer_main():
+    width = 1280
+    height = 700
     janela = Tk()
     janela.iconbitmap('../view/assets/logo.ico')
     janela.title("Janela Principal")
-    janela.geometry('1280x700')
+    center_window(janela, width, height)
     janela.config(background=colors.COR_BRANCA)
     janela.resizable(width=FALSE, height=FALSE)
 
@@ -79,7 +92,8 @@ def renderizer_main():
     label_Calendario.place(x=821, y=23)
 
     img_Pomodoro = PhotoImage(file='assets/Ellipse 4.png')
-    label_Pomodoro = Button(frame_meio, image=img_Pomodoro, relief=FLAT, bg=colors.COR_CINZA_ESCURO)
+    label_Pomodoro = Button(frame_meio, image=img_Pomodoro, relief=FLAT, bg=colors.COR_CINZA_ESCURO,
+                            command=lambda: renderizar_pomodoro(janela))
     label_Pomodoro.place(x=1040, y=23)
 
     janela.mainloop()
@@ -111,7 +125,7 @@ def renderizar_anotacoes(janela_main):
 
 def renderizar_pomodoro(janela_main):
     janela_main.destroy()
-    #abrir classe
+    pomodoro.InterfacePomodoro()
 
 
 def renderizar_dashboard(janela_autal):

@@ -4,13 +4,26 @@ from core import funcoes_main
 from core import funcoes_bloco
 numero_paginas_abertas = 1
 
+
+def center_window(janela, width, height):
+    screen_width = janela.winfo_screenwidth()
+    screen_height = janela.winfo_screenheight()
+
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    janela.geometry(f"{width}x{height}+{x}+{y}")
+
+
 class Anotacoes:
+    width = 1280
+    height = 700
 
     def __init__(self):
         global numero_paginas_abertas
         self.janela = Tk()
         self.janela.title("Bloco de notas")
-        self.janela.geometry("1280x700")
+        center_window(self.janela, self.width, self.height)
         self.janela.config(background='#F2F2F0')
         self.janela.resizable(width=FALSE, height=FALSE)
 

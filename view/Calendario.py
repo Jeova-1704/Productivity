@@ -1,15 +1,32 @@
 from tkinter import *
+
+from PIL import ImageTk, Image
 from tkcalendar import Calendar
 from core import funcoes_calendario, funcoes_main
 from utils import colors
+from utils.ToolTip import Tooltip
+
+
+
+def center_window(janela, width, height):
+    screen_width = janela.winfo_screenwidth()
+    screen_height = janela.winfo_screenheight()
+
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    janela.geometry(f"{width}x{height}+{x}+{y}")
 
 
 class Interface:
+    width = 1280
+    height = 700
+
     def __init__(self):
         self.janela = Tk()
         self.janela.iconbitmap('assets/calendario.ico')
         self.janela.title("Calendário")
-        self.janela.geometry("1280x700")
+        center_window(self.janela, self.width, self.height)
         self.janela.config(background='#F2F2F0')
         self.janela.resizable(width=FALSE, height=FALSE)
 
@@ -83,6 +100,24 @@ class Interface:
             height=2
         )
         self.botao_agendar.pack(padx=30, pady=15)
+
+        def atualizar_janela(janela):
+            janela.destroy()
+            Interface()
+
+        self.img_update = Image.open('assets/toDoList_update.png')
+        self.img_update = self.img_update.resize((35, 35))
+        self.img_update = ImageTk.PhotoImage(self.img_update)
+
+        self.botao_atualizar_table = Button(self.frame_calendario, image=self.img_update,
+                                            command=lambda: atualizar_janela(self.janela),
+                                            relief=GROOVE, width=40, compound=LEFT, overrelief=RIDGE,
+                                            font='monospace', bg=colors.COR_LARANJA_ESCURO,
+                                            fg=colors.COR_BRANCA)
+
+        self.botao_atualizar_table.place(x=700, y=460)
+
+        self.tooltip = Tooltip(self.botao_atualizar_table, "Atualizar calendário")
 
         self.janela.mainloop()
 

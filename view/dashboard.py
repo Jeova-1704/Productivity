@@ -5,12 +5,25 @@ from utils import colors, fonts
 from core import funcoes_main
 
 
+def center_window(janela, width, height):
+    screen_width = janela.winfo_screenwidth()
+    screen_height = janela.winfo_screenheight()
+
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    janela.geometry(f"{width}x{height}+{x}+{y}")
+
+
 class InterfaceDashboard:
+    width = 1280
+    height = 700
+
     def __init__(self):
         self.janela = Tk()
         self.janela.iconbitmap('assets/dashboard.ico')
         self.janela.title("DashBoard")
-        self.janela.geometry('1280x700')
+        center_window(self.janela, self.width, self.height)
         self.janela.config(background=colors.COR_BRANCA)
         self.janela.resizable(width=FALSE, height=FALSE)
 

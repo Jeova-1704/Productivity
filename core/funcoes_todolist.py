@@ -79,7 +79,7 @@ def addTarefa(janela_todo):
     Entrada_status['values'] = status_task
     Entrada_status.place(x=165, y=150)
 
-    titulo_nivel = Label(frame_meio, text='Nivel de importancia:', anchor=NW, font=fonts.fonte_conteudo,
+    titulo_nivel = Label(frame_meio, text='Nível de importância:', anchor=NW, font=fonts.fonte_conteudo,
                          bg=colors.COR_BRANCA)
     titulo_nivel.place(x=50, y=200)
     Entrada_nivel = ttk.Combobox(frame_meio, width=5, font=fonts.fonte_conteudo, justify=CENTER)
@@ -236,8 +236,8 @@ def aplicar_filtro(tv, filtro_box):
             bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Concluido",))
         elif status_para_filtro == "Em andamento":
             bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Em andamento",))
-        elif status_para_filtro == "Não iniado":
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Não iniado",))
+        elif status_para_filtro == "Não iniciado":
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Não iniciado",))
         else:
             bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?",
                                                      (status_para_filtro,))
