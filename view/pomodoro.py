@@ -43,6 +43,7 @@ class InterfacePomodoro():
         self._numero_ciclos = 0
         self._v_ciclos = 4
         self._t_pomodoro = 25
+        self.t_pomodoro_int = 25
         self._t_pausa = 5
         self._t_pausaC = 5
         self._t_pausaM = 10
@@ -94,15 +95,14 @@ class InterfacePomodoro():
                                    command=funcoes_pomodoro.abrir_janela )
         self.button_icon.place( x=125, y=46 )
 
-        self.texto_temporizador = funcoes_pomodoro.temporizador_foco(self.t_pomodoro,self.segundos_int,self.minutos_int)
-        self.label_temporizador = Label( self.frame_tempo, text=self.texto_temporizador,
+        self.label_temporizador = Label( self.frame_tempo, text="00 : 00",
                                          font=fonts.fonte_temporizador_p,
                                          fg=colors.COR_BRANCA,
                                          bg=colors.COR_LARANJA_CLARO )
         self.label_temporizador.place( x=280, y=170 )
 
         self.img_start = PhotoImage( file="assets/botao_start_pomodoro.png" )
-        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat", command=lambda: funcoes_pomodoro.temporizador_foco(self._t_pomodoro,self.minutos_int,self.segundos_int))
+        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat",command=lambda: funcoes_pomodoro.iniciarPomodoro(self.label_temporizador,self.t_pomodoro_int))
         self.button_start.place( x=350, y=330 )
 
         # 3 segmento de tela:
