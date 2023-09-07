@@ -74,25 +74,33 @@ class InterfacePomodoro():
         self.frame_tempo.pack()
         self.img_tempo = PhotoImage(file="assets/pomodoro_tempo.png")
         self.label_tempo = Label(self.frame_tempo, image=self.img_tempo)
-        self.label_tempo.place(x=251, y=77.09)
+        self.label_tempo.place(x=235, y=64.09)
 
-        self.img_icon = PhotoImage(file="assets/Ellipse 4.png")
+        self.img_icon = PhotoImage(file="assets/pomodoro.png")
         self.button_icon = Button(self.frame_tempo, image=self.img_icon, relief="flat",
                                   command=funcoes_pomodoro.abrir_janela)
-        self.button_icon.place(x=150, y=40)
+        self.button_icon.place(x=125, y=46)
 
         self.label_temporizador = Label(self.frame_tempo, text="xx : xx", font=fonts.fonte_temporizador_p,
                                         fg=colors.COR_BRANCA,
                                         bg=colors.COR_LARANJA_CLARO)
-        self.label_temporizador.place(x=300, y=200)
+        self.label_temporizador.place(x=280, y=160)
 
         self.img_start = PhotoImage(file="assets/botao_start_pomodoro.png")
         self.button_start = Button(self.frame_tempo, image=self.img_start, relief="flat", command=...)
-        self.button_start.place(x=365, y=350)
+        self.button_start.place(x=350, y=340)
 
+        # 3 segmento de tela:
+
+        self.img_info = PhotoImage(file="assets/info_pomodoro.png")
+        self.label_info = Label(self.janela, image=self.img_info)
+        self.label_info.place(x=878, y=195)
+        
+        # 4 segmento de tela:
+        
         self.img_intervalo = PhotoImage(file="assets/pomodoro_intervalos.png")
         self.label_intervalo = Label(self.frame_tempo, image=self.img_intervalo)
-        self.label_intervalo.place(x=800, y=112)
+        self.label_intervalo.place(x=800, y=190)
 
         self.qntd_intervalos = Label(self.label_intervalo, textvariable=self.v_ciclos,
                                      font=fonts.fonte_h2_p,
@@ -104,17 +112,19 @@ class InterfacePomodoro():
         self.pC_botao = Button(self.janela, textvariable=msg, font=fonts.fonte_conteudo, fg=colors.COR_BRANCA,
                                bg=colors.COR_LARANJA_ESCURO,
                                relief="raised", command=...)
-        self.pC_botao.place(x=1160, y=396)
+        self.pC_botao.place(x=1160, y=474)
 
         self.pM_botao = Button(self.janela, textvariable=msg, font=fonts.fonte_conteudo, fg=colors.COR_BRANCA,
                                bg=colors.COR_LARANJA_ESCURO,
                                relief="raised", command=...)
-        self.pM_botao.place(x=1160, y=458)
+        self.pM_botao.place(x=1160, y=535)
 
         self.pL_botao = Button(self.janela, textvariable=msg, font=fonts.fonte_conteudo, fg=colors.COR_BRANCA,
                                bg=colors.COR_LARANJA_ESCURO,
                                relief="raised", command=...)
-        self.pL_botao.place(x=1160, y=519)
+        self.pL_botao.place(x=1160, y=596)
 
         self.janela.mainloop()
 
+if __name__ == "__main__":
+    pomodoro = InterfacePomodoro()
