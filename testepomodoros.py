@@ -98,14 +98,14 @@ def fechar_janela():
 
 ################################################################################################
 
-def temporizador_intervalo(t_pausa , minutos, segundos):
+"""def temporizador_intervalo(t_pausa , minutos, segundos):
     minutos, segundos = divmod(t_pausa, 60 )
     minutos.set(f"{minutos:02d}")
     segundos.set(f"{segundos:02d}")
     update()
     time.sleep(1)
     tempo = "f"
-    return str(minutos) + ":" + str(segundos)
+    return str(minutos) + ":" + str(segundos)"""
 
 def temporizador_foco(t_foco, minutos, segundos):
     timer = conversao(t_foco)
