@@ -40,24 +40,24 @@ class InterfacePomodoro():
 
         # variaveis do pomodoro:
 
-        self._numero_ciclos = 0
-        self._v_ciclos = 4
-        self._t_pomodoro = 25
-        self.t_pomodoro_int = 25
+        self._numero_ciclos = 1
+        self._v_ciclos = 2
+        self._t_pomodoro = 1
+        self.t_pomodoro_int = 1
         self._t_pausa = 5
-        self._t_pausaC = 5
-        self._t_pausaM = 10
-        self._t_pausaL = 15
+        self.tempo_pl = None
+        self.tempo_pm = None
         self.segundos_int = 0
         self.minutos_int = 0
         self._segundos = IntVar()
         self._minutos = IntVar()
         self.check_pc = StringVar()
-        self.check_pc.set("  ")
+        self.check_pc.set("X")
         self.check_pm = StringVar()
         self.check_pm.set("  ")
         self.check_pl = StringVar()
         self.check_pl.set("  ")
+        print(self._t_pausa)
 
         # Continuação do codigo:
         # ================================================================================================================================================ 1 segmento de tela:
@@ -95,14 +95,15 @@ class InterfacePomodoro():
                                    command=funcoes_pomodoro.abrir_janela )
         self.button_icon.place( x=125, y=46 )
 
-        self.label_temporizador = Label( self.frame_tempo, text="00 : 00",
+        text_temporizador = '{:02d} : {:02d}'.format(self.minutos_int, self.segundos_int)
+        self.label_temporizador = Label( self.frame_tempo, text=text_temporizador,
                                          font=fonts.fonte_temporizador_p,
                                          fg=colors.COR_BRANCA,
                                          bg=colors.COR_LARANJA_CLARO )
         self.label_temporizador.place( x=280, y=170 )
 
         self.img_start = PhotoImage( file="assets/botao_start_pomodoro.png" )
-        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat",command=lambda: funcoes_pomodoro.iniciarPomodoro(self.label_temporizador,self.t_pomodoro_int))
+        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat",command=lambda: funcoes_pomodoro.iniciarPomodoro(self.label_temporizador,self.t_pomodoro_int, self.janela,self._numero_ciclos,self.qntd_intervalos, self.tempo_pm, self.tempo_pl))
         self.button_start.place( x=350, y=330 )
 
         # 3 segmento de tela:
@@ -117,7 +118,7 @@ class InterfacePomodoro():
         self.label_intervalo = Label( self.frame_tempo, image=self.img_intervalo )
         self.label_intervalo.place( x=800, y=190 )
 
-        self.qntd_intervalos = Label( self.label_intervalo, textvariable=self.v_ciclos,
+        self.qntd_intervalos = Label( self.label_intervalo, text=self._v_ciclos,
                                       font=fonts.fonte_h2_p,
                                       fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat")
         self.qntd_intervalos.place( x=355, y=33 )
@@ -152,87 +153,13 @@ class InterfacePomodoro():
             self.check_pc.set("  ")
             self.check_pm.set("X")
             self.check_pl.set("  ")
+            self.tempo_pm = True
         elif verificador == "pl":
             self.check_pc.set("  ")
             self.check_pm.set("  ")
             self.check_pl.set("X")
-
-    # Métodos getter
-    @property
-    def numero_ciclos(self):
-        return self._numero_ciclos
-
-    @property
-    def v_ciclos(self):
-        return self._v_ciclos
-
-    @property
-    def t_pomodoro(self):
-        return self._t_pomodoro
-
-    @property
-    def t_pausa(self):
-        return self._t_pausa
-
-    @property
-    def t_pausaC(self):
-        return self._t_pausaC
-
-    @property
-    def t_pausaM(self):
-        return self._t_pausaM
-
-    @property
-    def t_pausaL(self):
-        return self._t_pausaL
-
-    @property
-    def segundos(self):
-        return self._segundos
-
-    @property
-    def minutos(self):
-        return self._minutos
-
-    # Métodos setter
-    @numero_ciclos.setter
-    def numero_ciclos(self, value):
-        self._numero_ciclos = value
-
-    @v_ciclos.setter
-    def v_ciclos(self, value):
-        self._v_ciclos = value
-
-    @t_pomodoro.setter
-    def t_pomodoro(self, value):
-        self._t_pomodoro = value
-
-    @t_pausa.setter
-    def t_pausa(self, value):
-        self._t_pausa = value
-
-    @t_pausaC.setter
-    def t_pausaC(self, value):
-        self._t_pausaC = value
-
-    @t_pausaM.setter
-    def t_pausaM(self, value):
-        self._t_pausaM = value
-
-    @t_pausaL.setter
-    def t_pausaL(self, value):
-        self._t_pausaL = value
-
-    @segundos.setter
-    def segundos(self, value):
-        self._segundos = value
-
-    @minutos.setter
-    def minutos(self, value):
-        self._minutos = value
-
-
-
+            self.tempo_pl = True
+        self.qntd_intervalos.config(text=self._v_ciclos)
 
 if __name__ == "__main__":
     pomodoro = InterfacePomodoro()
