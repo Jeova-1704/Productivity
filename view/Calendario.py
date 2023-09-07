@@ -1,5 +1,4 @@
 from tkinter import *
-
 from PIL import ImageTk, Image
 from tkcalendar import Calendar
 from core import funcoes_calendario, funcoes_main
