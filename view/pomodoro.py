@@ -102,7 +102,7 @@ class InterfacePomodoro():
         self.label_temporizador.place( x=280, y=170 )
 
         self.img_start = PhotoImage( file="assets/botao_start_pomodoro.png" )
-        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat", command= funcoes_pomodoro.temporizador_foco(self.t_pomodoro, self.minutos_int,self.segundos_int))
+        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat", command=lambda: funcoes_pomodoro.temporizador_foco(self.t_pomodoro,self.minutos_int,self.segundos_int))
         self.button_start.place( x=350, y=330 )
 
         # 3 segmento de tela:
@@ -117,9 +117,9 @@ class InterfacePomodoro():
         self.label_intervalo = Label( self.frame_tempo, image=self.img_intervalo )
         self.label_intervalo.place( x=800, y=190 )
 
-        self.qntd_intervalos = Label( self.label_intervalo, text=self.v_ciclos,
+        self.qntd_intervalos = Label( self.label_intervalo, textvariable=self.v_ciclos,
                                       font=fonts.fonte_h2_p,
-                                      fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat" )
+                                      fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat")
         self.qntd_intervalos.place( x=355, y=33 )
 
         self.pC_botao = Button( self.janela, textvariable=self.check_pc, font=fonts.fonte_conteudo,
