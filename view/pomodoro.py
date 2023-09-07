@@ -4,8 +4,7 @@
 
 from tkinter import *
 from utils import colors, fonts
-from core import funcoes_pomodoro
-
+from core import funcoes_pomodoro,funcoes_main
 
 # Inicalização da janela: ===============================================================================================================================================
 
@@ -52,7 +51,7 @@ class InterfacePomodoro():
         self.Botao_Home = "Home"
         self.label = Button(self.navbar, text=self.Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
                             font=fonts.fonte_h2,
-                            relief=FLAT, command=...
+                            relief=FLAT, command=lambda: funcoes_main.renderizar_home(self.janela)
                             )
         self.label.place(x=625, y=50)
 
