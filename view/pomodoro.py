@@ -33,6 +33,7 @@ class InterfacePomodoro():
         self.janela.config(background=colors.COR_BRANCA)
         self.janela.resizable(width=False, height=False)
         self.janela.iconbitmap("assets/favicon.ico")
+
         # variaveis do pomodoro:
 
         self.numero_ciclos = 0
