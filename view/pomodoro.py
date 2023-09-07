@@ -63,6 +63,13 @@ class InterfacePomodoro():
         # ================================================================================================================================================ 1 segmento de tela:
         self.navbar = Frame( self.janela, width=1280, height=174, bg=colors.COR_CINZA_ESCURO )
         self.navbar.pack()
+
+        self.Texto_Productivity = "Productivity"
+        self.label = Label(self.navbar, text=self.Texto_Productivity, fg=colors.COR_BRANCA,
+                           bg=colors.COR_CINZA_ESCURO,
+                           font=fonts.fonte_conteudo_logo)
+        self.label.place(x=34, y=50)
+
         self.Botao_Home = "Home"
         self.label = Button( self.navbar, text=self.Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
                              font=fonts.fonte_h2,
