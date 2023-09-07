@@ -98,40 +98,75 @@ def fechar_janela():
 
 ################################################################################################
 
-def temporizador_intervalo(t_pausa , minutos, segundos):
-    minutos, segundos = divmod(t_pausa, 60 )
-    minutos.set(f"{minutos:02d}")
-    segundos.set(f"{segundos:02d}")
-    update()
-    time.sleep(1)
-    tempo = "f"
-    return str(minutos) + ":" + str(segundos)
+def iniciarPausa(tempo_pomodoro,label,janela,t_pausa,ciclos,label_Vciclos):
+    minutos = 0
+    segundos = 5
+    while minutos > 0 or segundos >= 0:
+        timeformat = '{:02d} : {:02d}'.format(minutos, segundos)
+        label.config(text=timeformat)
+        janela.update()
+        time.sleep(1)
+        segundos -= 1
+        if segundos < 0 :
+                if minutos == 0:
+                    segundos = 0
+                    timeformat = '{:02d} : {:02d}'.format(minutos, segundos)
+                    janela.update()
+                    break
+                else:
+                    minutos -= 1
+                    segundos = 59
+    if ciclos > 0:
+        ciclos -= 1
+        playsound("../view/assets/clock.wav")
+        label_Vciclos.config(text=ciclos)
+        messagebox.showinfo("Muito bem!", "Partiu dar uma pausa? \n Clique no botão ok!")
+        iniciarPausa(tempo_pomodoro,label,janela ,t_pausa,ciclos,label_Vciclos)
+    elif ciclos == 0:
+        playsound("../view/assets/clock.wav")
+        label_Vciclos.config(text=ciclos)
+        messagebox.showinfo("Muito bem!", "Você concluiu o pomodoro , Parabéns!")
 
-def temporizador_foco(t_foco, minutos, segundos):
-    timer = conversao(t_foco)
-    t_pausa = 0
-    while timer >= 0:
-        "temporizador_intervalo(t_pausa, minutos, segundos)"
-        if timer == 0:
-            # terminou o foco, toca musica e troca o temporizador para pausa
-            playsound( "sound.ogg" )
-            messagebox.showinfo( "Muito bem!", "Partiu dar uma pausa? \n Clique no botão de intervalo!" )
-        timer -= 1
-        if int(minutos) < 10 and int(segundos) < 10:
-            return "0" + str(minutos) + " : " + "0" + str(segundos)
-        elif int(minutos) < 10 and not int(segundos) < 10:
-            return "0" + str(minutos) + " : " + str(segundos)
-        elif not int(minutos) < 10 and int(segundos) < 10:
-            return str(minutos) + " : " + "0" + str(segundos)
-        else:
-            return str(minutos) + " : " + str(segundos)
 
 
-def iniciarPomodoro(label,tempo_pomodoro):
 
-    label.config(text="teste")
-    minutos = tempo_pomodoro
-    segundos = 30
+def iniciarPomodoro(label,tempo_pomodoro, janela, ciclos,label_Vciclos, tempo_pm, tempo_pl):
+
+    if tempo_pm:
+        t_pausa = 10
+    elif tempo_pl:
+        t_pausa = 15
+    else:
+        t_pausa = 5
+
+    minutos = 0
+    segundos = 5
+
+    while minutos > 0 or segundos >= 0:
+        timeformat = '{:02d} : {:02d}'.format(minutos, segundos)
+        label.config(text=timeformat)
+        janela.update()
+        time.sleep(1)
+        segundos -= 1
+        if segundos < 0 :
+            if minutos == 0:
+                segundos = 0
+                timeformat = '{:02d} : {:02d}'.format(minutos, segundos)
+                janela.update()
+                break
+            else:
+                minutos -= 1
+                segundos = 59
+
+    if ciclos >= 0:
+        playsound("../view/assets/clock.wav")
+        label_Vciclos.config( text=ciclos )
+        messagebox.showinfo("Muito bem!", "Partiu dar uma pausa? \n Clique no botão ok!")
+        iniciarPausa(tempo_pomodoro,label,janela ,t_pausa,ciclos,label_Vciclos)
+
+
+
+
 
 
 

@@ -149,9 +149,11 @@ def fechar_janela_home(texto, janela):
         mensagem = funcoes_bloco.messagebox.askyesno("pergunta", "Deseja salvar suas alterações?")
         if mensagem:
             funcoes_bloco.salvar_arquivo_janela(texto)
+            funcoes_bloco.arquivo()
             janela.destroy()
             renderizer_main()
         else:
+            funcoes_bloco.arquivo()
             janela.destroy()
             renderizer_main()
     else:
@@ -165,9 +167,11 @@ def fechar_janela_team(texto, janela):
         mensagem = funcoes_bloco.messagebox.askyesno("pergunta", "Deseja salvar suas alterações?")
         if mensagem:
             funcoes_bloco.salvar_arquivo_janela(texto)
+            funcoes_bloco.arquivo()
             janela.destroy()
             Team.Interface()
         else:
+            funcoes_bloco.arquivo()
             janela.destroy()
             Team.Interface()
     else:

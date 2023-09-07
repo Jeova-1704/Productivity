@@ -1,8 +1,9 @@
+import tkinter
 from tkinter import *
 from utils import colors, fonts
 from core import funcoes_main
 from core import funcoes_bloco
-numero_paginas_abertas = 1
+
 
 
 def center_window(janela, width, height):
@@ -20,14 +21,14 @@ class Anotacoes:
     height = 700
 
     def __init__(self):
-        global numero_paginas_abertas
+        global numero_paginas_salvas
         self.janela = Tk()
         self.janela.title("Bloco de notas")
         center_window(self.janela, self.width, self.height)
         self.janela.config(background='#F2F2F0')
         self.janela.resizable(width=FALSE, height=FALSE)
 
-        numero_paginas_abertas += 1
+
 
         frame_top = Frame(self.janela, width=1280, height=125, bg=colors.COR_BRANCA, relief=SOLID)
         frame_top.pack(padx=0, pady=0)
@@ -60,8 +61,13 @@ class Anotacoes:
         frame_detalhes_borda = Frame(frame_top, width=1280, height=4, bg=colors.COR_CINZA_CLARO, relief=SOLID)
         frame_detalhes_borda.pack(padx=0, pady=0)
 
-        self.texto = Text(self.janela, wrap="word", height=25, width=200, font=fonts.fonte_conteudo)
+        centralizar = tkinter.Label(self.janela, text="Bloco de anotações", font="Arial 20")
+        centralizar.pack()
+
+        self.texto = Text(self.janela, wrap="word", height=18, width=100, font=fonts.fonte_conteudo)
         self.texto.pack()
+        self.texto.focus_force()
+
 
         menu_janela = Menu(self.janela)
         file_menu_janela_bloco_notas = Menu(menu_janela, tearoff=0)
