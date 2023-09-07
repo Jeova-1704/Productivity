@@ -1,1 +1,17 @@
 .idea/
+<<<<<<< HEAD
+=======
+core/.idea/
+dao/.idea/
+utils/.idea/
+view/.idea/
+dao/todolistStatus.db
+dao/bancodedados
+core/__pycache__
+dao/eventos.db
+dao/__pycache__/
+utils/__pycache__/
+view/__pycache__/
+
+
+>>>>>>> 334b683771ff8a31f53dd2a85b833612fe6c0a82
