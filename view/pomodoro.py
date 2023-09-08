@@ -1,7 +1,7 @@
 # Código para ser seguido nos projetos
 
 # Importação das bibliotecas e outras necessidades:
-# ==========================================================================================================================================
+# ======================================================================================================================
 
 from tkinter import *
 from typing import Any
@@ -11,7 +11,7 @@ from core import funcoes_pomodoro, funcoes_main
 
 
 # Inicalização da janela:
-# ===============================================================================================================================================
+# =====================================================================================================================
 
 
 def center_window(janela, width, height):
@@ -35,40 +35,41 @@ class InterfacePomodoro():
         self.height = 700
         center_window( self.janela, self.width, self.height )
         self.janela.config( background=colors.COR_BRANCA )
-        self.janela.resizable( width=False, height=False )
         self.janela.iconbitmap( "assets/favicon.ico" )
 
         # variaveis do pomodoro:
 
-        self._numero_ciclos = 1
-        self._v_ciclos = 2
-        self._t_pomodoro = 1
-        self.t_pomodoro_int = 1
-        self._t_pausa = 5
+        self.numero_ciclos = funcoes_pomodoro.numero_ciclos
+        self.t_pomodoro = 1
+        self.t_pomodoro_int = funcoes_pomodoro.t_pomodoro_int
+        self.t_pausa = 5
         self.tempo_pl = None
         self.tempo_pm = None
+        self.duracao_pausaC = funcoes_pomodoro.duracao_pausaC
+        self.duracao_pausaM = funcoes_pomodoro.duracao_pausaM
+        self.duracao_pausaL = funcoes_pomodoro.duracao_pausaL
         self.segundos_int = 0
         self.minutos_int = 0
-        self._segundos = IntVar()
-        self._minutos = IntVar()
+        self.segundos = IntVar()
+        self.minutos = IntVar()
         self.check_pc = StringVar()
-        self.check_pc.set("X")
+        self.check_pc.set( "X" )
         self.check_pm = StringVar()
-        self.check_pm.set("  ")
+        self.check_pm.set( "  " )
         self.check_pl = StringVar()
-        self.check_pl.set("  ")
-        print(self._t_pausa)
+        self.check_pl.set( "  " )
+        print( self.numero_ciclos )
 
         # Continuação do codigo:
-        # ================================================================================================================================================ 1 segmento de tela:
+        # ======================================================================================= 1 segmento de tela:
         self.navbar = Frame( self.janela, width=1280, height=174, bg=colors.COR_CINZA_ESCURO )
         self.navbar.pack()
 
         self.Texto_Productivity = "Productivity"
-        self.label = Label(self.navbar, text=self.Texto_Productivity, fg=colors.COR_BRANCA,
-                           bg=colors.COR_CINZA_ESCURO,
-                           font=fonts.fonte_conteudo_logo)
-        self.label.place(x=34, y=50)
+        self.label = Label( self.navbar, text=self.Texto_Productivity, fg=colors.COR_BRANCA,
+                            bg=colors.COR_CINZA_ESCURO,
+                            font=fonts.fonte_conteudo_logo )
+        self.label.place( x=34, y=50 )
 
         self.Botao_Home = "Home"
         self.label = Button( self.navbar, text=self.Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
@@ -99,18 +100,26 @@ class InterfacePomodoro():
 
         self.img_icon = PhotoImage( file="assets/pomodoro.png" )
         self.button_icon = Button( self.frame_tempo, image=self.img_icon, relief="flat",
-                                   command=funcoes_pomodoro.abrir_janela )
+                                   command=lambda: funcoes_pomodoro.abrir_janela(self.janela) )
         self.button_icon.place( x=125, y=46 )
 
-        text_temporizador = '{:02d} : {:02d}'.format(self.minutos_int, self.segundos_int)
-        self.label_temporizador = Label( self.frame_tempo, text=text_temporizador,
+        self.text_temporizador = '{:02d} : {:02d}'.format( self.minutos_int, self.segundos_int )
+        self.label_temporizador = Label( self.frame_tempo, text=self.text_temporizador,
                                          font=fonts.fonte_temporizador_p,
                                          fg=colors.COR_BRANCA,
                                          bg=colors.COR_LARANJA_CLARO )
         self.label_temporizador.place( x=280, y=170 )
 
         self.img_start = PhotoImage( file="assets/botao_start_pomodoro.png" )
-        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat",command=lambda: funcoes_pomodoro.iniciarPomodoro(self.label_temporizador,self.t_pomodoro_int, self.janela,self._numero_ciclos,self.qntd_intervalos, self.tempo_pm, self.tempo_pl))
+        self.button_start = Button( self.frame_tempo, image=self.img_start, relief="flat",
+                                    command=lambda: funcoes_pomodoro.iniciarPomodoro(self.label_temporizador,
+                                                                                     self.t_pomodoro_int, self.janela,
+                                                                                     self.numero_ciclos,
+                                                                                     self.qntd_intervalos,
+                                                                                     self.tempo_pm, self.tempo_pl,
+                                                                                      self.duracao_pausaC,
+                                                                                      self.duracao_pausaM,
+                                                                                      self.duracao_pausaL))
         self.button_start.place( x=350, y=330 )
 
         # 3 segmento de tela:
@@ -125,10 +134,12 @@ class InterfacePomodoro():
         self.label_intervalo = Label( self.frame_tempo, image=self.img_intervalo )
         self.label_intervalo.place( x=800, y=190 )
 
-        self.qntd_intervalos = Label( self.label_intervalo, text=self._v_ciclos,
+        self.qntd_intervalos = Label( self.label_intervalo,
+                                      text=funcoes_pomodoro.salvar_inputs( None,None, None, None, None, None, None ),
                                       font=fonts.fonte_h2_p,
-                                      fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat")
+                                      fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat" )
         self.qntd_intervalos.place( x=355, y=33 )
+        self.qntd_intervalos.config( text=self.numero_ciclos )
 
         self.pC_botao = Button( self.janela, textvariable=self.check_pc, font=fonts.fonte_conteudo,
                                 fg=colors.COR_BRANCA,
@@ -148,25 +159,26 @@ class InterfacePomodoro():
                                 relief="raised", command=lambda: self.selecaoDeTempo( "pl" ) )
         self.pL_botao.place( x=1160, y=596 )
 
-        self.janela.mainloop()
+        print( self.numero_ciclos )
 
+        self.janela.mainloop()
 
     def selecaoDeTempo(self, verificador):
         if verificador == "pc":
-            self.check_pc.set("X")
-            self.check_pm.set("  ")
-            self.check_pl.set("  ")
+            self.check_pc.set( "X" )
+            self.check_pm.set( "  " )
+            self.check_pl.set( "  " )
         elif verificador == "pm":
-            self.check_pc.set("  ")
-            self.check_pm.set("X")
-            self.check_pl.set("  ")
+            self.check_pc.set( "  " )
+            self.check_pm.set( "X" )
+            self.check_pl.set( "  " )
             self.tempo_pm = True
         elif verificador == "pl":
-            self.check_pc.set("  ")
-            self.check_pm.set("  ")
-            self.check_pl.set("X")
+            self.check_pc.set( "  " )
+            self.check_pm.set( "  " )
+            self.check_pl.set( "X" )
             self.tempo_pl = True
-        self.qntd_intervalos.config(text=self._v_ciclos)
+
 
 if __name__ == "__main__":
     pomodoro = InterfacePomodoro()

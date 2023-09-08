@@ -1,15 +1,12 @@
 from tkinter import *
 from tkinter import messagebox
-from turtle import update
-from view import pomodoro
-from turtledemo.nim import randomrow
 
 from utils import colors, fonts
 from PIL import ImageTk, Image
 
 import time
 from playsound import playsound
-from view import pomodoro
+
 
 def conversao(t):
     # de min para segundos:
@@ -21,18 +18,33 @@ def conversao(t):
 janela_aberta = False
 janela_config = None
 
-
-def salvar_inputs(qntd_ciclos, duracao_pomodoro, duracao_pausaC, duracao_pausaM, duracao_pausaL):
-    global v_ciclos, t_pomodoro, t_pausaC, t_pausaM, t_pausaL
-
-    v_ciclos.set(int(qntd_ciclos.get()))
-    t_pomodoro = int(duracao_pomodoro.get())
-    t_pausaC = int(duracao_pausaC.get())
-    t_pausaM = int(duracao_pausaM.get())
-    t_pausaL = int(duracao_pausaL.get())
+#####################################################################
+# Variáveis globais para valores de config do pomodoro
+numero_ciclos = 4
+t_pomodoro_int = 1
+duracao_pausaC = 5
+duracao_pausaM = 10
+duracao_pausaL = 15
 
 
-def abrir_janela():
+def salvar_inputs(janela_principal, janela, qntd_ciclos_g, duracao_pomodoro_g, duracao_pausaC_g, duracao_pausaM_g,
+                  duracao_pausaL_g):
+    global numero_ciclos, t_pomodoro_int, duracao_pausaC, duracao_pausaM, duracao_pausaL, janela_aberta, janela_config
+    try:
+        numero_ciclos = qntd_ciclos_g.get()
+        t_pomodoro_int = duracao_pomodoro_g.get()
+        duracao_pausaC = duracao_pausaC_g.get()
+        duracao_pausaM = duracao_pausaM_g.get()
+        duracao_pausaL = duracao_pausaL_g.get()
+        janela_principal.update()
+        janela.destroy()
+        janela_aberta = False
+        print( numero_ciclos )
+    except:
+        ...
+
+
+def abrir_janela(janela_principal):
     global janela_aberta, janela_config
 
     # Verifica se a janela já está aberta
@@ -75,12 +87,15 @@ def abrir_janela():
     duracao_pausaL = Entry( janela_config, textvariable=duracao_pausaL_var, width=5, justify="center", relief="sunken" )
     duracao_pausaL.place( x=62, y=362 )
 
+    print( numero_ciclos )
+
     # botao de salvar dados
     botao_salvar = Button( janela_config, text=" SALVAR ", relief="flat", bg=colors.COR_LARANJA_CLARO,
                            font=fonts.fonte_botao,
                            fg=colors.COR_BRANCA,
-                           command=lambda: salvar_inputs( qntd_ciclos, duracao_pomodoro,
-                                                          duracao_pausaC, duracao_pausaM, duracao_pausaL) )
+                           command=lambda: salvar_inputs( janela_principal, janela_config, qntd_ciclos,
+                                                          duracao_pomodoro,
+                                                          duracao_pausaC, duracao_pausaM, duracao_pausaL ) )
     botao_salvar.place( x=109, y=420 )
 
     # Define o sinalizador para indicar que a janela está aberta
@@ -98,60 +113,58 @@ def fechar_janela():
 
 ################################################################################################
 
-def iniciarPausa(tempo_pomodoro,label,janela,t_pausa,ciclos,label_Vciclos):
-    minutos = 0
-    segundos = 5
+def iniciarPausa(tempo_pomodoro, label, janela, t_pausa, ciclos, label_qntdintervalos):
+    minutos = t_pausa
+    segundos = 0
     while minutos > 0 or segundos >= 0:
-        timeformat = '{:02d} : {:02d}'.format(minutos, segundos)
-        label.config(text=timeformat)
+        timeformat = '{:02d} : {:02d}'.format( minutos, segundos )
+        label.config( text=timeformat )
         janela.update()
-        time.sleep(1)
+        time.sleep( 1 )
         segundos -= 1
-        if segundos < 0 :
-                if minutos == 0:
-                    segundos = 0
-                    timeformat = '{:02d} : {:02d}'.format(minutos, segundos)
-                    janela.update()
-                    break
-                else:
-                    minutos -= 1
-                    segundos = 59
-    if ciclos > 0:
-        ciclos -= 1
-        playsound("../view/assets/clock.wav")
-        label_Vciclos.config(text=ciclos)
-        messagebox.showinfo("Muito bem!", "Partiu dar uma pausa? \n Clique no botão ok!")
-        iniciarPausa(tempo_pomodoro,label,janela ,t_pausa,ciclos,label_Vciclos)
-    elif ciclos == 0:
-        playsound("../view/assets/clock.wav")
-        label_Vciclos.config(text=ciclos)
-        messagebox.showinfo("Muito bem!", "Você concluiu o pomodoro , Parabéns!")
-
-
-
-
-def iniciarPomodoro(label,tempo_pomodoro, janela, ciclos,label_Vciclos, tempo_pm, tempo_pl):
-
-    if tempo_pm:
-        t_pausa = 10
-    elif tempo_pl:
-        t_pausa = 15
-    else:
-        t_pausa = 5
-
-    minutos = 0
-    segundos = 5
-
-    while minutos > 0 or segundos >= 0:
-        timeformat = '{:02d} : {:02d}'.format(minutos, segundos)
-        label.config(text=timeformat)
-        janela.update()
-        time.sleep(1)
-        segundos -= 1
-        if segundos < 0 :
+        if segundos < 0:
             if minutos == 0:
                 segundos = 0
-                timeformat = '{:02d} : {:02d}'.format(minutos, segundos)
+                timeformat = '{:02d} : {:02d}'.format( minutos, segundos )
+                janela.update()
+                break
+            else:
+                minutos -= 1
+                segundos = 59
+    if ciclos > 0:
+        ciclos -= 1
+        playsound( "../view/assets/clock.wav" )
+        label_qntdintervalos.config( text=ciclos )
+        messagebox.showinfo( "Muito bem!", "Partiu dar uma pausa? \n Clique no botão ok!" )
+        iniciarPausa( tempo_pomodoro, label, janela, t_pausa, ciclos, label_qntdintervalos )
+    elif ciclos == 0:
+        playsound( "../view/assets/clock.wav" )
+        label_qntdintervalos.config( text=ciclos )
+        messagebox.showinfo( "Muito bem!", "Você concluiu o pomodoro , Parabéns!" )
+
+
+def iniciarPomodoro(label, tempo_pomodoro, janela, ciclos, label_qntdintervalos, tempo_pm, tempo_pl, duracao_pausaC,
+                    duracao_pausaM, duracao_pausaL):
+    if tempo_pm:
+        t_pausa = duracao_pausaM
+    elif tempo_pl:
+        t_pausa = duracao_pausaL
+    else:
+        t_pausa = duracao_pausaC
+
+    minutos = tempo_pomodoro
+    segundos = 0
+
+    while minutos > 0 or segundos >= 0:
+        timeformat = '{:02d} : {:02d}'.format( minutos, segundos )
+        label.config( text=timeformat )
+        janela.update()
+        time.sleep( 1 )
+        segundos -= 1
+        if segundos < 0:
+            if minutos == 0:
+                segundos = 0
+                timeformat = '{:02d} : {:02d}'.format( minutos, segundos )
                 janela.update()
                 break
             else:
@@ -159,26 +172,7 @@ def iniciarPomodoro(label,tempo_pomodoro, janela, ciclos,label_Vciclos, tempo_pm
                 segundos = 59
 
     if ciclos >= 0:
-        playsound("../view/assets/clock.wav")
-        label_Vciclos.config( text=ciclos )
-        messagebox.showinfo("Muito bem!", "Partiu dar uma pausa? \n Clique no botão ok!")
-        iniciarPausa(tempo_pomodoro,label,janela ,t_pausa,ciclos,label_Vciclos)
-
-
-
-
-
-
-
-
-'''def break_():
-    timer = conversao( t_pausa )
-    while timer >= 0:
-        work_break( timer )
-        if timer == 0:
-            # terminou a pausa, toca musica e troca o temporizador para foco
-            playsound( "sound.ogg" )
-            messagebox.showinfo( "Simbora!", "Bora voltar pro foco? \n Clique no botão de foco!" )
-        timer -= 1
-'''
-# pomodoro(foco, pausa)
+        playsound( "../view/assets/clock.wav" )
+        label_qntdintervalos.config( text=ciclos )
+        messagebox.showinfo( "Muito bem!", "Partiu dar uma pausa? \n Clique no botão ok!" )
+        iniciarPausa( tempo_pomodoro, label, janela, t_pausa, ciclos, label_qntdintervalos )
