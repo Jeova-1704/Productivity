@@ -124,15 +124,14 @@ def renderizar_pomodoro(janela_main):
     pomodoro.InterfacePomodoro()
 
 
-def renderizar_dashboard(janela_autal):
-    janela_autal.destroy()
-    view.dashboard.InterfaceDashboard()
+def renderizar_dashboard(janela):
+    janela.destroy()
+    dashboard.InterfaceDashboard()
 
 
 def renderizar_team_anotacoes(janela_main):
     janela_main.destroy()
     Team.Interface()
-
 
 def renderizar_home_anotacoes(janela):
     janela.destroy()
@@ -174,19 +173,17 @@ def fechar_janela_team(texto, janela):
         janela.destroy()
         Team.Interface()
 
-def fechar_janela_dashboard(texto, janela, janela_autal):
+def fechar_janela_dashboard(texto,janela):
     conteudo_janela = texto.get("1.0", "end-1c")
     if conteudo_janela != "":
         mensagem = funcoes_bloco.messagebox.askyesno("pergunta", "Deseja salvar suas alterações?")
         if mensagem:
             funcoes_bloco.salvar_arquivo_janela(texto)
             funcoes_bloco.arquivo()
-            janela.destroy()
-            renderizar_dashboard(janela_autal)
+
+            renderizar_dashboard(janela)
         else:
             funcoes_bloco.arquivo()
-            janela.destroy()
-            renderizar_dashboard(janela_autal)
+            renderizar_dashboard(janela)
     else:
-        janela.destroy()
-        renderizar_dashboard(janela_autal)
+        renderizar_dashboard(janela)

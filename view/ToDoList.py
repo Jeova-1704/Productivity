@@ -31,11 +31,9 @@ class InterfaceToDoList:
         self.janela.title("To-Do List")
         center_window(self.janela, self.width, self.height)
         self.janela.config(background=colors.COR_BRANCA)
-        #self.janela.resizable(width=FALSE, height=FALSE)
 
         self.frame_top = Frame(self.janela, width=1280, height=125, bg=colors.COR_BRANCA, relief=SOLID)
         self.frame_top.pack(padx=0, pady=0)
-
         self.frame_detalhes = Frame(self.frame_top, width=1280, height=174, bg=colors.COR_CINZA_ESCURO, relief=SOLID)
         self.frame_detalhes.pack(padx=0, pady=0)
 

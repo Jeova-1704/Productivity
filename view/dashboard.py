@@ -67,61 +67,54 @@ class InterfaceDashboard:
 
         self.texto_anotacoes = Label(self.janela, text="Tarefas", font=fonts.fonte_conteudo, width=10,
                                      bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
-        self.texto_anotacoes.place(x=580, y=180)
+        self.texto_anotacoes.place(x=530, y=180)
 
         self.texto_anotacoes = Label(self.janela, text="Não iniciado", font=fonts.fonte_conteudo, width=10,
                                      bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
-        self.texto_anotacoes.place(x=400, y=230)
+        self.texto_anotacoes.place(x=350, y=230)
 
         self.texto_anotacoes = Label(self.janela, text="Andamento", font=fonts.fonte_conteudo, width=10,
                                      bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
-        self.texto_anotacoes.place(x=580, y=230)
+        self.texto_anotacoes.place(x=530, y=230)
 
         self.texto_anotacoes = Label(self.janela, text="Concluido", font=fonts.fonte_conteudo, width=10,
                                      bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
-        self.texto_anotacoes.place(x=770, y=230)
+        self.texto_anotacoes.place(x=705, y=230)
 
         self.calendario = Label(self.janela, text="Calendário", font=fonts.fonte_conteudo, width=10,
                                 bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
-        self.calendario.place(x=140, y=180)
+        self.calendario.place(x=90, y=180)
 
         self.bloco_de_notas = Label(self.janela, text="Bloco de Notas", font=fonts.fonte_conteudo, width=15,
                                 bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
         self.salvos = Label(self.janela, text="Anotações salvas:", font="Arial 14", width=15,
                                     bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
-        self.bloco_de_notas.place(x=1000, y=180)
-        self.salvos.place(x=1010, y=230)
+        self.bloco_de_notas.place(x=970, y=180)
+        self.salvos.place(x=978, y=230)
 
         qtd_bloco_notas = funcoes_bloco.retornar_qtd_notas()
         self.quantidadde = Label(self.janela, text=qtd_bloco_notas, bg=colors.COR_CINZA_CLARO, fg = colors.COR_LARANJA_ESCURO, font=fonts.fonte_titulo)
-        self.quantidadde.place(x=1080, y=280)
-
-
-
+        self.quantidadde.place(x=1050, y=280)
 
         self.pomodoro = Label(self.janela, text="Pomodoro", font=fonts.fonte_conteudo, width=15,
                                 bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
         self.concluidos = Label(self.janela, text="Quantidade de pomodoros concluidos:", font="Arial 14", width=30,
                                     bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
-        self.pomodoro.place(x=1000, y=480)
-        self.concluidos.place(x=931, y=520)
+        self.pomodoro.place(x=970, y=480)
+        self.concluidos.place(x=895, y=530)
 
         qtd_pomodoros = funcoes_pomodoro.quantidade_pomodoros()
         self.quantidadde = Label(self.janela, text=qtd_pomodoros, bg=colors.COR_CINZA_CLARO, fg = colors.COR_LARANJA_ESCURO, font=fonts.fonte_titulo)
-        self.quantidadde.place(x=1080, y=565)
-
-
-
-
+        self.quantidadde.place(x=1050, y=565)
 
         self.treeview_datas_eventos = Treeview(self.janela, columns=('Data',), show='headings')
         self.treeview_datas_eventos.heading('Data', text='Data')
         self.treeview_datas_eventos.column('Data', width=150, anchor='w')
-        self.treeview_datas_eventos.place(x=100, y=265, width=150, height=400)
+        self.treeview_datas_eventos.place(x=50, y=265, width=150, height=400)
 
         self.treeview_eventos = Treeview(self.janela, columns=('Evento',), show='headings')
         self.treeview_eventos.heading('Evento', text='Evento', anchor='w')
-        self.treeview_eventos.place(x=200, y=265, width=100, height=400)
+        self.treeview_eventos.place(x=150, y=265, width=100, height=400)
 
         self.populate_datas_eventos()
         self.janela.mainloop()
@@ -129,15 +122,15 @@ class InterfaceDashboard:
     def create_task_tables(self):
         self.table_nao_iniciado = Treeview(self.janela, columns=('Tarefa',), show='headings')
         self.table_nao_iniciado.heading('Tarefa', text='Tarefa')
-        self.table_nao_iniciado.place(x=375, y=265, width=180, height=400)
+        self.table_nao_iniciado.place(x=325, y=265, width=180, height=400)
 
         self.table_andamento = Treeview(self.janela, columns=('Tarefa',), show='headings')
         self.table_andamento.heading('Tarefa', text='Tarefa')
-        self.table_andamento.place(x=557, y=265, width=180, height=400)
+        self.table_andamento.place(x=500, y=265, width=180, height=400)
 
         self.table_concluido = Treeview(self.janela, columns=('Tarefa',), show='headings')
         self.table_concluido.heading('Tarefa', text='Tarefa')
-        self.table_concluido.place(x=738, y=265, width=180, height=400)
+        self.table_concluido.place(x=677, y=265, width=180, height=400)
 
     def populate_tables(self):
         try:

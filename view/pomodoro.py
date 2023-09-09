@@ -1,15 +1,6 @@
-# Código para ser seguido nos projetos
-
-# Importação das bibliotecas e outras necessidades:
-# ======================================================================================================================
-
 from tkinter import *
 from utils import colors, fonts
 from core import funcoes_pomodoro, funcoes_main
-
-
-# Inicalização da janela:
-# =====================================================================================================================
 
 
 def center_window(janela, width, height):
@@ -22,7 +13,7 @@ def center_window(janela, width, height):
     janela.geometry(f"{width}x{height}+{x}+{y}")
 
 
-class InterfacePomodoro():
+class InterfacePomodoro:
     width = 1280
     height = 700
 
@@ -35,8 +26,6 @@ class InterfacePomodoro():
         self.janela.config(background=colors.COR_BRANCA)
         self.janela.iconbitmap("assets/IconPomodoro.ico")
 
-        # variaveis do pomodoro:
-
         self.numero_ciclos = funcoes_pomodoro.numero_ciclos
         self.t_pomodoro = 1
         self.t_pomodoro_int = funcoes_pomodoro.t_pomodoro_int
@@ -48,8 +37,8 @@ class InterfacePomodoro():
         self.duracao_pausaL = funcoes_pomodoro.duracao_pausaL
         self.segundos_int = 0
         self.minutos_int = 0
-        self.segundos = IntVar()
-        self.minutos = IntVar()
+        self.qtd_intervalos_label = IntVar()
+        self.qtd_intervalos_label.set(self.numero_ciclos)
         self.check_pc = StringVar()
         self.check_pc.set("X")
         self.check_pm = StringVar()
@@ -57,8 +46,6 @@ class InterfacePomodoro():
         self.check_pl = StringVar()
         self.check_pl.set("  ")
 
-        # Continuação do codigo:
-        # ======================================================================================= 1 segmento de tela:
         self.navbar = Frame(self.janela, width=1280, height=174, bg=colors.COR_CINZA_ESCURO)
         self.navbar.pack()
 
@@ -85,10 +72,8 @@ class InterfacePomodoro():
         self.Botao_Team = "Sobre"
         self.label = Button(self.navbar, text=self.Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
                             font=fonts.fonte_conteudo_navBAr,
-                            command=..., relief=FLAT)
+                            command=lambda: funcoes_main.renderizar_team(self.janela), relief=FLAT)
         self.label.place(x=1068, y=50)
-
-        # 2 segmento de tela:
 
         self.frame_tempo = Frame(self.janela, width=1280, height=532, bg=colors.COR_BRANCA)
         self.frame_tempo.pack()
@@ -121,20 +106,19 @@ class InterfacePomodoro():
 
         self.img_info = PhotoImage(file="assets/LabelPadroesPomodoro.png")
         self.label_info = Label(self.janela, image=self.img_info)
-        self.label_info.place(x=878, y=195)
-
-        # 4 segmento de tela:
+        self.label_info.place(x=828, y=195)
 
         self.img_intervalo = PhotoImage(file="assets/LabelPomodoroInterval.png")
         self.label_intervalo = Label(self.frame_tempo, image=self.img_intervalo)
         self.label_intervalo.place(x=800, y=190)
 
         self.qntd_intervalos = Label(self.label_intervalo,
-                                     text=funcoes_pomodoro.salvar_inputs(None, None, None, None, None, None, None),
+                                     text = self.numero_ciclos,
                                      font=fonts.fonte_h2_p,
                                      fg=colors.COR_LARANJA_ESCURO, bg=colors.COR_BRANCA, relief="flat")
         self.qntd_intervalos.place(x=355, y=33)
-        self.qntd_intervalos.config(text=self.numero_ciclos)
+
+
 
         self.pC_botao = Button(self.janela, textvariable=self.check_pc, font=fonts.fonte_conteudo,
                                fg=colors.COR_BRANCA,
@@ -153,21 +137,29 @@ class InterfacePomodoro():
                                bg=colors.COR_LARANJA_ESCURO,
                                relief="raised", command=lambda: self.selecaoDeTempo("pl"))
         self.pL_botao.place(x=1160, y=596)
+        self.qntd_intervalos.config(text=self.numero_ciclos)
 
         self.janela.mainloop()
 
     def selecaoDeTempo(self, verificador):
+
         if verificador == "pc":
             self.check_pc.set("X")
             self.check_pm.set("  ")
             self.check_pl.set("  ")
+
+
         elif verificador == "pm":
             self.check_pc.set("  ")
             self.check_pm.set("X")
             self.check_pl.set("  ")
             self.tempo_pm = True
+
         elif verificador == "pl":
             self.check_pc.set("  ")
             self.check_pm.set("  ")
             self.check_pl.set("X")
             self.tempo_pl = True
+
+        self.qntd_intervalos.config(text=self.numero_ciclos)
+

@@ -1,4 +1,4 @@
-from tkinter import filedialog , messagebox , simpledialog
+from tkinter import filedialog, messagebox, simpledialog
 from view import BlocoDeNotas
 
 arquivo_atual_janela = ""
@@ -29,8 +29,6 @@ def salvar_arquivo_janela(texto):
         conteudo_janela = texto.get("1.0", "end-1c")
         with open(arquivo_atual_janela, "w") as salvar:
             salvar.write(conteudo_janela)
-
-
     else:
         conteudo_janela = texto.get("1.0", "end-1c")
         arquivo = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=
@@ -65,15 +63,6 @@ def fechar_janela(texto, janela):
     else:
         janela.destroy()
 
-
-def contador():
-    if numero_paginas_salvas == 1:
-        messagebox.showinfo("Contador", f"Até o momento você salvou {numero_paginas_salvas} nova anotação.")
-    elif numero_paginas_salvas == 0:
-        messagebox.showinfo("Contador", f"Até o momento você não possui anotações salvas")
-
-    else:
-        messagebox.showinfo("Contador", f"Até o momento você salvou{numero_paginas_salvas} novas anotações.")
 
 
 def pesquisar_palavra(texto):
@@ -117,8 +106,8 @@ def destruir(janela, texto):
     global arquivo_atual_janela
     arquivo_atual_janela = ""
     janela.destroy()
-    Main_bloco_notas.Anotacoes()
+    BlocoDeNotas.Anotacoes()
 
 def arquivo():
     global arquivo_atual_janela
-    arquivo_atual_janela= ""
+    arquivo_atual_janela = ""

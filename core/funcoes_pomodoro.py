@@ -5,14 +5,9 @@ from utils import colors, fonts
 import time
 from playsound import playsound
 
-
-#####################################################################
-# Variável global para rastrear se a janela está aberta ou não
 janela_aberta = False
 janela_config = None
 
-#####################################################################
-# Variáveis globais para valores de config do pomodoro
 numero_ciclos = 4
 t_pomodoro_int = 25
 duracao_pausaC = 5
@@ -20,8 +15,10 @@ duracao_pausaM = 10
 duracao_pausaL = 15
 pomodoros_concluidos = 0
 
+
 def quantidade_pomodoros():
     return pomodoros_concluidos
+
 
 def salvar_inputs(janela_principal, janela, qntd_ciclos_g, duracao_pomodoro_g, duracao_pausaC_g, duracao_pausaM_g,
                   duracao_pausaL_g):
@@ -39,15 +36,12 @@ def salvar_inputs(janela_principal, janela, qntd_ciclos_g, duracao_pomodoro_g, d
         pass
 
 
-
 def abrir_janela(janela_principal):
     global janela_aberta, janela_config
 
-    # Verifica se a janela já está aberta
     if janela_aberta:
         return
 
-    # Cria a janela e configura suas propriedades
     janela_config = Toplevel()
     janela_config.title("SETTINGS")
     janela_config.geometry('284x450')
@@ -60,34 +54,26 @@ def abrir_janela(janela_principal):
     bg_label.place(relwidth=1, relheight=1)
     bg_label.image = img
 
-    # os inputs da janela config --------------------------------------------------------------------------------------------
-
-
     qntd_ciclos = Entry(janela_config, width=5, justify="center", relief="sunken")
     qntd_ciclos.place(x=62, y=152)
     qntd_ciclos.insert(0, numero_ciclos)
-
 
     duracao_pomodoro = Entry(janela_config, width=5, justify="center", relief="sunken")
     duracao_pomodoro.place(x=62, y=265)
     duracao_pomodoro.insert(0, t_pomodoro_int)
 
-
     duracao_pausaC_I = Entry(janela_config, width=5, justify="center", relief="sunken")
     duracao_pausaC_I.place(x=62, y=296)
     duracao_pausaC_I.insert(0, duracao_pausaC)
-
 
     duracao_pausaM_I = Entry(janela_config, width=5, justify="center", relief="sunken")
     duracao_pausaM_I.place(x=62, y=330)
     duracao_pausaM_I.insert(0, duracao_pausaM)
 
-
     duracao_pausaL_I = Entry(janela_config, width=5, justify="center", relief="sunken")
     duracao_pausaL_I.place(x=62, y=362)
     duracao_pausaL_I.insert(0, duracao_pausaL)
 
-    # botao de salvar dados
     botao_salvar = Button(janela_config, text=" SALVAR ", relief="flat", bg=colors.COR_LARANJA_CLARO,
                           font=fonts.fonte_botao,
                           fg=colors.COR_BRANCA,
@@ -96,10 +82,9 @@ def abrir_janela(janela_principal):
                                                         duracao_pausaC_I, duracao_pausaM_I, duracao_pausaL_I))
     botao_salvar.place(x=109, y=420)
 
-    # Define o sinalizador para indicar que a janela está aberta
+
     janela_aberta = True
 
-    # Configura um callback para fechar a janela e redefinir o sinalizador
     janela_config.protocol("WM_DELETE_WINDOW", fechar_janela)
 
 
@@ -108,8 +93,6 @@ def fechar_janela():
     janela_aberta = False
     janela_config.destroy()
 
-
-################################################################################################
 
 def iniciarPausa(tempo_pomodoro, label, janela, t_pausa, ciclos, label_qntdintervalos):
     global pomodoros_concluidos

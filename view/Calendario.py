@@ -100,16 +100,14 @@ class Interface:
         )
         self.botao_agendar.pack(padx=30, pady=15)
 
-        def atualizar_janela(janela):
-            janela.destroy()
-            Interface()
+
 
         self.img_update = Image.open('assets/LabelToDoListUptade.png')
         self.img_update = self.img_update.resize((35, 35))
         self.img_update = ImageTk.PhotoImage(self.img_update)
 
         self.botao_atualizar_table = Button(self.frame_calendario, image=self.img_update,
-                                            command=lambda: atualizar_janela(self.janela),
+                                            command=lambda: funcoes_calendario.atualizar_janela(self.janela),
                                             relief=GROOVE, width=40, compound=LEFT, overrelief=RIDGE,
                                             font='monospace', bg=colors.COR_LARANJA_ESCURO,
                                             fg=colors.COR_BRANCA)

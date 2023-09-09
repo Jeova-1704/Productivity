@@ -49,7 +49,7 @@ class Anotacoes:
 
         Botao_Codigo = "DashBoard"
         label = Button(frame_top, text=Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                       font=('monospace', 32),  relief=FLAT,command=lambda: funcoes_main.renderizar_dashboard(self.janela))
+                       font=('monospace', 32),  relief=FLAT,command=lambda: funcoes_main.fechar_janela_dashboard(self.texto,self.janela))
         label.place(x=800, y=50)
 
         Botao_Team = "Sobre"
@@ -80,7 +80,6 @@ class Anotacoes:
         file_menu_janela_bloco_notas.add_command(label="Sair", command=lambda: funcoes_main.fechar_janela_home(self.texto, self.janela))
         menu_janela.add_command(label="Procurar", command=lambda: funcoes_bloco.pesquisar_palavra(self.texto))
         menu_janela.add_command(label="Desmarcar texto", command=lambda: funcoes_bloco.desmarcar_palavra(self.texto))
-        menu_janela.add_command(label="Contador", command=lambda: funcoes_bloco.contador())
         self.janela.config(menu=menu_janela)
         self.janela.protocol("WM_DELETE_WINDOW", lambda: funcoes_main.fechar_janela_home(self.texto, self.janela))
         self.janela.mainloop()

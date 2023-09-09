@@ -1,7 +1,8 @@
-from tkinter import simpledialog , messagebox
+from tkinter import simpledialog, messagebox
 from tkinter import *
 from dao.bdCalendario import BancoDeEventos
 from datetime import datetime
+from view import Calendario
 
 
 class Funcoes:
@@ -54,7 +55,8 @@ class Funcoes:
                 hora_label = Label(evento_frame, text=evento_horario, font=("monospace", 14))
                 remover_button = Button(evento_frame, text="Remover", bg="#BF4C0A", image=self.image_resized,
                                         relief=GROOVE,
-                                        command=lambda ev=evento_descricao: self.remover_evento(data, ev, evento_id))
+                                        command=lambda ev=evento_descricao: self.remover_evento(data, ev, evento_id,
+                                                                                                self.root))
                 evento_label.pack(side="left")
                 hora_label.pack(side="left")
                 remover_button.pack(side="right")
@@ -69,7 +71,7 @@ class Funcoes:
 
                 self.widgets_eventos[evento_id] = (evento_frame, color_tag)
 
-    def remover_evento(self, data, evento, evento_id):
+    def remover_evento(self, data, evento, evento_id, janela):
         dados_eventos = self.sistema_de_registro.ver_todos_eventos()
         for e_id, evento_data, evento_descricao, evento_horario in dados_eventos:
             if evento_data == data and evento_descricao == evento:
@@ -86,9 +88,14 @@ class Funcoes:
                     self.cal.tag_delete(color_tag)
                     del self.widgets_eventos[e_id]
                 self.mostrar_eventos_para_data(data)
-
                 break
 
+        atualizar_janela(janela)
+
+
+def atualizar_janela(janela):
+    janela.destroy()
+    Calendario.Interface()
 
 
 if __name__ == "__main__":
