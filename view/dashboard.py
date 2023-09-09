@@ -2,8 +2,7 @@ from tkinter import *
 from tkinter.ttk import Treeview
 from dao import bdToDoList, bdCalendario
 from utils import colors, fonts
-from core import funcoes_main
-from core import funcoes_bloco
+from core import funcoes_main, funcoes_bloco, funcoes_pomodoro
 
 
 def center_window(janela, width, height):
@@ -22,7 +21,7 @@ class InterfaceDashboard:
 
     def __init__(self):
         self.janela = Tk()
-        self.janela.iconbitmap('assets/dashboard.ico')
+        self.janela.iconbitmap('assets/IconDashboard.ico')
         self.janela.title("DashBoard")
         center_window(self.janela, self.width, self.height)
         self.janela.config(background=colors.COR_BRANCA)
@@ -98,6 +97,23 @@ class InterfaceDashboard:
         self.quantidadde.place(x=1080, y=280)
 
 
+
+
+        self.pomodoro = Label(self.janela, text="Pomodoro", font=fonts.fonte_conteudo, width=15,
+                                bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.concluidos = Label(self.janela, text="Quantidade de pomodoros concluidos:", font="Arial 14", width=30,
+                                    bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_BRANCA)
+        self.pomodoro.place(x=1000, y=480)
+        self.concluidos.place(x=931, y=520)
+
+        qtd_pomodoros = funcoes_pomodoro.quantidade_pomodoros()
+        self.quantidadde = Label(self.janela, text=qtd_pomodoros, bg=colors.COR_CINZA_CLARO, fg = colors.COR_LARANJA_ESCURO, font=fonts.fonte_titulo)
+        self.quantidadde.place(x=1080, y=565)
+
+
+
+
+
         self.treeview_datas_eventos = Treeview(self.janela, columns=('Data',), show='headings')
         self.treeview_datas_eventos.heading('Data', text='Data')
         self.treeview_datas_eventos.column('Data', width=150, anchor='w')
@@ -129,7 +145,7 @@ class InterfaceDashboard:
             for task in all_tasks:
                 self.add_task_to_table(task)
         except Exception as e:
-            print("Erro ao acessar o banco de dados:", str(e))
+            pass
 
     def add_task_to_table(self, task):
         status = task[2]
@@ -145,8 +161,8 @@ class InterfaceDashboard:
             eventos = self.db.ver_todos_eventos()
             return eventos
         except Exception as e:
-            print("Erro ao acessar o banco de dados:", str(e))
-            return []
+            pass
+
 
     def populate_datas_eventos(self):
         try:
@@ -160,8 +176,5 @@ class InterfaceDashboard:
                 self.treeview_eventos.insert('', 'end', values=(descricao,))
 
         except Exception as e:
-            print("Erro ao acessar o banco de dados:", str(e))
+            pass
 
-
-if __name__ == '__main__':
-    interfaceToDoList = InterfaceDashboard()

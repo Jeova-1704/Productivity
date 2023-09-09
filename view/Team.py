@@ -42,7 +42,7 @@ class Interface:
 
         Botao_Codigo = "DashBoard"
         label = Button(frame_top, text=Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                       font=('monospace', 32), relief=FLAT)
+                       font=('monospace', 32), relief=FLAT,command=lambda: funcoes_main.renderizar_dashboard(self.janela))
         label.place(x=800, y=50)
 
         Botao_Team = "Sobre"
@@ -60,7 +60,7 @@ class Interface:
         label_nomes.place(x=465, y=15)
         frame_meio_team = Frame(self.janela, width=1280, height=420, bg=colors.COR_BRANCA, relief=SOLID)
         frame_meio_team.pack(padx=0, pady=0)
-        img_logo = PhotoImage(file='assets/Group 8.png')
+        img_logo = PhotoImage(file='assets/LabelTeam.png')
         label = Label(frame_meio_team, image=img_logo)
         label.pack(padx=0, pady=0)
         Botao_Codigo = "Código GitHub"
@@ -69,7 +69,3 @@ class Interface:
                        command=funcoes_main.abrir_navegador)
         label.pack(padx=0, pady=20)
         self.janela.mainloop()
-
-
-if __name__ == "__main__":
-    interface = Interface()

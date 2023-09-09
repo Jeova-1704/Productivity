@@ -2,10 +2,9 @@ from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
 
-from core import funcoes_todolist
+from core import funcoes_todolist, funcoes_main
 from utils import colors, fonts
 from dao import bdToDoList
-from core import funcoes_main
 from utils.ToolTip import Tooltip
 
 
@@ -28,7 +27,7 @@ class InterfaceToDoList:
     def __init__(self):
 
         self.janela = Tk()
-        self.janela.iconbitmap('assets/todoList.ico')
+        self.janela.iconbitmap('assets/IconToDoList.ico')
         self.janela.title("To-Do List")
         center_window(self.janela, self.width, self.height)
         self.janela.config(background=colors.COR_BRANCA)
@@ -87,7 +86,7 @@ class InterfaceToDoList:
         self.tv.place(x=670, y=20)
 
         try:
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus")
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM BdToDoList")
             for row in bdToDoList.ToDoList_banco.cursor.fetchall():
                 self.tv.insert("", "end", values=row)
         except Exception as e:
@@ -101,7 +100,7 @@ class InterfaceToDoList:
                                  bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
         linha_horizontal.place(x=0, y=523)
 
-        self.img_logo = Image.open('assets/toDoList_logo.png')
+        self.img_logo = Image.open('assets/LabelToDoListLogo.png')
         self.img_logo = ImageTk.PhotoImage(self.img_logo)
         self.imagem_logo = Label(self.frame_meio, image=self.img_logo, compound=LEFT, anchor=NW)
         self.imagem_logo.place(x=165, y=10)
@@ -109,7 +108,7 @@ class InterfaceToDoList:
         self.texto_todolist = Label(self.frame_meio, text="To-Do List", font=fonts.fonte_titulo)
         self.texto_todolist.place(x=255, y=25)
 
-        self.img_add = Image.open('assets/toDoList_add.png')
+        self.img_add = Image.open('assets/LabelToDoListAdd.png')
         self.img_add = self.img_add.resize((35, 35))
         self.img_add = ImageTk.PhotoImage(self.img_add)
         self.botao_add = Button(self.frame_meio, image=self.img_add,
@@ -120,7 +119,7 @@ class InterfaceToDoList:
                                 bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
         self.botao_add.place(x=175, y=120)
 
-        self.img_update = Image.open('assets/toDoList_update.png')
+        self.img_update = Image.open('assets/LabelToDoListUptade.png')
         self.img_update = self.img_update.resize((35, 35))
         self.img_update = ImageTk.PhotoImage(self.img_update)
         self.botao_update = Button(self.frame_meio, image=self.img_update,
@@ -138,7 +137,7 @@ class InterfaceToDoList:
         self.botao_atualizar_table.place(x=1205, y=450)
         self.tooltip = Tooltip(self.botao_atualizar_table, "Atualizar tabela")
 
-        self.img_delete = Image.open('assets/toDoList_delete.png')
+        self.img_delete = Image.open('assets/LabelToDoListDelete.png')
         self.img_delete = self.img_delete.resize((35, 35))
         self.img_delete = ImageTk.PhotoImage(self.img_delete)
         self.botao_delete = Button(self.frame_meio,
@@ -149,7 +148,7 @@ class InterfaceToDoList:
                                    bg=colors.COR_LARANJA_CLARO, fg=colors.COR_BRANCA)
         self.botao_delete.place(x=175, y=280)
 
-        self.img_all_delete = Image.open('assets/toDoList_danger.png')
+        self.img_all_delete = Image.open('assets/LabelToDoListDanger.png')
         self.img_all_delete = self.img_all_delete.resize((35, 35))
         self.img_all_delete = ImageTk.PhotoImage(self.img_all_delete)
         self.botao_all_delete = Button(self.frame_meio, command=lambda: funcoes_todolist.deletarTodasTasks(self.janela),
@@ -164,7 +163,7 @@ class InterfaceToDoList:
         self.status_filter_combobox['values'] = self.status
         self.status_filter_combobox.place(x=320, y=425)
 
-        self.img_filter = Image.open('assets/toDoList_filtro.png')
+        self.img_filter = Image.open('assets/LabelToDoListFilter.png')
         self.img_filter = self.img_filter.resize((35, 35))
         self.img_filter = ImageTk.PhotoImage(self.img_filter)
         self.filtrar_tabela = Button(self.frame_meio,
@@ -179,7 +178,3 @@ class InterfaceToDoList:
         self.filtrar_tabela.place(x=174, y=425)
 
         self.janela.mainloop()
-
-
-if __name__ == '__main__':
-    interfaceToDoList = InterfaceToDoList()

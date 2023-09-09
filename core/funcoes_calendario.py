@@ -1,7 +1,6 @@
-from tkinter import simpledialog
+from tkinter import simpledialog , messagebox
 from tkinter import *
 from dao.bdCalendario import BancoDeEventos
-from tkinter import messagebox
 from datetime import datetime
 
 
@@ -39,7 +38,7 @@ class Funcoes:
 
     def mostrar_eventos_para_data(self, data):
 
-        self.image = PhotoImage(file="assets/toDoList_delete.png")
+        self.image = PhotoImage(file="assets/LabelToDoListDelete.png")
         self.image_resized = self.image.subsample(3, 3)
 
         self.event_label.config(text="Eventos para " + data)

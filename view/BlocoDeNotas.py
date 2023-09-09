@@ -1,8 +1,7 @@
-import tkinter
 from tkinter import *
 from utils import colors, fonts
-from core import funcoes_main
-from core import funcoes_bloco
+from core import funcoes_main, funcoes_bloco
+
 
 
 
@@ -50,7 +49,7 @@ class Anotacoes:
 
         Botao_Codigo = "DashBoard"
         label = Button(frame_top, text=Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                       font=('monospace', 32),  relief=FLAT)
+                       font=('monospace', 32),  relief=FLAT,command=lambda: funcoes_main.renderizar_dashboard(self.janela))
         label.place(x=800, y=50)
 
         Botao_Team = "Sobre"
@@ -61,7 +60,7 @@ class Anotacoes:
         frame_detalhes_borda = Frame(frame_top, width=1280, height=4, bg=colors.COR_CINZA_CLARO, relief=SOLID)
         frame_detalhes_borda.pack(padx=0, pady=0)
 
-        centralizar = tkinter.Label(self.janela, text="Bloco de anotações", font="Arial 20")
+        centralizar = Label(self.janela, text="Bloco de anotações", font="Arial 20")
         centralizar.pack()
 
         self.texto = Text(self.janela, wrap="word", height=18, width=100, font=fonts.fonte_conteudo)

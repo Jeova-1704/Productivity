@@ -29,18 +29,3 @@ class Tooltip:
         if self.tooltip:
             self.tooltip.destroy()
             self.tooltip = None
-
-# Exemplo de uso
-def main():
-    root = tk.Tk()
-    root.title("Tooltips em Tkinter")
-
-    button = ttk.Button(root, text="Botão com Tooltip")
-    button.pack()
-
-    tooltip = Tooltip(button, "Isso é um botão!")
-
-    root.mainloop()
-
-if __name__ == "__main__":
-    main()

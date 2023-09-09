@@ -1,7 +1,5 @@
-from tkinter import filedialog
-from tkinter import messagebox
-from tkinter import simpledialog
-from view import Main_bloco_notas
+from tkinter import filedialog , messagebox , simpledialog
+from view import BlocoDeNotas
 
 arquivo_atual_janela = ""
 texto_na_pagina = []

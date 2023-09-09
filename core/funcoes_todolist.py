@@ -1,8 +1,6 @@
 import tkinter.messagebox
 from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-
+from tkinter import ttk , messagebox
 from utils import fonts, colors
 from dao import bdToDoList
 from view import ToDoList
@@ -45,7 +43,7 @@ def atualizar_tarefa(Entrada_tarefa, Entrada_descricao, Entrada_status, Entrada_
 def addTarefa(janela_todo):
     janela_dados = Toplevel()
     janela_dados.geometry('500x500')
-    janela_dados.iconbitmap('../view/assets/todoList.ico')
+    janela_dados.iconbitmap('../view/assets/IconToDoList.ico')
     janela_dados.title("Cadastro de tarefas")
     janela_dados.resizable(height=FALSE, width=FALSE)
     janela_dados.config(background=colors.COR_BRANCA)
@@ -153,8 +151,8 @@ def atualizarTarefa(id_tarefa, janela_todo):
     try:
         todo_lista = bdToDoList.ToDoList_banco.procurarTarefa(id_tarefa)
         if len(todo_lista) != 0 or todo_lista == False:
-            janela_dados = Tk()
-            janela_dados.iconbitmap('../view/assets/todoList.ico')
+            janela_dados = Toplevel()
+            janela_dados.iconbitmap('../view/assets/IconToDoList.ico')
             janela_dados.geometry('500x500')
             janela_dados.title("Atuaização de tarefas")
             janela_dados.resizable(height=FALSE, width=FALSE)
@@ -231,15 +229,15 @@ def aplicar_filtro(tv, filtro_box):
 
     try:
         if status_para_filtro == "Todos":
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus")
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM BdToDoList")
         elif status_para_filtro == "Concluido":
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Concluido",))
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM BdToDoList WHERE status=?", ("Concluido",))
         elif status_para_filtro == "Em andamento":
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Em andamento",))
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM BdToDoList WHERE status=?", ("Em andamento",))
         elif status_para_filtro == "Não iniciado":
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?", ("Não iniciado",))
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM BdToDoList WHERE status=?", ("Não iniciado",))
         else:
-            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM todolistStatus WHERE status=?",
+            bdToDoList.ToDoList_banco.cursor.execute("SELECT * FROM BdToDoList WHERE status=?",
                                                      (status_para_filtro,))
 
         for row in bdToDoList.ToDoList_banco.cursor.fetchall():

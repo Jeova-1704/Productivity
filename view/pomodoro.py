@@ -4,7 +4,6 @@
 # ======================================================================================================================
 
 from tkinter import *
-
 from utils import colors, fonts
 from core import funcoes_pomodoro, funcoes_main
 
@@ -34,7 +33,7 @@ class InterfacePomodoro():
         self.height = 700
         center_window(self.janela, self.width, self.height)
         self.janela.config(background=colors.COR_BRANCA)
-        self.janela.iconbitmap("assets/favicon.ico")
+        self.janela.iconbitmap("assets/IconPomodoro.ico")
 
         # variaveis do pomodoro:
 
@@ -57,7 +56,6 @@ class InterfacePomodoro():
         self.check_pm.set("  ")
         self.check_pl = StringVar()
         self.check_pl.set("  ")
-        print(self.numero_ciclos)
 
         # Continuação do codigo:
         # ======================================================================================= 1 segmento de tela:
@@ -80,7 +78,8 @@ class InterfacePomodoro():
         self.Botao_Codigo = "DashBoard"
         self.label = Button(self.navbar, text=self.Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
                             font=fonts.fonte_conteudo_navBAr,
-                            relief=FLAT)
+                            relief=FLAT,
+                            command=lambda: funcoes_main.renderizar_dashboard(self.janela))
         self.label.place(x=800, y=50)
 
         self.Botao_Team = "Sobre"
@@ -93,14 +92,14 @@ class InterfacePomodoro():
 
         self.frame_tempo = Frame(self.janela, width=1280, height=532, bg=colors.COR_BRANCA)
         self.frame_tempo.pack()
-        self.img_tempo = PhotoImage(file="assets/pomodoro_tempo.png")
+        self.img_tempo = PhotoImage(file="assets/LabelPomodoroTime.png")
         self.label_tempo = Label(self.frame_tempo, image=self.img_tempo)
         self.label_tempo.place(x=235, y=64.09)
 
-        self.img_icon = PhotoImage(file="assets/pomodoro.png")
+        self.img_icon = PhotoImage(file="assets/EllipsePomodoro.png")
         self.button_icon = Button(self.frame_tempo, image=self.img_icon, relief="flat",
                                   command=lambda: funcoes_pomodoro.abrir_janela(self.janela))
-        self.button_icon.place(x=125, y=46)
+        self.button_icon.place(x=44, y=36)
 
         self.text_temporizador = '{:02d} : {:02d}'.format(self.minutos_int, self.segundos_int)
         self.label_temporizador = Label(self.frame_tempo, text=self.text_temporizador,
@@ -108,7 +107,7 @@ class InterfacePomodoro():
                                         fg=colors.COR_BRANCA,
                                         bg=colors.COR_LARANJA_CLARO)
         self.label_temporizador.place(x=280, y=170)
-        self.img_start = PhotoImage(file="assets/botao_start_pomodoro.png")
+        self.img_start = PhotoImage(file="assets/LabelPomodoroStart.png")
         self.button_start = Button(self.frame_tempo, image=self.img_start, relief="flat",
                                    command=lambda: funcoes_pomodoro.iniciarPomodoro(self.label_temporizador,
                                                                                     self.t_pomodoro_int, self.janela,
@@ -120,13 +119,13 @@ class InterfacePomodoro():
                                                                                     self.duracao_pausaL))
         self.button_start.place(x=350, y=330)
 
-        self.img_info = PhotoImage(file="assets/info_pomodoro.png")
+        self.img_info = PhotoImage(file="assets/LabelPadroesPomodoro.png")
         self.label_info = Label(self.janela, image=self.img_info)
         self.label_info.place(x=878, y=195)
 
         # 4 segmento de tela:
 
-        self.img_intervalo = PhotoImage(file="assets/pomodoro_intervalos.png")
+        self.img_intervalo = PhotoImage(file="assets/LabelPomodoroInterval.png")
         self.label_intervalo = Label(self.frame_tempo, image=self.img_intervalo)
         self.label_intervalo.place(x=800, y=190)
 
@@ -155,8 +154,6 @@ class InterfacePomodoro():
                                relief="raised", command=lambda: self.selecaoDeTempo("pl"))
         self.pL_botao.place(x=1160, y=596)
 
-        print(self.numero_ciclos)
-
         self.janela.mainloop()
 
     def selecaoDeTempo(self, verificador):
@@ -174,7 +171,3 @@ class InterfacePomodoro():
             self.check_pm.set("  ")
             self.check_pl.set("X")
             self.tempo_pl = True
-
-
-if __name__ == "__main__":
-    pomodoro = InterfacePomodoro()

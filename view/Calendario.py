@@ -23,7 +23,7 @@ class Interface:
 
     def __init__(self):
         self.janela = Tk()
-        self.janela.iconbitmap('assets/calendario.ico')
+        self.janela.iconbitmap('assets/IconCalendar.ico')
         self.janela.title("Calendário")
         center_window(self.janela, self.width, self.height)
         self.janela.config(background='#F2F2F0')
@@ -49,7 +49,7 @@ class Interface:
         Botao_Codigo = "DashBoard"
         label = Button(frame_top, text=Botao_Codigo, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
                        font=('monospace', 32),
-                       relief=FLAT)
+                       relief=FLAT,command=lambda: funcoes_main.renderizar_dashboard(self.janela))
         label.place(x=800, y=50)
 
         Botao_Team = "Sobre"
@@ -104,7 +104,7 @@ class Interface:
             janela.destroy()
             Interface()
 
-        self.img_update = Image.open('assets/toDoList_update.png')
+        self.img_update = Image.open('assets/LabelToDoListUptade.png')
         self.img_update = self.img_update.resize((35, 35))
         self.img_update = ImageTk.PhotoImage(self.img_update)
 
@@ -119,7 +119,3 @@ class Interface:
         self.tooltip = Tooltip(self.botao_atualizar_table, "Atualizar calendário")
 
         self.janela.mainloop()
-
-
-if __name__ == "__main__":
-    interface = Interface()
