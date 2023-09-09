@@ -4,7 +4,6 @@
 # ======================================================================================================================
 
 from tkinter import *
-from typing import Any
 
 from utils import colors, fonts
 from core import funcoes_pomodoro, funcoes_main

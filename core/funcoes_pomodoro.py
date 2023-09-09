@@ -2,16 +2,9 @@ from tkinter import *
 from tkinter import messagebox
 
 from utils import colors, fonts
-from PIL import ImageTk, Image
 
 import time
 from playsound import playsound
-
-
-def conversao(t):
-    # de min para segundos:
-    return t * 60
-
 
 #####################################################################
 # Variável global para rastrear se a janela está aberta ou não
