@@ -97,10 +97,10 @@ O projeto foi desenvolvido usando arquitetura MVC, divida em 4 pacores, sendo el
 ## ✒️ Autores
 
 * **Ana Oliveira** - *desenvolvedora* - [GitHub Ana](https://github.com/holyvieri)
-* **Arthur Lopes** - *desenvolvedora* - [GitHub Arthut](https://github.com/ArthurSampaio13)
-* **Emerson Feitosa** - *desenvolvedorao* - [GitHub Emerson](https://github.com/emerson-feitosa)
-* **Jeová Bezerra** - *desenvolvedora* - [GitHub Jeova](https://github.com/Jeova-1704)
-* **Marcos Pierre** - *desenvolvedora* - [GitHub Pierre](https://github.com/PierreOF)
+* **Arthur Lopes** - *desenvolvedor* - [GitHub Arthut](https://github.com/ArthurSampaio13)
+* **Emerson Feitosa** - *desenvolvedor* - [GitHub Emerson](https://github.com/emerson-feitosa)
+* **Jeová Bezerra** - *desenvolvedor* - [GitHub Jeova](https://github.com/Jeova-1704)
+* **Pierre Monteiro** - *desenvolvedor* - [GitHub Pierre](https://github.com/PierreOF)
 ---
 
 ## 📄 Licença
