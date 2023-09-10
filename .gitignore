@@ -1,0 +1,13 @@
+.idea/
+core/.idea/
+dao/.idea/
+utils/.idea/
+view/.idea/
+dao/BdToDoList.db
+dao/bancodedados
+core/__pycache__
+dao/eventos.db
+dao/__pycache__/
+utils/__pycache__/
+view/__pycache__/
+core/__pycache__/
