@@ -1,13 +1,14 @@
 <div align="center">
 
-![logo_productivity.png](view%2Fassets%2Flogo_productivity.png) 
+![LogoProductivity](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/17a6a928-22a4-4225-a66c-32396e09ad8c)
+
 </div>
 
 <br>
 
 <div align="center">
 
-![Logo_todolist](view%2Fassets%2FEllipse%201.png)![logo_anotacoes](view%2Fassets%2FEllipse%202.png)![logo_calendario](view%2Fassets%2FEllipse%203.png)![logo_pomodoro](view%2Fassets%2FEllipse%204.png)
+![EllipseToDoList](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/3f71ecd0-7eb9-4f73-9056-269c7f337401)![EllipseBlocoDeNotas](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/5126925d-34b0-46cf-8857-17c08c224c93)![EllipseCalendario](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/c4f0660c-25de-484d-b003-c4ee4d9d1c63)![EllipsePomodoro](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/b230b07d-241b-467f-934e-b1d5cce33064)
 
 </div>
 
@@ -36,15 +37,15 @@ O projeto foi desenvolvido em linguagem Python devido à sua simplicidade, versa
 ### Tela To-do List
 ![To-do List](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/21281d80-82fc-4c58-883a-73889adc3835)
 ### Tela Bloco de notas
-![BlocoDeNotas](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/7519e837-2057-445d-a45f-6c21085c42e5)
+![Bloco-de-notas](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/7d570e23-b3c1-44a6-909f-06f5813e384e)
 ### Tela calendario
 ![Calendario](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/258d4129-5369-4471-846d-1cd3f024e266)
 ### Tela pomorodo
->em desenvolvimento
+![Pomodoro](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/a0693459-01b5-4570-80a9-c6832d13f575)
 ### Tela team
 ![Team](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/8ecd5291-eb31-4340-b12a-9fef9b833573)
 ### Tela dashBoard
->em desenvolvimento
+![dashBoard](https://github.com/Jeova-1704/Projeto-programacao-1/assets/127805808/19e953ed-94cf-4d92-ac1d-7b5257f08b7f)
 
 ---
 
