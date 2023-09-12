@@ -19,13 +19,19 @@
 
 No âmbito da disciplina de Programação 1, foi desenvolvido um projeto de aplicação de produtividade em Python, com o objetivo de fornecer aos usuários uma ferramenta abrangente para melhorar sua eficiência e organização pessoal. A aplicação engloba quatro sistemas principais: Todolist, Pomodoro, Calendário e Bloco de Anotações. Cada sistema oferece funcionalidades específicas para atender às diferentes necessidades dos usuários, proporcionando uma experiência integrada e centralizada para melhorar sua produtividade no dia a dia.
 
-Todolist: ...
 
-Pomodoro: ...
+### 1. Todolist (Lista de Tarefas):
+Uma Todolist é uma lista organizada de tarefas que precisam ser realizadas. É uma ferramenta eficaz para ajudar as pessoas a acompanhar e priorizar suas atividades diárias, semanais ou mensais. As tarefas geralmente são listadas com breves descrições e podem ser marcadas como concluídas à medida que são realizadas. Muitas vezes, aplicativos e ferramentas digitais são usados para criar e gerenciar listas de tarefas, tornando-as facilmente acessíveis em dispositivos eletrônicos.
 
-Calendário: ...
+### 2. Pomodoro:
+A Técnica Pomodoro é um método de gerenciamento de tempo que envolve dividir o trabalho em intervalos de tempo curtos, geralmente 25 minutos, chamados "pomodoros", seguidos por uma pausa curta de 5 minutos. Após quatro pomodoros, é recomendada uma pausa mais longa de 15-30 minutos. Essa técnica visa aumentar a produtividade, minimizando a procrastinação e a fadiga mental, incentivando a concentração intensa durante os pomodoros.
 
-Bloco de Anotações: ...
+### 3. Calendário:
+Um calendário é uma representação visual dos dias, semanas e meses de um ano, usado para acompanhar datas e eventos importantes. Pode ser físico ou digital. Calendários ajudam na organização do tempo, permitindo que as pessoas agendem compromissos, lembrem-se de datas importantes, como aniversários e feriados, e planejem suas atividades futuras. Além disso, muitos calendários digitais permitem a sincronização com dispositivos móveis e colaboração entre usuários.
+
+### 4. Bloco de Anotações:
+Um bloco de anotações é um local onde as pessoas podem registrar informações importantes, ideias, listas, pensamentos e notas em geral. Pode ser um caderno físico, um aplicativo de anotações em dispositivos eletrônicos ou um software dedicado. Os blocos de anotações são utilizados para manter registros organizados e acessíveis, facilitando a referência futura e a organização de informações pessoais ou profissionais. Eles são uma ferramenta valiosa para capturar e arquivar conhecimento.
+
 
 O projeto foi desenvolvido em linguagem Python devido à sua simplicidade, versatilidade e ampla gama de bibliotecas disponíveis. Além disso, a interface gráfica da aplicação foi criada usando uma biblioteca como o Tkinter para fornecer uma experiência de usuário amigável e intuitiva.
 
