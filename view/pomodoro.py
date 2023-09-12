@@ -23,6 +23,7 @@ class InterfacePomodoro:
         self.width = 1280
         self.height = 700
         center_window(self.janela, self.width, self.height)
+        self.janela.resizable(width=FALSE, height=FALSE)
         self.janela.config(background=colors.COR_BRANCA)
         self.janela.iconbitmap("assets/IconPomodoro.ico")
 

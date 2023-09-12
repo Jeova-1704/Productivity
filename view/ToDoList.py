@@ -3,8 +3,8 @@ from tkinter import ttk
 from PIL import ImageTk, Image
 
 from core import funcoes_todolist, funcoes_main
-from utils import colors, fonts
 from dao import bdToDoList
+from utils import colors, fonts
 from utils.ToolTip import Tooltip
 
 
@@ -19,18 +19,24 @@ def center_window(janela, width, height):
 
 
 class InterfaceToDoList:
-    Botao_Codigo: str
     status = ['Todos', 'Concluido', 'Em andamento', 'Não iniciado']
-
     width = 1280
     height = 700
+
     def __init__(self):
 
         self.janela = Tk()
         self.janela.iconbitmap('assets/IconToDoList.ico')
         self.janela.title("To-Do List")
         center_window(self.janela, self.width, self.height)
+        self.janela.resizable(width=FALSE, height=FALSE)
         self.janela.config(background=colors.COR_BRANCA)
+        self.criar_navBar()
+        self.criar_treeView()
+        self.criarLinhas()
+        self.criarBotoes()
+
+    def criar_navBar(self):
 
         self.frame_top = Frame(self.janela, width=1280, height=125, bg=colors.COR_BRANCA, relief=SOLID)
         self.frame_top.pack(padx=0, pady=0)
@@ -38,34 +44,37 @@ class InterfaceToDoList:
         self.frame_detalhes.pack(padx=0, pady=0)
 
         self.Texto_Productivity = "Productivity"
-        self.label = Label(self.frame_detalhes, text=self.Texto_Productivity, fg=colors.COR_BRANCA,
-                           bg=colors.COR_CINZA_ESCURO,
-                           font=fonts.fonte_conteudo_logo)
-        self.label.place(x=34, y=50)
+        self.label_logo = Label(self.frame_detalhes, text=self.Texto_Productivity, fg=colors.COR_BRANCA,
+                                bg=colors.COR_CINZA_ESCURO,
+                                font=fonts.fonte_conteudo_logo)
+        self.label_logo.place(x=34, y=50)
 
         self.Botao_Home = "Home"
-        self.label = Button(self.frame_detalhes, text=self.Botao_Home, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                            font=fonts.fonte_conteudo_navBAr,
-                            relief=FLAT, command=lambda: funcoes_main.renderizar_home(self.janela)
-                            )
-        self.label.place(x=625, y=50)
+        self.label_home = Button(self.frame_detalhes, text=self.Botao_Home, fg=colors.COR_BRANCA,
+                                 bg=colors.COR_CINZA_ESCURO,
+                                 font=fonts.fonte_conteudo_navBAr,
+                                 relief=FLAT, command=lambda: funcoes_main.renderizar_home(self.janela)
+                                 )
+        self.label_home.place(x=625, y=50)
 
         self.Botao_Codigo = "DashBoard"
-        self.label = Button(self.frame_detalhes, text=self.Botao_Codigo, fg=colors.COR_BRANCA,
-                            bg=colors.COR_CINZA_ESCURO,
-                            font=fonts.fonte_conteudo_navBAr,
-                            command=lambda: funcoes_main.renderizar_dashboard(self.janela), relief=FLAT)
-        self.label.place(x=800, y=50)
+        self.label_dashboard = Button(self.frame_detalhes, text=self.Botao_Codigo, fg=colors.COR_BRANCA,
+                                      bg=colors.COR_CINZA_ESCURO,
+                                      font=fonts.fonte_conteudo_navBAr,
+                                      command=lambda: funcoes_main.renderizar_dashboard(self.janela), relief=FLAT)
+        self.label_dashboard.place(x=800, y=50)
 
         self.Botao_Team = "Sobre"
-        self.label = Button(self.frame_detalhes, text=self.Botao_Team, fg=colors.COR_BRANCA, bg=colors.COR_CINZA_ESCURO,
-                            font=fonts.fonte_conteudo_navBAr,
-                            command=lambda: funcoes_main.renderizar_team(self.janela), relief=FLAT)
-        self.label.place(x=1068, y=50)
+        self.label_team = Button(self.frame_detalhes, text=self.Botao_Team, fg=colors.COR_BRANCA,
+                                 bg=colors.COR_CINZA_ESCURO,
+                                 font=fonts.fonte_conteudo_navBAr,
+                                 command=lambda: funcoes_main.renderizar_team(self.janela), relief=FLAT)
+        self.label_team.place(x=1068, y=50)
 
         self.frame_detalhes_borda = Frame(self.frame_top, width=1280, height=4, bg=colors.COR_CINZA_CLARO, relief=SOLID)
         self.frame_detalhes_borda.pack(padx=0, pady=0)
 
+    def criar_treeView(self):
         self.frame_meio = Frame(self.janela, width=1280, height=550, bg=colors.COR_BRANCA, relief=SOLID)
         self.frame_meio.pack()
 
@@ -90,6 +99,7 @@ class InterfaceToDoList:
         except Exception as e:
             self.tv.insert("", "end", values=("Erro ao acessar o banco de dados:", str(e)))
 
+    def criarLinhas(self):
         linha_vertical = Label(self.frame_meio, relief=GROOVE, width=0, height=255, anchor=NW, font='Ivy 1',
                                bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
         linha_vertical.place(x=640, y=15)
@@ -98,6 +108,7 @@ class InterfaceToDoList:
                                  bg=colors.COR_LARANJA_ESCURO, fg=colors.COR_CINZA_ESCURO)
         linha_horizontal.place(x=0, y=523)
 
+    def criarBotoes(self):
         self.img_logo = Image.open('assets/LabelToDoListLogo.png')
         self.img_logo = ImageTk.PhotoImage(self.img_logo)
         self.imagem_logo = Label(self.frame_meio, image=self.img_logo, compound=LEFT, anchor=NW)
